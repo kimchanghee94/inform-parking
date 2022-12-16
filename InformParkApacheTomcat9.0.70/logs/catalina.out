@@ -1,0 +1,106 @@
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+16-Dec-2022 17:45:58.321 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 서버 버전 이름:    Apache Tomcat/9.0.70
+16-Dec-2022 17:45:58.322 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 빌드 시각:  Dec 1 2022 14:05:47 UTC
+16-Dec-2022 17:45:58.323 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 버전 번호:  9.0.70.0
+16-Dec-2022 17:45:58.323 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 이름:     Mac OS X
+16-Dec-2022 17:45:58.323 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 버전:     13.1
+16-Dec-2022 17:45:58.323 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 아키텍처:          aarch64
+16-Dec-2022 17:45:58.323 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 자바 홈:           /Library/Java/JavaVirtualMachines/jdk-11.0.16.1.jdk/Contents/Home
+16-Dec-2022 17:45:58.323 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 버전:          11.0.16.1+1-LTS-1
+16-Dec-2022 17:45:58.323 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 벤더:          Oracle Corporation
+16-Dec-2022 17:45:58.323 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:     /Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70
+16-Dec-2022 17:45:58.323 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:     /Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70
+16-Dec-2022 17:45:58.331 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.lang=ALL-UNNAMED
+16-Dec-2022 17:45:58.331 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.io=ALL-UNNAMED
+16-Dec-2022 17:45:58.331 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util=ALL-UNNAMED
+16-Dec-2022 17:45:58.331 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+16-Dec-2022 17:45:58.331 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+16-Dec-2022 17:45:58.331 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.config.file=/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/conf/logging.properties
+16-Dec-2022 17:45:58.331 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Dec-2022 17:45:58.331 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djdk.tls.ephemeralDHKeySize=2048
+16-Dec-2022 17:45:58.331 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+16-Dec-2022 17:45:58.331 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+16-Dec-2022 17:45:58.332 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dignore.endorsed.dirs=
+16-Dec-2022 17:45:58.332 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.base=/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70
+16-Dec-2022 17:45:58.332 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.home=/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70
+16-Dec-2022 17:45:58.332 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.io.tmpdir=/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/temp
+16-Dec-2022 17:45:58.336 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent 프로덕션 환경들에서 최적의 성능을 제공하는, APR 기반 Apache Tomcat Native 라이브러리가, 다음 java.library.path에서 발견되지 않습니다: [/Users/kimchanghee/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+16-Dec-2022 17:45:58.469 INFO [main] org.apache.coyote.AbstractProtocol.init 프로토콜 핸들러 ["http-nio-8080"]을(를) 초기화합니다.
+16-Dec-2022 17:45:58.482 INFO [main] org.apache.catalina.startup.Catalina.load [261] 밀리초 내에 서버가 초기화되었습니다.
+16-Dec-2022 17:45:58.505 INFO [main] org.apache.catalina.core.StandardService.startInternal 서비스 [Catalina]을(를) 시작합니다.
+16-Dec-2022 17:45:58.505 INFO [main] org.apache.catalina.core.StandardEngine.startInternal 서버 엔진을 시작합니다: [Apache Tomcat/9.0.70]
+16-Dec-2022 17:45:58.508 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/docs]을(를) 배치합니다.
+16-Dec-2022 17:45:58.621 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/docs]에 대한 배치가 [113] 밀리초에 완료되었습니다.
+16-Dec-2022 17:45:58.621 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/manager]을(를) 배치합니다.
+16-Dec-2022 17:45:58.644 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/manager]에 대한 배치가 [23] 밀리초에 완료되었습니다.
+16-Dec-2022 17:45:58.644 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/examples]을(를) 배치합니다.
+16-Dec-2022 17:45:58.732 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/examples]에 대한 배치가 [88] 밀리초에 완료되었습니다.
+16-Dec-2022 17:45:58.732 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/ROOT]을(를) 배치합니다.
+16-Dec-2022 17:45:58.741 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/ROOT]에 대한 배치가 [8] 밀리초에 완료되었습니다.
+16-Dec-2022 17:45:58.741 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/host-manager]을(를) 배치합니다.
+16-Dec-2022 17:45:58.747 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/host-manager]에 대한 배치가 [6] 밀리초에 완료되었습니다.
+16-Dec-2022 17:45:58.750 INFO [main] org.apache.coyote.AbstractProtocol.start 프로토콜 핸들러 ["http-nio-8080"]을(를) 시작합니다.
+16-Dec-2022 17:45:58.754 INFO [main] org.apache.catalina.startup.Catalina.start 서버가 [271] 밀리초 내에 시작되었습니다.
+16-Dec-2022 17:46:14.335 INFO [main] org.apache.catalina.core.StandardServer.await 셧다운 포트를 통해 유효한 셧다운 명령을 받았습니다. 서버 인스턴스를 중지시킵니다.
+16-Dec-2022 17:46:14.336 INFO [main] org.apache.coyote.AbstractProtocol.pause 프로토콜 핸들러 ["http-nio-8080"]을(를) 일시 정지 중
+16-Dec-2022 17:46:14.337 INFO [main] org.apache.catalina.core.StandardService.stopInternal 서비스 [Catalina]을(를) 중지시킵니다.
+16-Dec-2022 17:46:14.347 INFO [main] org.apache.coyote.AbstractProtocol.stop 프로토콜 핸들러 ["http-nio-8080"]을(를) 중지시킵니다.
+16-Dec-2022 17:46:14.351 INFO [main] org.apache.coyote.AbstractProtocol.destroy 프로토콜 핸들러 ["http-nio-8080"]을(를) 소멸시킵니다.
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+17-Dec-2022 00:44:02.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 서버 버전 이름:    Apache Tomcat/9.0.70
+17-Dec-2022 00:44:02.742 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 빌드 시각:  Dec 1 2022 14:05:47 UTC
+17-Dec-2022 00:44:02.742 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 버전 번호:  9.0.70.0
+17-Dec-2022 00:44:02.742 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 이름:     Mac OS X
+17-Dec-2022 00:44:02.743 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 버전:     13.1
+17-Dec-2022 00:44:02.743 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 아키텍처:          aarch64
+17-Dec-2022 00:44:02.743 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 자바 홈:           /Library/Java/JavaVirtualMachines/jdk-11.0.16.1.jdk/Contents/Home
+17-Dec-2022 00:44:02.743 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 버전:          11.0.16.1+1-LTS-1
+17-Dec-2022 00:44:02.743 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 벤더:          Oracle Corporation
+17-Dec-2022 00:44:02.743 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:     /Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70
+17-Dec-2022 00:44:02.743 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:     /Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70
+17-Dec-2022 00:44:02.749 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.lang=ALL-UNNAMED
+17-Dec-2022 00:44:02.749 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.io=ALL-UNNAMED
+17-Dec-2022 00:44:02.750 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util=ALL-UNNAMED
+17-Dec-2022 00:44:02.750 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+17-Dec-2022 00:44:02.750 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+17-Dec-2022 00:44:02.750 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.config.file=/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/conf/logging.properties
+17-Dec-2022 00:44:02.750 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+17-Dec-2022 00:44:02.750 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djdk.tls.ephemeralDHKeySize=2048
+17-Dec-2022 00:44:02.750 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+17-Dec-2022 00:44:02.750 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+17-Dec-2022 00:44:02.750 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dignore.endorsed.dirs=
+17-Dec-2022 00:44:02.750 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.base=/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70
+17-Dec-2022 00:44:02.750 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.home=/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70
+17-Dec-2022 00:44:02.750 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.io.tmpdir=/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/temp
+17-Dec-2022 00:44:02.754 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent 프로덕션 환경들에서 최적의 성능을 제공하는, APR 기반 Apache Tomcat Native 라이브러리가, 다음 java.library.path에서 발견되지 않습니다: [/Users/kimchanghee/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+17-Dec-2022 00:44:02.876 INFO [main] org.apache.coyote.AbstractProtocol.init 프로토콜 핸들러 ["http-nio-8080"]을(를) 초기화합니다.
+17-Dec-2022 00:44:02.888 INFO [main] org.apache.catalina.startup.Catalina.load [262] 밀리초 내에 서버가 초기화되었습니다.
+17-Dec-2022 00:44:02.909 INFO [main] org.apache.catalina.core.StandardService.startInternal 서비스 [Catalina]을(를) 시작합니다.
+17-Dec-2022 00:44:02.909 INFO [main] org.apache.catalina.core.StandardEngine.startInternal 서버 엔진을 시작합니다: [Apache Tomcat/9.0.70]
+17-Dec-2022 00:44:03.328 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+17-Dec-2022 00:44:03.337 INFO [main] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization started
+17-Dec-2022 00:44:03.438 INFO [main] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext initialized in 101 ms
+17-Dec-2022 00:44:03.447 INFO [main] org.springframework.web.servlet.FrameworkServlet.initServletBean Initializing Servlet 'dispatcher'
+17-Dec-2022 00:44:03.710 INFO [main] org.springframework.web.servlet.FrameworkServlet.initServletBean Completed initialization in 263 ms
+17-Dec-2022 00:44:03.714 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/InformParkingWeb_war_exploded]을(를) 배치합니다.
+17-Dec-2022 00:44:03.963 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+17-Dec-2022 00:44:03.969 INFO [main] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization started
+17-Dec-2022 00:44:04.036 INFO [main] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext initialized in 67 ms
+17-Dec-2022 00:44:04.038 INFO [main] org.springframework.web.servlet.FrameworkServlet.initServletBean Initializing Servlet 'dispatcher'
+17-Dec-2022 00:44:04.265 INFO [main] org.springframework.web.servlet.FrameworkServlet.initServletBean Completed initialization in 227 ms
+17-Dec-2022 00:44:04.267 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/InformParkingWeb_war_exploded]에 대한 배치가 [552] 밀리초에 완료되었습니다.
+17-Dec-2022 00:44:04.267 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/docs]을(를) 배치합니다.
+17-Dec-2022 00:44:04.274 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/docs]에 대한 배치가 [7] 밀리초에 완료되었습니다.
+17-Dec-2022 00:44:04.274 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/manager]을(를) 배치합니다.
+17-Dec-2022 00:44:04.285 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/manager]에 대한 배치가 [11] 밀리초에 완료되었습니다.
+17-Dec-2022 00:44:04.285 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/examples]을(를) 배치합니다.
+17-Dec-2022 00:44:04.350 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/examples]에 대한 배치가 [64] 밀리초에 완료되었습니다.
+17-Dec-2022 00:44:04.350 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/host-manager]을(를) 배치합니다.
+17-Dec-2022 00:44:04.356 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory 웹 애플리케이션 디렉토리 [/Users/kimchanghee/inform-parking/InformParkApacheTomcat9.0.70/webapps/host-manager]에 대한 배치가 [6] 밀리초에 완료되었습니다.
+17-Dec-2022 00:44:04.358 INFO [main] org.apache.coyote.AbstractProtocol.start 프로토콜 핸들러 ["http-nio-8080"]을(를) 시작합니다.
+17-Dec-2022 00:44:04.363 INFO [main] org.apache.catalina.startup.Catalina.start 서버가 [1474] 밀리초 내에 시작되었습니다.
+17-Dec-2022 00:44:31.328 INFO [main] org.apache.catalina.core.StandardServer.await 셧다운 포트를 통해 유효한 셧다운 명령을 받았습니다. 서버 인스턴스를 중지시킵니다.
+17-Dec-2022 00:44:31.329 INFO [main] org.apache.coyote.AbstractProtocol.pause 프로토콜 핸들러 ["http-nio-8080"]을(를) 일시 정지 중
+17-Dec-2022 00:44:31.330 INFO [main] org.apache.catalina.core.StandardService.stopInternal 서비스 [Catalina]을(를) 중지시킵니다.
+17-Dec-2022 00:44:31.348 INFO [main] org.apache.coyote.AbstractProtocol.stop 프로토콜 핸들러 ["http-nio-8080"]을(를) 중지시킵니다.
+17-Dec-2022 00:44:31.355 INFO [main] org.apache.coyote.AbstractProtocol.destroy 프로토콜 핸들러 ["http-nio-8080"]을(를) 소멸시킵니다.
