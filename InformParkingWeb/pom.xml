@@ -70,10 +70,13 @@
         </dependency>
     <!-- <<< KCH 2022/DEC/17 : spring mybatis연동을 위한 라이브러리 추가 -->
 
+        <!-- html 정적파일 사용을 위한 라이브러리 추가 -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jasper</artifactId>
+            <version>8.5.13</version>
+        </dependency>
+
     </dependencies>
     <!-- <<< KCH 2022/DEC/16 : 스프링 버전 설정 맟 필요한 라이브러리를 추가해준다. -->
-
-
-
-
 </project>

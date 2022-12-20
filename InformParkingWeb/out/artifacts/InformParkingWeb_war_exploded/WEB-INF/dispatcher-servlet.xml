@@ -13,8 +13,14 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="com.inpark.controller" />
 
+    <!-- 정적인 파일 처리를 기본으로 두고 없을 경우 jsp파일을 찾도록 해준다-->
+    <!-- 정적인 파일들을 static폴더에 두고 url사용시 static을 생략해서 사용할 수 있다. -->
+    <mvc:resources location="/static/" mapping="/**" />
+
+    <!-- 동적인 파일 처리 jsp -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/" />    <!--해당 경로에 들어가서 HomeController 클래스가 반환한 String 문자열에-->
         <property name="suffix" value=".jsp" />             <!--.jsp를 붙여서 해당 jsp파일을 화면에 띄우도록 해준다-->
     </bean>
+
 </beans>

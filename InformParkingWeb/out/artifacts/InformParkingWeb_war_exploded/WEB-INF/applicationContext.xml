@@ -15,12 +15,13 @@
            <property name="url" value="${jdbc.url}"/>
            <property name="username" value="${jdbc.username}"/>
            <property name="password" value="${jdbc.password}"/>
-       </bean>
+     </bean>
     <!-- Mysql <-> Mybatis를 연결해주는 객체 -->
+    <!-- id와 비밀번호의 경우 해당 xml파일에 적어주지말고 보안상 따로 파일을 만들어 호출해도록 하라고 한다 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:/mybatis-config.xml"/>
-        <property name="mapperLocations" value="classpath:/mappers/*.xml"/>
+        <property name="mapperLocations" value="classpath:/mappers/member-config.xml"/>
     </bean>
 
     <!-- MyBatis를 이용하여 dao없이 바로 호출 가능하도록 하는데 3.0 이상 부터 지원해준다 -->
