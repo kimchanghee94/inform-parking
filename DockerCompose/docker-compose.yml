@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  inform_parking_apahce :
+    build : ./ApacheDockerFile
+    ports :
+      - 8080:80
+    volumes :
+      - ~/inform-parking/InformParkingWeb/out/artifacts/InformParkingWeb_war_exploded/static:/usr/local/apache2/htdocs
+    depends_on :
+      - inform_parking_tomcat
+    networks :
+      - inform_parking_network
+ 
+  inform_parking_tomcat :
+    build : ./TomcatDockerFile
+    ports :
+      - 8081:8080
+    volumes : 
+      - ~/inform-parking/InformParkingWeb/out/artifacts:/usr/local/tomcat/webapps/
+      - ~/inform-parking/InformParkApacheTomcat9.0.70/conf:/usr/local/tomcat/conf/
+    depends_on :
+      - inform_parking_mysql
+    networks :
+      - inform_parking_network
+
+  inform_parking_mysql :
+    build : ./MysqlDockerFile
+    ports :
+      - 3306:3306
+    volumes :
+      - /opt/homebrew/var/mysql:/var/lib/mysql
+    environment : 
+      - MYSQL_ROOT_PASSWORD : 1234
+      - MYSQL_DB : todos
+    networks :
+      - inform_parking_network
+
+
+networks:
+  inform_parking_network :
+    driver : bridge
