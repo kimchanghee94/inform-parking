@@ -2,41 +2,54 @@ version: "3"
 
 services:
   inform_parking_apahce :
+    container_name : inform_parking_apache
     build : ./ApacheDockerFile
+    restart : always #컨테이너가 예상치 못한 일로 죽을 시 자동으로 다시 띄울 수 있도록 한다.
     ports :
       - 8080:80
     volumes :
+      - ~/inform-parking/InformParkingApache/conf:/usr/local/apache2/conf
       - ~/inform-parking/InformParkingWeb/out/artifacts/InformParkingWeb_war_exploded/static:/usr/local/apache2/htdocs
+    environment :
+      - TZ=Asia/Seoul
     depends_on :
       - inform_parking_tomcat
     networks :
-      - inform_parking_network
+      - inparknet
  
   inform_parking_tomcat :
+    container_name : inform_parking_tomcat
     build : ./TomcatDockerFile
+    restart : always
     ports :
-      - 8081:8080
+      - 8081:8009
     volumes : 
       - ~/inform-parking/InformParkingWeb/out/artifacts:/usr/local/tomcat/webapps/
-      - ~/inform-parking/InformParkApacheTomcat9.0.70/conf:/usr/local/tomcat/conf/
+      - ~/inform-parking/InformParkingTomcat/conf:/usr/local/tomcat/conf/
+    environment :
+      - TZ=Asia/Seoul
     depends_on :
       - inform_parking_mysql
     networks :
-      - inform_parking_network
+      - inparknet
 
   inform_parking_mysql :
+    container_name : inform_parking_mysql
     build : ./MysqlDockerFile
+    restart : always
     ports :
       - 3306:3306
     volumes :
+      #- ~/inform-parking/InformParkingDB/mysql:/var/lib/mysql
       - /opt/homebrew/var/mysql:/var/lib/mysql
     environment : 
-      - MYSQL_ROOT_PASSWORD : 1234
-      - MYSQL_DB : todos
+      - MYSQL_ROOT_PASSWORD=1234
+      - TZ=Asia/Seoul
     networks :
-      - inform_parking_network
+      - inparknet
 
 
 networks:
-  inform_parking_network :
-    driver : bridge
+  inparknet :
+    external :
+      name : inform_parking_network
