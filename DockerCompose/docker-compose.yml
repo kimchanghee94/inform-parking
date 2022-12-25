@@ -6,7 +6,7 @@ services:
     build : ./ApacheDockerFile
     restart : always #컨테이너가 예상치 못한 일로 죽을 시 자동으로 다시 띄울 수 있도록 한다.
     ports :
-      - 8080:80
+      - 80:80
     volumes :
       - ~/inform-parking/InformParkingApache/conf:/usr/local/apache2/conf
       - ~/inform-parking/InformParkingWeb/out/artifacts/InformParkingWeb_war_exploded/static:/usr/local/apache2/htdocs
@@ -22,7 +22,7 @@ services:
     build : ./TomcatDockerFile
     restart : always
     ports :
-      - 8081:8009
+      - 8080:8009
     volumes : 
       - ~/inform-parking/InformParkingWeb/out/artifacts:/usr/local/tomcat/webapps/
       - ~/inform-parking/InformParkingTomcat/conf:/usr/local/tomcat/conf/
