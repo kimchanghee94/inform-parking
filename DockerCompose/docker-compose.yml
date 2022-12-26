@@ -26,6 +26,7 @@ services:
     volumes : 
       - ~/inform-parking/InformParkingWeb/out/artifacts:/usr/local/tomcat/webapps/
       - ~/inform-parking/InformParkingTomcat/conf:/usr/local/tomcat/conf/
+#      - ~/inform-parking/InformParkingTomcat/logs:/usr/local/tomcat/logs/
     environment :
       - TZ=Asia/Seoul
     depends_on :

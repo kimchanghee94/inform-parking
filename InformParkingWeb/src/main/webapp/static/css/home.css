@@ -1,0 +1,66 @@
+.html{
+    height: 100%;
+    width: 100%;
+}
+.body{
+    margin:0;
+    padding:0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.left-layout{
+    width : 20%;
+}
+
+.right-layout{
+    width : 80%;
+}
+
+.left-layout-top{
+    height: 15%;
+    background-color: #258fff;
+}
+
+.left_layout_bottom{
+    height: 85%;
+}
+
+.navbar{
+    height : 40%;
+    display : flex;
+    align-items: center;
+}
+
+.navbar-toggle{
+    width : 5%;
+    margin-left : 5%;
+    text-align: center;
+}
+
+.brand_name {
+    width : 95%;
+    margin-left: 5%;
+    color : white;
+    font-size: 25px;
+}
+.search{
+    margin-left: 10%;
+    heigth : 60%;
+}
+
+input {
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+
+img{
+    postion : absolute;
+    width: 17px;
+    top: 10px;
+    rigth: 12px;
+    margint: 0;
+}

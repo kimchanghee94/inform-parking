@@ -1,0 +1,10 @@
+26-Dec-2022 17:08:26.411 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+26-Dec-2022 17:08:55.538 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+26-Dec-2022 17:10:07.129 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+26-Dec-2022 17:10:51.888 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+26-Dec-2022 17:14:43.929 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+26-Dec-2022 17:31:32.741 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+26-Dec-2022 17:33:49.865 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+26-Dec-2022 18:01:01.420 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+26-Dec-2022 18:18:59.596 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+26-Dec-2022 20:42:03.621 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
