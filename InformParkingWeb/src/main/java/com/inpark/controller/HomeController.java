@@ -14,8 +14,14 @@ public class HomeController {
     @Autowired
     private MemberService memberService;
 
+    @RequestMapping("/login")
+    public String login() { return "login";}
+
+    @RequestMapping("/join")
+    public String join() { return "join";}
+
     @RequestMapping("/home")
-    public String showHome(){
+    public String home(){
         return "home";
     }
 
