@@ -15,10 +15,10 @@ public class HomeController {
     private MemberService memberService;
 
     @RequestMapping("/login")
-    public String login() { return "login";}
+    public String login() { return "utility.login";}
 
     @RequestMapping("/join")
-    public String join() { return "join";}
+    public String join() { return "utility.join";}
 
     @RequestMapping("/home")
     public String home(){

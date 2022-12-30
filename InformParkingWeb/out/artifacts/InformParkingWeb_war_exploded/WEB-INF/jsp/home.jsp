@@ -27,11 +27,21 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <button type="button" class="modal-close-btn close" data-dismiss="modal">x</button>
                             <h4 class="modal-title"><strong>주차장</strong>을 알리다 🚙</h4>
                         </div>
                         <div class="modal-body">
-                            <p>팝업 내용</p>
+                            <ul class="usr-inform-body">
+                                <li><a href="login">로그인</a></li>
+                                <li><a href="join">회원가입</a></li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <ul class="usr-inform-footer">
+                                <!--<li><a href="#">관리자 신청하기</a></li>-->
+                                <li><a href="#">공지사항</a></li>
+                                <li><a href="#">고객센터</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
