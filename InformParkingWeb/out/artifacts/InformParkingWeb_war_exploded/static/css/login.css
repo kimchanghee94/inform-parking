@@ -34,8 +34,11 @@ a:active{
 }
 
 .container-login{
-    width : 100%;
-    padding-left : 47%;
+    width: 100%;
+}
+
+.login-div{
+    margin-left: 24%;
 }
 
 .sub-menu{

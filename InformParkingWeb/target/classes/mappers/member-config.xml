@@ -1,7 +1,26 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.inpark.mapper.MemberMapper">
     <select id="selectMember" parameterType="String" resultType="memberDto">
-        SELECT id, passwd from login WHERE id =#{id}
+        SELECT id, info from users WHERE id =#{id}
+    </select>
+
+    <select id="idCheck" resultType="int">
+        SELECT count(*) from users where id = #{id}
+    </select>
+
+    <select id="phoneCheck" resultType="int">
+        SELECT count(*) from users where info->'$.phone' = #{phone}
+    </select>
+
+    <insert id="insertMember">
+        INSERT INTO users(id, info) VALUES(
+        #{id}, #{info}
+        )
+    </insert>
+
+    <select id="loginMember" parameterType="String" resultType="memberDto">
+        SELECT id, info from users WHERE id=#{id}
     </select>
 </mapper>

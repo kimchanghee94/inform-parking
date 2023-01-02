@@ -4,10 +4,12 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
     <definition name="utility.*" template="/WEB-INF/jsp/utility/inc/layout.jsp">
-        <put-attribute name="title" value="Tiles tutorial homepage" />
+        <put-attribute name="title" value="{1}"/>
+        <put-attribute name="css-path" value="/css/{1}.css" />
+        <put-attribute name="js-path" value="/js/{1}.js"/>
         <put-attribute name="header" value="/WEB-INF/jsp/utility/inc/{1}-header.jsp" />
         <put-attribute name="aside" value="/WEB-INF/jsp/utility/inc/aside.jsp" />
-        <put-attribute name="body" value="/WEB-INF/jsp/utility/login.jsp" />
+        <put-attribute name="body" value="/WEB-INF/jsp/utility/{1}.jsp" />
         <put-attribute name="footer" value="/WEB-INF/jsp/utility/inc/footer.jsp" />
     </definition>
 </tiles-definitions>

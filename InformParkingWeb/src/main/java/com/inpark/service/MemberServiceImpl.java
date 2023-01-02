@@ -18,4 +18,22 @@ public class MemberServiceImpl implements MemberService {
 //        return memberDao.selectMember(id);
         return memberMapper.selectMember(id);
     }
+
+    @Override
+    public void insertMember(MemberDto mto){
+        memberMapper.insertMember(mto);
+    }
+
+    @Override
+    public int idCheck(String id){
+        return memberMapper.idCheck(id);
+    }
+
+    @Override
+    public int phoneCheck(String phone){ return memberMapper.phoneCheck(phone);}
+
+    @Override
+    public MemberDto loginMember(String id){
+        return memberMapper.loginMember(id);
+    }
 }

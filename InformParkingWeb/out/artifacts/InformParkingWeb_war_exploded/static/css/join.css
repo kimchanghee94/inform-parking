@@ -33,9 +33,9 @@ a:active{
     width: 80%;
 }
 
-.container-login{
+.container-join{
     width : 100%;
-    padding-left : 24%;
+    padding-left : 250px;
 }
 
 .sub-menu{
@@ -48,10 +48,24 @@ a:active{
     font-weight: bold;
 }
 
+.input-group-text{
+    height:38px;
+}
+
 .input-group{
+    display: flex;
     width: 330px;
+    height: 38px;
 }
 
 .btn{
     width: 330px;
+}
+
+.error{
+    font-size: 12px;
+    height: 30px;
+    color: red;
+    font-weight: 700;
+    margin-left: 45px;
 }

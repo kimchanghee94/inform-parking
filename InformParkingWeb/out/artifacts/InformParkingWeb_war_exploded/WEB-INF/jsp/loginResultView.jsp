@@ -13,5 +13,8 @@
 <body>
 id: ${member.id}
 password: ${member.passwd}
+phone: ${member.phone}
+name: ${member.userName}
+car number: ${member.carNum}
 </body>
 </html>
