@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kimchanghee
@@ -32,8 +33,18 @@
                         </div>
                         <div class="modal-body">
                             <ul class="usr-inform-body">
-                                <li><a href="login">로그인</a></li>
-                                <li><a href="join">회원가입</a></li>
+                                <c:choose>
+                                    <c:when test="${res eq null}">
+                                        <li><a id="submenu-login" href="login">로그인</a></li>
+                                        <li><a id="submenu-join" href="join">회원가입</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a id="submenu-logout" href="login" onclick="logoutFunc()">로그아웃</a></li>
+                                        <li><a id="submenu-reserve" href="#">예매내역</a></li>
+                                        <li><a id="submenu-admin" href="#">관리자로 전환</a></li>
+                                        <li><a id="submenu-withdrawal" href="#">회원탈퇴</a></li>
+                                    </c:otherwise>
+                                </c:choose>
                             </ul>
                         </div>
                         <div class="modal-footer">

@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
 @Controller
 public class HomeController {
 
@@ -26,21 +31,35 @@ public class HomeController {
     }
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
-    public String postLogin(MemberDto dto){
+    public String postLogin(MemberDto dto, HttpServletRequest req, Model model){
         MemberDto res = memberService.loginMember(dto.getId());
+        HttpSession session = req.getSession();
+
         if(res == null){
+            System.out.println("해당 아이디가 없음");
+            model.addAttribute("msg", "해당 아이디가 존재하지 않습니다.");
             return "utility.login";
         }
 
         System.out.println("로그인 생성 암호화 매칭 가즈아" + res.getPasswd() + res.getUserName());
         if(bCryptPasswordEncoder.matches(dto.getPasswd(), res.getPasswd())){
-            System.out.println("성공?");
-            return "utility.login";
+            System.out.println("로그인 성공");
+            session.setAttribute("res", res);
+
+            return "redirect:/";
         }else{
-            System.out.println("실패?");
+            System.out.println("비밀번호가 맞지 않음");
+            model.addAttribute("msg","비밀번호가 맞지 않습니다.");
             return "utility.login";
         }
 
+    }
+
+    @RequestMapping(value="/logout", method=RequestMethod.POST)
+    public void postLogout(HttpServletRequest req){
+        HttpSession session = req.getSession();
+        session.invalidate();
+        System.out.println("로그아웃 성공");
     }
 
     @RequestMapping(value="/join", method=RequestMethod.GET)
@@ -57,7 +76,7 @@ public class HomeController {
 
         memberService.insertMember(dto);
 
-        return "redirect:/";
+        return "utility.login";
     }
 
     @RequestMapping(value = "/memberIdChk", method=RequestMethod.POST)

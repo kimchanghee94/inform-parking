@@ -68,11 +68,21 @@
 }
 
 a:link{
+    text-decoration-line: none;
     color: black;
 }
 
 a:visited{
+    text-decoration-line: none;
     color: black;
+}
+
+a:hover{
+    text-decoration-line: underline;
+}
+
+a:active{
+    text-decoration-line: underline;
 }
 
 .modal-body{

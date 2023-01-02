@@ -12,3 +12,11 @@ var options = {
 };
 
 var map = new kakao.maps.Map(container, options);
+
+/* 회원 탈퇴 */
+function logoutFunc(){
+    $.ajax({
+        type : "post",
+        url : "/logout"
+    });
+}

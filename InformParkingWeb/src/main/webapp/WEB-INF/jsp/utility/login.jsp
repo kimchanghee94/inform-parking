@@ -1,5 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <main id="main">
+    <script type="text/javascript">
+        let message = "${msg}";
+            console.log(message);
+        if(message != ""){
+            alert(message);
+            history.back();
+        }
+    </script>
     <div class="container-login">
         <div class="">
             <div class="d-flex">
