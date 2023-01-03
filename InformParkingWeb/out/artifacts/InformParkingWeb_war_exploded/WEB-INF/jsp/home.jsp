@@ -21,6 +21,7 @@
     <div class="left-top-layout">
         <div class="left-top-header">
             <h1 class="brand-title"><strong>주차장</strong>을 알리다</h1>
+            <a id="move-my-pos" href="#" onclick="moveCurPos()">현재 위치로</a>
             <button class="user-inform-button btn-modal" data-toggle="modal" data-target="#user-info-modal">
                 <img src="https://t1.daumcdn.net/localimg/localimages/07/2018/pc/title/ico_menu.png" alt="drop down button">
             </button>
@@ -80,9 +81,12 @@
     </div>
     <div id="kakao_map" class="map-view">
     </div>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56aa35a066273ae1aab6fd6b7313eb8f"></script>
-    <script type="text/javascript" src="/js/home.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://developer.mozilla.org/ko/docs/Web/API/Geolocation_API"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56aa35a066273ae1aab6fd6b7313eb8f&libraries=clusterer">
+    </script>
+    <script type="text/javascript" src="/js/home.js"></script>
     <script src="/bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

@@ -9,6 +9,24 @@
     width: 100%;
 }
 
+a:link{
+    text-decoration-line: none;
+    color: black;
+}
+
+a:visited{
+    text-decoration-line: none;
+    color: black;
+}
+
+a:hover{
+    text-decoration-line: underline;
+}
+
+a:active{
+    text-decoration-line: underline;
+}
+
 .left-top-layout{
     position: relative;
     height: 130px;
@@ -31,6 +49,14 @@
     margin: 0;
     padding: 5px 0 21px 36px;
     width: 150px;
+}
+
+#move-my-pos{
+    position: absolute;
+    left: 314px;
+    top: 30px;
+    font-size: 12px;
+    color: ghostwhite;
 }
 
 .user-inform-button{
@@ -65,24 +91,6 @@
 .modal-content{
     width: 350px;
     height: 100%;
-}
-
-a:link{
-    text-decoration-line: none;
-    color: black;
-}
-
-a:visited{
-    text-decoration-line: none;
-    color: black;
-}
-
-a:hover{
-    text-decoration-line: underline;
-}
-
-a:active{
-    text-decoration-line: underline;
 }
 
 .modal-body{
