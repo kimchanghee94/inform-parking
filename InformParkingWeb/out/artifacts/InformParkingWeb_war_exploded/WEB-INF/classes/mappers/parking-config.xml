@@ -1,0 +1,25 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inpark.mapper.ParkingMapper">
+    <select id="selectViewParking" parameterType="compParkingDto" resultType="parkingDto">
+        SELECT * from parking
+        WHERE (longitude BETWEEN ${swLng} AND ${neLng}) AND (latitude BETWEEN ${swLat} AND ${neLat})
+    </select>
+
+    <insert id="insertParking" parameterType="java.util.List">
+        INSERT INTO parking(id, parkingName, longitude, latitude) VALUES
+        <foreach collection="list" item="item" separator=",">
+        (#{item.id}, #{item.parkingName}, #{item.longitude}, #{item.latitude})
+        </foreach>
+    </insert>
+
+    <insert id="insertOneParking">
+        INSERT INTO parking(parkingName, latitude, longitude) VALUES( #{parkingName}, #{latitude}, #{longitude})
+    </insert>
+
+    <delete id="deleteAllParking">
+        DELETE FROM parking
+    </delete>
+
+</mapper>

@@ -11,6 +11,9 @@ public class MemberDto {
     private String passwd;
     private String carNum;
     private String phone;
+
+
+    /* json형태로 db를 구축할 경우에 사용한다.
     private String info;
 
     public String getInfo(){
@@ -39,7 +42,7 @@ public class MemberDto {
         } catch(JsonProcessingException jpe){
             jpe.printStackTrace();
         }
-    }
+    }*/
 
     public String getId() {
         return id;

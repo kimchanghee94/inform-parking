@@ -3,7 +3,7 @@
 
 <mapper namespace="com.inpark.mapper.MemberMapper">
     <select id="selectMember" parameterType="String" resultType="memberDto">
-        SELECT id, info from users WHERE id =#{id}
+        SELECT id, userName, passwd, carNum, phone from users WHERE id =#{id}
     </select>
 
     <select id="idCheck" resultType="int">
@@ -11,16 +11,15 @@
     </select>
 
     <select id="phoneCheck" resultType="int">
-        SELECT count(*) from users where info->'$.phone' = #{phone}
+        SELECT count(*) from users where phone = #{phone}
     </select>
 
     <insert id="insertMember">
-        INSERT INTO users(id, info) VALUES(
-        #{id}, #{info}
-        )
+        INSERT INTO users(id, passwd, userName, phone, carNum) VALUES(
+        #{id}, #{passwd}, #{userName}, #{phone}, #{carNum})
     </insert>
 
     <select id="loginMember" parameterType="String" resultType="memberDto">
-        SELECT id, info from users WHERE id=#{id}
+        SELECT id, passwd from users WHERE id=#{id}
     </select>
 </mapper>

@@ -65,7 +65,7 @@ navigator.geolocation.getCurrentPosition(
       //위에서 처럼 위도와 경도를 api를 매페이지 전부 호출해 가져오게 될경우 시간 비효율로 인해 json파일에 담아 빠르게 불러올 수 있도록 한다.
       var markers;
 
-      getMarker();
+      getMapViewMarkers();
 
       var zoomControl = new kakao.maps.ZoomControl();
       map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
@@ -80,17 +80,70 @@ navigator.geolocation.getCurrentPosition(
           if(mapLevel > 7){
               clusterer.clear();
           }else{
-              getMarker();
+              getMapViewMarkers();
           }
       });
 
-      //이동 이벤
+      //이동 이벤트
       kakao.maps.event.addListener(map, 'dragend', function() {
           if(mapLevel < 8 ){
-              getMarker();
+              getMapViewMarkers();
           }
       });
 
+      //db를 통해 데이터를 가져와 사용한다.
+      function getMapViewMarkers(){
+          var latlngJson;
+          var neLat = map.getBounds().getNorthEast().getLat();
+          var neLng = map.getBounds().getNorthEast().getLng();
+          var swLat = map.getBounds().getSouthWest().getLat();
+          var swLng = map.getBounds().getSouthWest().getLng();
+
+          var data = {
+              neLat : neLat,
+              neLng : neLng,
+              swLat : swLat,
+              swLng : swLng
+          };
+          $.ajax({
+              type : "post",
+              url : "/getMapViewMarkers",
+              data : data,
+              dataType : "json",
+              async : false,
+              statusCode: {
+                  200 : function(data){
+                      console.log("get MapViewMarkers success");
+                  },
+                  404 : function(data){
+                      console.log("get MapViewMarkers failed");
+                  }
+              },
+              async : false,
+              success : function(response){
+                  console.log(response.header.statusCode);
+                if(response.header.statusCode == "00"){
+                    console.log("맵 안의 데이터가 존재하여 값을 받은 경우");
+                    latlngJson = response.body;
+                }else if(response.header.statusCode =="01"){
+                    console.log("값을 따로 받은게 존재하지 않을 경우");
+                    latlngJson = response.body;
+                }
+              }
+          });
+
+          console.log(latlngJson);
+
+          markers = $(latlngJson.items).map(function(i, item) {
+              return new kakao.maps.Marker({
+                  position : new kakao.maps.LatLng(item.latitude, item.longitude)
+              });
+          });
+
+          clusterer.addMarkers(markers);
+      }
+
+      /* 해당 메서드는 json파일로 데이터를 불러올 때 사용한 메서드
       function getMarker(){
           $.get("/json/parking.json", function(data) {
               // 데이터에서 좌표 값을 가지고 마커를 표시합니다
@@ -110,6 +163,6 @@ navigator.geolocation.getCurrentPosition(
               });
               clusterer.addMarkers(markers);
           });
-      }
+      }*/
   }
 );

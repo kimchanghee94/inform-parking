@@ -4,7 +4,7 @@
         <div class="">
             <div class="rounded d-flex">
                 <div class=>
-                    <form action="" method="post">
+                    <form action="/join" method="post">
                         <div class="p-5">
                             <div class="input-group">
                                            <span class="input-group-text bg-dark">
