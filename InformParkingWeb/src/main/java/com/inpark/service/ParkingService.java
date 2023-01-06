@@ -9,6 +9,6 @@ public interface ParkingService {
     List<ParkingDto> selectViewParking(CompParkingDto compParkingDto);
 
     void insertParking(List<ParkingDto> dto);
-    void insertOneParking(ParkingDto dto);
+
     void deleteAllParking();
 }

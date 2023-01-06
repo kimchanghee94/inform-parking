@@ -187,15 +187,153 @@ input::placeholder{
     display: block;
 }
 
+/*주차장 정보 표시 레이아웃*/
 .left-bottom-layout{
     position: absolute;
     width: 390px;
-    bottom: 0;
+    bottom: 20px;
     left: 0;
     right: 0;
     top: 130px;
 }
 
+.HIDDEN{
+    display: none;
+}
+
+#login-activate{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 30px;
+    background-color: lightslategray;
+}
+
+.login-activate-text{
+    font-size: 15px;
+    height: 100%;
+    color: white;
+    margin : 0 0 10px 17px;
+}
+
+.left-bottom-main{
+    position: absolute;
+    width: 390px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 30px;
+    overflow: scroll;
+}
+
+#left-bottom-main-markerNonClick-text{
+    position: absolute;
+    top: 290px;
+    left: 60px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#parking-basic-info{
+    position: absolute;
+    border-bottom: 1px solid lightgray;
+    top: 0;
+    width: 100%;
+    height: 102px;
+}
+
+#parking-name-text{
+    height: 30px;
+    font-size: 20px;
+    margin: 10px 0 0 17px;
+}
+
+#parking-addr-text{
+    height: 25px;
+    font-size: 15px;
+    margin: 10px 0 0 17px;
+}
+#parking-phone-text{
+    height: 20px;
+    font-size: 15px;
+    color: lightslategray;
+    margin: 0 0 5px 17px;
+}
+
+#parking-operating-time{
+    position: absolute;
+    border-bottom: 1px solid lightgray;
+    top: 102px;
+    width: 100%;
+    height: 215px;
+}
+
+#parking-sub-info{
+    height: 50px;
+    font-size: 17px;
+    margin: 15px 0 0 17px;
+    line-height: 25px;
+}
+
+#time-list{
+    padding:20px 0 0 30px;
+    font-size: 17px;
+    line-height: 40px;
+}
+
+.parking-price-info{
+    position: absolute;
+    top: 317px;
+    width: 100%;
+}
+
+.parking-price-list{
+    height: 25px;
+    font-size: 17px;
+    margin: 10px 0 0 17px;
+}
+
+#non-pay-text{
+    position: absolute;
+    top: 130px;
+    left: 35px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.custom-button{
+    width: 370px;
+    left: 8px;
+}
+
+#day-buy-button{
+    position: absolute;
+    top: 200px;
+}
+
+#month-buy-button{
+    position: absolute;
+    top: 240px;
+}
+
+/*주차장 푸터 레이아웃*/
+.left-bottom-footer{
+    position: absolute;
+    background-color: whitesmoke;
+    width: 390px;
+    height: 20px;
+    border-top: 1px solid darkgray;
+    font-size: 10px;
+    left: 0;
+    bottom: 0;
+}
+
+#footer-text{
+    margin: 2px 0 0 70px;
+}
+
+
+/* 맵 정보 표시 레이아웃*/
 .map-view{
     position: absolute;
     bottom: 0;
@@ -203,3 +341,5 @@ input::placeholder{
     right: 0;
     top: 0;
 }
+
+

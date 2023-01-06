@@ -23,7 +23,7 @@ public class ParkingSchedular {
     @Autowired
     private ParkingService parkingService;
 
-    @Scheduled(cron="0 00 07 * * ?")
+    @Scheduled(cron="0 0 01 * * ?")
     public void getLatLng() throws IOException {
         List<ParkingDto> parkingList = new ArrayList<>();
         System.out.println("아침 7시가 되면 데이터를 한번 비우고 위도와 경도를 DB에 새로 구축한다.");
@@ -58,7 +58,6 @@ public class ParkingSchedular {
             while ((line = rd.readLine()) != null) {
                 sb.append(line);
             }
-            //System.out.println(sb.toString());
             rd.close();
             conn.disconnect();
 
@@ -79,6 +78,31 @@ public class ParkingSchedular {
                         parkingDto.setParkingName((String)object.get("prkplceNm"));
                         parkingDto.setLatitude(Double.parseDouble((String)object.get("latitude")));
                         parkingDto.setLongitude(Double.parseDouble((String)object.get("longitude")));
+                        parkingDto.setPhone((String)object.get("phoneNumber"));
+
+                        parkingDto.setParkingFor((String)object.get("prkplceSe"));
+                        parkingDto.setParkingStruct((String)object.get("prkplceType"));
+                        parkingDto.setRdnmadr((String)object.get("rdnmadr"));
+                        parkingDto.setLnmadr((String)object.get("lnmadr"));
+                        parkingDto.setOpenDay((String)object.get("operDay"));
+                        parkingDto.setParkingCnt((String)object.get("prkcmprt"));
+
+                        parkingDto.setWeekOpen((String)object.get("weekdayOperOpenHhmm"));
+                        parkingDto.setWeekClose((String)object.get("weekdayOperColseHhmm"));
+                        parkingDto.setSatOpen((String)object.get("satOperOperOpenHhmm"));
+                        parkingDto.setSatClose((String)object.get("satOperCloseHhmm"));
+                        parkingDto.setHoliOpen((String)object.get("holidayOperOpenHhmm"));
+                        parkingDto.setHoliClose((String)object.get("holidayCloseOpenHhmm"));
+
+                        parkingDto.setParkingFreeInfo((String)object.get("parkingchrgeInfo"));
+                        parkingDto.setBasicTime((String)object.get("basicTime"));
+                        parkingDto.setBasicCharge((String)object.get("basicCharge"));
+                        parkingDto.setAddUnitTime((String)object.get("addUnitTime"));
+                        parkingDto.setAddUnitCharge((String)object.get("addUnitCharge"));
+                        parkingDto.setDayChargeTime((String)object.get("dayCmmtktAdjTime"));
+                        parkingDto.setDayCharge((String)object.get("dayCmmtkt"));
+                        parkingDto.setMonthCharge((String)object.get("monthCmmtkt"));
+
                         parkingList.add(parkingDto);
                     }
                 }
@@ -90,6 +114,5 @@ public class ParkingSchedular {
             System.out.println(dto);
         }
         parkingService.insertParking(parkingList);
-        //parkingService.insertOneParking(parkingList.get(0));
     }
 }

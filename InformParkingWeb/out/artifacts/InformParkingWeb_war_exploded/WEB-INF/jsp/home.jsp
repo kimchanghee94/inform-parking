@@ -13,6 +13,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width", initial-scale="1">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://developer.mozilla.org/ko/docs/Web/API/Geolocation_API"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56aa35a066273ae1aab6fd6b7313eb8f&libraries=clusterer">
+    </script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/home.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>주차장을 알리다</title>
@@ -76,17 +83,56 @@
             </div>
         </div>
     </div>
-    <div class="left-bottom-layout">
-        <div>주차장 정보에 대해 표시될 공간입니다.</div>
+    <div class="left-bottom-layout" value="markerClickFlag">
+        <div id="login-activate">
+            <c:choose>
+                <c:when test="${res eq null}">
+                    <h4 class="login-activate-text">안녕하세요😄</h4>
+                </c:when>
+                <c:otherwise>
+                    <h4 class="login-activate-text">${res.userName}님 반갑습니다😄</h4>
+                </c:otherwise>
+            </c:choose>
+        </div>
+        <div class="left-bottom-main markerNonClick" id="markerNonClick-page">
+            <div id="left-bottom-main-markerNonClick-text">
+                마커를 클릭하시면 주차장 정보가 표시됩니다❗️
+            </div>
+        </div>
+        <div class="left-bottom-main markerClick HIDDEN" id="markerClick-page">
+            <div id="parking-basic-info">
+                <h4 id="parking-name-text"></h4>
+                <h4 id="parking-addr-text"></h4>
+                <h4 id="parking-phone-text"></h4>
+            </div>
+            <div id="parking-operating-time">
+                <h4 id="parking-sub-info"></h4>
+                <ul id="time-list">
+                    <li id="week-time-list"></li>
+                    <li id="sat-time-list"></li>
+                    <li id="holi-time-list"></li>
+                </ul>
+            </div>
+            <div class="parking-price-info HIDDEN" id="pay-parking">
+                <h4 class="parking-price-list" id="basic-price-text"></h4>
+                <h4 class="parking-price-list" id="add-price-text"></h4>
+                <h4 class="parking-price-list" id="empty"></h4>
+                <h4 class="parking-price-list" id="day-price-text"></h4>
+                <h4 class="parking-price-list" id="month-price-text"></h4>
+                <button type="button" class="btn btn-primary custom-button" id="day-buy-button">하루 정기권 구매</button>
+                <button type="button" class="btn btn-primary custom-button" id="month-buy-button">월 정기권 구매</button>
+            </div>
+            <div class="parking-price-info HIDDEN" id="non-pay-parking">
+                <div id="non-pay-text">
+                    무료주차장에는 가격정보를 따로 표시하지 않습니다😳️
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="left-bottom-footer">
+        <p id="footer-text">'주차장을 알리다's Homepage is powered by <span class="text-primary">Changhee</span></p>
     </div>
     <div id="kakao_map" class="map-view">
     </div>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://developer.mozilla.org/ko/docs/Web/API/Geolocation_API"></script>
-    <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56aa35a066273ae1aab6fd6b7313eb8f&libraries=clusterer">
-    </script>
-    <script type="text/javascript" src="/js/home.js"></script>
-    <script src="/bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

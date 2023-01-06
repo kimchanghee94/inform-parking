@@ -8,14 +8,18 @@
     </select>
 
     <insert id="insertParking" parameterType="java.util.List">
-        INSERT INTO parking(id, parkingName, longitude, latitude) VALUES
+        INSERT INTO parking(id, parkingName, longitude, latitude, phone,
+        parkingFor, parkingStruct, rdnmadr, lnmadr, openDay, parkingCnt,
+        weekOpen, weekClose, satOpen, satClose, holiOpen, holiClose,
+        parkingFreeInfo, basicTime, basicCharge, addUnitTime, addUnitCharge,
+        dayChargeTime, dayCharge, monthCharge) VALUES
         <foreach collection="list" item="item" separator=",">
-        (#{item.id}, #{item.parkingName}, #{item.longitude}, #{item.latitude})
+        (#{item.id}, #{item.parkingName}, #{item.longitude}, #{item.latitude}, #{item.phone},
+        #{item.parkingFor}, #{item.parkingStruct}, #{item.rdnmadr}, #{item.lnmadr}, #{item.openDay},
+        #{item.parkingCnt}, #{item.weekOpen}, #{item.weekClose}, #{item.satOpen}, #{item.satClose},
+        #{item.holiOpen}, #{item.holiClose}, #{item.parkingFreeInfo}, #{item.basicTime}, #{item.basicCharge},
+        #{item.addUnitTime}, #{item.addUnitCharge}, #{item.dayChargeTime}, #{item.dayCharge}, #{item.monthCharge})
         </foreach>
-    </insert>
-
-    <insert id="insertOneParking">
-        INSERT INTO parking(parkingName, latitude, longitude) VALUES( #{parkingName}, #{latitude}, #{longitude})
     </insert>
 
     <delete id="deleteAllParking">

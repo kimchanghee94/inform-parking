@@ -25,11 +25,6 @@ public class ParkingServiceImpl implements ParkingService {
     }
 
     @Override
-    public void insertOneParking(ParkingDto dto){
-        parkingMapper.insertOneParking(dto);
-    }
-
-    @Override
     public void deleteAllParking(){
         parkingMapper.deleteAllParking();
     }

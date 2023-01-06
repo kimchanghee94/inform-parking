@@ -12,7 +12,5 @@ public interface ParkingMapper {
 
     void insertParking(List<ParkingDto> dto);
 
-    void insertOneParking(ParkingDto dto);
-
     void deleteAllParking();
 }

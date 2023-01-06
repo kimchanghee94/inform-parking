@@ -46,6 +46,30 @@ public class ParkingController {
             temp.put("parkingName", listParking.get(i).getParkingName());
             temp.put("latitude", listParking.get(i).getLatitude());
             temp.put("longitude", listParking.get(i).getLongitude());
+            temp.put("phone", listParking.get(i).getPhone());
+
+            temp.put("parkingFor", listParking.get(i).getParkingFor());
+            temp.put("parkingStruct", listParking.get(i).getParkingStruct());
+            temp.put("rdnmadr", listParking.get(i).getRdnmadr());
+            temp.put("lnmadr", listParking.get(i).getLnmadr());
+            temp.put("openDay", listParking.get(i).getOpenDay());
+            temp.put("parkingCnt", listParking.get(i).getParkingCnt());
+
+            temp.put("weekOpen", listParking.get(i).getWeekOpen());
+            temp.put("weekClose", listParking.get(i).getWeekClose());
+            temp.put("satOpen", listParking.get(i).getSatOpen());
+            temp.put("satClose", listParking.get(i).getSatClose());
+            temp.put("holiOpen", listParking.get(i).getHoliOpen());
+            temp.put("holiClose", listParking.get(i).getHoliClose());
+
+            temp.put("parkingFreeInfo", listParking.get(i).getParkingFreeInfo());
+            temp.put("basicTime", listParking.get(i).getBasicTime());
+            temp.put("basicCharge", listParking.get(i).getBasicCharge());
+            temp.put("addUnitTime", listParking.get(i).getAddUnitTime());
+            temp.put("addUnitCharge", listParking.get(i).getAddUnitCharge());
+            temp.put("dayChargeTime", listParking.get(i).getDayChargeTime());
+            temp.put("dayCharge", listParking.get(i).getDayCharge());
+            temp.put("monthCharge", listParking.get(i).getMonthCharge());
 
             items.add(temp);
         }
