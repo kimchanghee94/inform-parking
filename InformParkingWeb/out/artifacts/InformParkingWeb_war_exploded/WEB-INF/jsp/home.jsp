@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://developer.mozilla.org/ko/docs/Web/API/Geolocation_API"></script>
     <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56aa35a066273ae1aab6fd6b7313eb8f&libraries=clusterer">
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56aa35a066273ae1aab6fd6b7313eb8f&libraries=clusterer,services">
     </script>
     <script src="/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="/js/home.js"></script>
@@ -66,12 +66,12 @@
                 </div>
             </div>
             <div class="search">
-                <form class="keyword-search-form" onsubmit="return keywordSearch()">
+                <form class="keyword-search-form" onsubmit="return false">
                     <fieldset class="keyword-search-fieldset">
                         <div class="searchbar">
-                            <input type="text" name="ks" placeholder="장소, 주소, 주차장 검색" class="keyword-searchBar" maxlength="100"
-                            autocomplete="off">
-                            <button class="search_button">
+                            <input id="search-place-input" type="text" name="ks" placeholder="장소, 주소, 주차장 검색" class="keyword-searchBar" maxlength="100"
+                            autocomplete="off" onkeypress="enterkey()">
+                            <button class="search_button" type="button" onclick="keywordSearch()" id="search-button-img">
                                 <img class="offmouse" src="https://t1.daumcdn.net/localimg/localimages/07/2018/pc/common/ico_search.png"
                                 alter="search icon">
                                 <img class="onmouse" src="https://t1.daumcdn.net/localimg/localimages/07/2018/pc/common/ico_search.png"

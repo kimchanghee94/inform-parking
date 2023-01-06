@@ -51,3 +51,12 @@
 06-Jan-2023 10:07:00.345 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
 06-Jan-2023 10:42:22.917 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
 06-Jan-2023 11:10:37.256 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+06-Jan-2023 21:56:38.110 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+06-Jan-2023 22:07:22.442 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+06-Jan-2023 22:29:01.447 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+06-Jan-2023 23:13:09.772 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+06-Jan-2023 23:20:21.321 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+06-Jan-2023 23:20:33.486 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+06-Jan-2023 23:40:00.408 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+06-Jan-2023 23:44:39.863 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+06-Jan-2023 23:51:59.390 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
