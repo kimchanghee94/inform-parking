@@ -6,6 +6,7 @@
 * DataBase : MyBatis, MySQL, MySQLWorkBench
 * IDE : intellij
 * Framework : Spring MVC - Maven사용
+* 주요 Library : spring-security
 
 
 --메인페이지--
