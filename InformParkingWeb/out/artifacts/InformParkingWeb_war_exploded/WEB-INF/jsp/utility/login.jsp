@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <main id="main">
     <script type="text/javascript">
-        let message = "${msg}";
+        let message = "${requestScope.loginFailMsg}";
             console.log(message);
         if(message != ""){
             alert(message);
@@ -12,7 +12,7 @@
         <div class="">
             <div class="d-flex">
                 <div class=login-div>
-                    <form class="login-form" action="/login" method="post">
+                    <form class="login-form" action="login" method="post">
                         <div class="p-5">
                             <div class="input-group mb-3">
                                            <span class="input-group-text bg-dark"><i

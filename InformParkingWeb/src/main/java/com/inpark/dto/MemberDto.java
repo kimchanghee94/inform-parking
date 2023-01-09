@@ -4,6 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONObject;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.List;
+
 
 public class MemberDto {
     private String id;
@@ -11,7 +16,6 @@ public class MemberDto {
     private String passwd;
     private String carNum;
     private String phone;
-
 
     /* json형태로 db를 구축할 경우에 사용한다.
     private String info;
@@ -82,5 +86,9 @@ public class MemberDto {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String toString(){
+        return id + ", " + userName + ", " + passwd + ", " + phone + ", " + carNum;
     }
 }

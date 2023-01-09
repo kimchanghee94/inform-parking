@@ -36,4 +36,9 @@ public class MemberServiceImpl implements MemberService {
     public MemberDto loginMember(String id){
         return memberMapper.loginMember(id);
     }
+
+    @Override
+    public void insertAuth(String id, String auth){
+        memberMapper.insertAuth(id, auth);
+    }
 }

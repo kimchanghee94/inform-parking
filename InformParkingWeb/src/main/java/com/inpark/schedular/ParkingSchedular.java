@@ -26,7 +26,7 @@ public class ParkingSchedular {
     //@Scheduled(cron="0 0 01 * * ?")
     public void getLatLng() throws IOException {
         List<ParkingDto> parkingList = new ArrayList<>();
-        System.out.println("아침 7시가 되면 데이터를 한번 비우고 위도와 경도를 DB에 새로 구축한다.");
+        System.out.println("새벽 1시가 되면 데이터를 한번 비우고 위도와 경도를 DB에 새로 구축한다.");
 
         parkingService.deleteAllParking();
 

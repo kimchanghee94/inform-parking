@@ -119,8 +119,25 @@
         <!-- spring security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.0.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.0.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>5.7.3</version>
+            <version>5.0.6.RELEASE</version>
+        </dependency>
+
+        <!-- JSP에서 spring-security tag library 사용할 수 있도록 -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>5.0.6.RELEASE</version>
         </dependency>
 
 

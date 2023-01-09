@@ -12,4 +12,6 @@ public interface MemberService {
     int phoneCheck(String phone);
 
     MemberDto loginMember(String id);
+
+    void insertAuth(String id, String auth);
 }

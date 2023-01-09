@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%--
   Created by IntelliJ IDEA.
   User: kimchanghee
@@ -8,7 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html class="home_html">
+<html class="home_html"/>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width", initial-scale="1">
@@ -41,18 +42,20 @@
                         </div>
                         <div class="modal-body">
                             <ul class="usr-inform-body">
-                                <c:choose>
-                                    <c:when test="${res eq null}">
-                                        <li><a id="submenu-login" href="login">로그인</a></li>
-                                        <li><a id="submenu-join" href="join">회원가입</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li><a id="submenu-logout" href="login" onclick="logoutFunc()">로그아웃</a></li>
-                                        <li><a id="submenu-reserve" href="#">예매내역</a></li>
-                                        <li><a id="submenu-admin" href="#">관리자로 전환</a></li>
-                                        <li><a id="submenu-withdrawal" href="#">회원탈퇴</a></li>
-                                    </c:otherwise>
-                                </c:choose>
+                                <sec:authorize access="isAnonymous()">
+                                    <li><a id="submenu-login" href="login">로그인</a></li>
+                                    <li><a id="submenu-join" href="join">회원가입</a></li>
+                                </sec:authorize>
+                                <sec:authorize access="isAuthenticated()">
+                                    <sec:authentication property="principal" var="user"/>
+                                    <sec:authorize access="hasRole('admin')">
+                                        <li><a id="submenu-admin-page" href="/loginResultView/${user.username}">관리자 전용 페이지</a></li>
+                                    </sec:authorize>
+                                    <li><a id="submenu-logout" href="login" onclick="logoutFunc()">로그아웃</a></li>
+                                    <li><a id="submenu-reserve" href="#">예매내역</a></li>
+                                    <li><a id="submenu-admin" href="#">관리자로 전환</a></li>
+                                    <li><a id="submenu-withdrawal" href="#">회원탈퇴</a></li>
+                                </sec:authorize>
                             </ul>
                         </div>
                         <div class="modal-footer">
@@ -85,14 +88,12 @@
     </div>
     <div class="left-bottom-layout" value="markerClickFlag">
         <div id="login-activate">
-            <c:choose>
-                <c:when test="${res eq null}">
-                    <h4 class="login-activate-text">안녕하세요😄</h4>
-                </c:when>
-                <c:otherwise>
-                    <h4 class="login-activate-text">${res.userName}님 반갑습니다😄</h4>
-                </c:otherwise>
-            </c:choose>
+            <sec:authorize access="isAnonymous()">
+                <h4 class="login-activate-text">안녕하세요😄</h4>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <h4 class="login-activate-text"><sec:authentication property="principal.username2"/>님 반갑습니다😄</h4>
+            </sec:authorize>
         </div>
         <div class="left-bottom-main markerNonClick" id="markerNonClick-page">
             <div id="left-bottom-main-markerNonClick-text">
