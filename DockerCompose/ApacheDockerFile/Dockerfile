@@ -8,7 +8,7 @@ RUN apt-get update && \
     #mod-jk
     apt-get install wget && \
     apt-get install tar && \
-    apt-get install -y libaprutil1-dev perl gcc make
+    apt-get install -y libaprutil1-dev perl gcc make 
 
 RUN cd /usr/local/src && wget http://www.apache.org/dist/tomcat/tomcat-connectors/jk/tomcat-connectors-1.2.48-src.tar.gz && tar -xzf tomcat-connectors-1.2.48-src.tar.gz
 RUN cd /usr/local/src/tomcat-connectors-1.2.48-src/native && ./configure --with-apxs=/usr/local/apache2/bin/apxs && make && make install    

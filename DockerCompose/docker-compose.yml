@@ -7,9 +7,11 @@ services:
     restart : always #컨테이너가 예상치 못한 일로 죽을 시 자동으로 다시 띄울 수 있도록 한다.
     ports :
       - 80:80
+      - 443:443
     volumes :
       - ~/inform-parking/InformParkingApache/conf:/usr/local/apache2/conf
       - ~/inform-parking/InformParkingWeb/out/artifacts/InformParkingWeb_war_exploded/static:/usr/local/apache2/htdocs
+#      - ~/inform-parking/InformParkingApache/ssl:/etc/ssl
     environment :
       - TZ=Asia/Seoul
     depends_on :

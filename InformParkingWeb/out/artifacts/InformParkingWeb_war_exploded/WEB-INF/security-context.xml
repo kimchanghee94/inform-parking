@@ -8,8 +8,11 @@
 	   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <security:http auto-config="true" use-expressions="true">
+        <!-- 정적페이지에 대해 모든 권한 허용 -->
         <security:intercept-url pattern="/static/**" access="permitAll" />
+        <!-- 관리자 임의 페이지로 권한 테스트 완료-->
         <security:intercept-url pattern="/loginResultView/*" access="hasRole('admin')"/>
+        <!-- 로그인 이후에 로그인 및 회원가입 페이지 접근 못하도록 설정-->
         <security:intercept-url pattern="/login" access="isAnonymous()"/>
         <security:intercept-url pattern="/join" access="isAnonymous()"/>
 
@@ -20,6 +23,9 @@
                 login-page="/login"
                 authentication-failure-handler-ref="userLoginFailHandler"
                 authentication-success-handler-ref="userLoginSuccessHandler"/>
+
+            <!-- 로그아웃 성공 후 보낼 url이지만 home.jsp a링크에 걸어둔 url로 덮어씌어지는 것으로 판단 -->
+            <!-- 세션 지워줄 것 -->
         <security:logout
             logout-url="/logout"
             logout-success-url="/"
