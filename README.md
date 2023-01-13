@@ -7,7 +7,7 @@
 * IDE : intellij
 * Framework : Spring MVC - Maven사용
 * 주요 Library : spring-security(auth-provider 사용)
-* REST-API : 공공데이터포털(전국 주차장)
+* REST-API : 공공데이터포털(전국 주차장), Kakao Map
 * 다중공유기 포트포워딩으로 외부 접속 허용
 * 가비아에서 www.inparking.online 도메인 구매, zero ssl을 통해 https 보안 적용
 
