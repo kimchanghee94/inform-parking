@@ -24,33 +24,29 @@ a:hover{
     text-decoration-line: underline;
 }
 
-a:active{
+a:active {
     text-decoration-line: underline;
 }
-
 .container{
     margin: 0;
     padding: 0;
     width: 100%;
-    display: flex;
+}
+
+.login-join-info{
+    width: 100%;
+    margin : 0;
+    paddig : 0;
 }
 
 .column1{
-    margin: 0;
-    padding: 0;
-    width: 20%;
-}
-
-.column2{
-    width: 80%;
+    position: absolute;
+    top:285px;
+    width: 200px;
 }
 
 .container-login{
     width: 100%;
-}
-
-.login-div{
-    margin-left: 24%;
 }
 
 .sub-menu{

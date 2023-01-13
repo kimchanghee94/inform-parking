@@ -19,8 +19,8 @@
 <body class="layout_body">
 <!-- header -->
     <tiles:insertAttribute name="header"/>
-<div class="container">
-    <div class="column1" id="aside-column1">
+<div class="login-join-info">
+    <div class="column1">
         <!-- aside -->
             <tiles:insertAttribute name="aside"/>
     </div>

@@ -9,11 +9,11 @@
         }
     </script>
     <div class="container-login">
-        <div class="">
-            <div class="d-flex">
+        <div class="d-flow justify-content-center">
+            <div class="d-flex justify-content-center">
                 <div class=login-div>
                     <form class="login-form" action="login" method="post">
-                        <div class="p-5">
+                        <div class="p-5 input-form-div">
                             <div class="input-group mb-3">
                                            <span class="input-group-text bg-dark"><i
                                                    class="bi bi-person-plus-fill text-white"></i></span>
