@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html>
-<html>
+<html class="layout_html">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width", initial-scale="1">
@@ -16,11 +16,11 @@
     <script src=<tiles:getAsString name="js-path"/>></script>
     <title id="haed-title"><tiles:getAsString name="title"/></title>
 </head>
-<body>
+<body class="layout_body">
 <!-- header -->
     <tiles:insertAttribute name="header"/>
 <div class="container">
-    <div class="column1">
+    <div class="column1" id="aside-column1">
         <!-- aside -->
             <tiles:insertAttribute name="aside"/>
     </div>

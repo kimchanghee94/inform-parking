@@ -1,3 +1,15 @@
+.layout_html{
+    height: 100%;
+    width: 100%;
+}
+
+.layout_body{
+    margin:0;
+    padding:0;
+    height: 100%;
+    width: 100%;
+}
+
 a:link{
     text-decoration-line: none;
     color: black;
@@ -57,4 +69,53 @@ a:active{
 
 .btn{
     width: 330px;
+}
+
+.mobile{
+    display: none;
+}
+
+.desktop{
+    display: flow;
+}
+
+@media only screen and (max-width: 600px){
+    .desktop{
+        display: none;
+    }
+
+    .mobile{
+        display: list-item;
+    }
+
+    .container{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        display: unset;
+    }
+
+    .column2{
+        width: 100%;
+    }
+
+    .container-login{
+        width: 100%;
+    }
+
+    .login-div{
+        margin-left: 0;
+    }
+
+    .login-text{
+        font-weight: bold;
+    }
+
+    .input-group{
+        width: 100%;
+    }
+
+    .btn{
+        width: 100%;
+    }
 }

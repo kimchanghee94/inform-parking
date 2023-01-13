@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html class="home_html"/>
-<head>
+<head class="home_head">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width", initial-scale="1">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
@@ -26,7 +26,7 @@
     <title>주차장을 알리다</title>
 </head>
 <body class="home_body">
-    <div class="left-top-layout">
+    <div class="left-top-layout left-layout">
         <div class="left-top-header">
             <h1 class="brand-title"><strong>주차장</strong>을 알리다</h1>
             <a id="move-my-pos" href="#" onclick="moveCurPos()">현재 위치로</a>
@@ -85,8 +85,6 @@
                 </form>
             </div>
         </div>
-    </div>
-    <div class="left-bottom-layout" value="markerClickFlag">
         <div id="login-activate">
             <sec:authorize access="isAnonymous()">
                 <h4 class="login-activate-text">안녕하세요😄</h4>
@@ -95,6 +93,8 @@
                 <h4 class="login-activate-text"><sec:authentication property="principal.username2"/>님 반갑습니다😄</h4>
             </sec:authorize>
         </div>
+    </div>
+    <div class="left-bottom-layout left-layout" value="markerClickFlag">
         <div class="left-bottom-main markerNonClick" id="markerNonClick-page">
             <div id="left-bottom-main-markerNonClick-text">
                 마커를 클릭하시면 주차장 정보가 표시됩니다❗️
@@ -130,10 +130,10 @@
             </div>
         </div>
     </div>
-    <div class="left-bottom-footer">
+    <div class="left-bottom-footer left-layout">
         <p id="footer-text">'주차장을 알리다's Homepage is powered by <span class="text-primary">Changhee</span></p>
     </div>
-    <div id="kakao_map" class="map-view">
+    <div class="map-view right-layout" id="kakao_map">
     </div>
 </body>
 </html>

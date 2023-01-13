@@ -1,0 +1,2 @@
+12-Jan-2023 23:29:46.783 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+12-Jan-2023 23:31:38.758 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.

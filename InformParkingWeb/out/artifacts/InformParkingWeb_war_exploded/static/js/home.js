@@ -73,6 +73,7 @@ function execMap(kmFlag, keywordValue){
                             bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
                         }
                         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+                        // KCH 경로타는 가운데 비동기 실시간 내 위치에 주차장
                         map.setBounds(bounds);
                         getMapViewMarkers();
                     }else if(status === kakao.maps.services.Status.ZERO_RESULT){

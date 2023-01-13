@@ -2,7 +2,7 @@
 <main id="main">
     <div class="container-join">
         <div class="">
-            <div class="rounded d-flex">
+            <div class="rounded d-flex remove-attr">
                 <div class=>
                     <form action="join" method="post">
                         <div class="p-5">

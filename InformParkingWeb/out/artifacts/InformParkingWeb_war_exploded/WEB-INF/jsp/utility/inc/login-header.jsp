@@ -11,8 +11,10 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" id="header-li-nav">
                 <li class="nav-item"><a href="home" class="nav-link">Home</a></li>
+                <li class="nav-item mobile"><a href="#" class="nav-link">공지사항</a></li>
+                <li class="nav-item mobile"><a href="#" class="nav-link">고객센터</a></li>
             </ul>
         </div>
     </nav>
