@@ -1,4 +1,4 @@
-# inform-parking
+# inform-parking(Mac OS)
 주차장 위치와 남은 공간, 가격 등을 제공하는 웹프로젝트
 
 * Front : jsp, html, css, java-script, bootstrap, apache tile
