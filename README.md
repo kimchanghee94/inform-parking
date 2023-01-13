@@ -24,6 +24,23 @@
 
 
 
--- 회원가입 페이지--
+--회원가입 페이지--
 
 ![image](https://user-images.githubusercontent.com/45596085/211064181-79edc61d-2adf-428d-892c-a21cff840257.png)
+
+
+
+--반응형 메인페이지--
+![image](https://user-images.githubusercontent.com/45596085/212411868-a611b966-d90d-4000-b6c8-ab6d5be7a3cf.png)
+
+
+
+
+--반응형 로그인 페이지--
+![image](https://user-images.githubusercontent.com/45596085/212411854-674741a2-82e9-4430-be41-898814ce025b.png)
+
+
+
+
+--반응형 회원가입 페이지--
+![image](https://user-images.githubusercontent.com/45596085/212411814-c4708ef6-aa82-4375-8253-971349c2517e.png)
