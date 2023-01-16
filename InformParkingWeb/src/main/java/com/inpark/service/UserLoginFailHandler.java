@@ -18,7 +18,7 @@ public class UserLoginFailHandler implements AuthenticationFailureHandler {
     public void onAuthenticationFailure(HttpServletRequest request,
                                         HttpServletResponse response, AuthenticationException exception)
             throws IOException, ServletException {
-        System.out.println("Spring security에서 로그인 실패구간 잡아버리기");
+        System.out.println("Spring security에서 로그인 실패구간 잡기");
         if (exception instanceof AuthenticationServiceException) {
             request.setAttribute("loginFailMsg", "존재하지 않는 사용자입니다.");
 

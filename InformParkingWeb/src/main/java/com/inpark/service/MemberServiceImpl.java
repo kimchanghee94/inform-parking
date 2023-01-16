@@ -4,11 +4,16 @@ import com.inpark.dao.MemberDao;
 import com.inpark.dto.MemberDto;
 import com.inpark.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 //dao 없이도 바로 호출할 수 있도록 mybatis의 기능을 사용해보았다. 이 기능을 사용하기 위해 bean에 주석처리로 표시해준 부분을 확인
 @Service("MemberService")
 public class MemberServiceImpl implements MemberService {
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
 //    private MemberDao memberDao;
     private MemberMapper memberMapper;
@@ -20,17 +25,38 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void insertMember(MemberDto mto){
-        memberMapper.insertMember(mto);
+    public void insertMember(MemberDto dto){
+        System.out.println("암호화 전 : " + dto.getPasswd());
+        dto.setPasswd(bCryptPasswordEncoder.encode(dto.getPasswd()));
+        System.out.println("암호화 후 : " + dto.getPasswd());
+
+        memberMapper.insertMember(dto);
+        memberMapper.insertAuth(dto.getId(), "ROLE_manager");
     }
 
     @Override
-    public int idCheck(String id){
-        return memberMapper.idCheck(id);
+    public String idCheck(String id){
+        System.out.println("id 중복체크 컨트롤러 진입" + id);
+        int result = memberMapper.idCheck(id);
+        System.out.println("result : " + result);
+        if(result != 0){
+            return "fail";
+        } else {
+            return "success";
+        }
     }
 
     @Override
-    public int phoneCheck(String phone){ return memberMapper.phoneCheck(phone);}
+    public String phoneCheck(String phone){
+        System.out.println("phone 중복 체크" + phone);
+        int result = memberMapper.phoneCheck(phone);
+        System.out.println("result : " + result);
+        if(result != 0){
+            return "fail";
+        } else {
+            return "success";
+        }
+    }
 
     @Override
     public MemberDto loginMember(String id){

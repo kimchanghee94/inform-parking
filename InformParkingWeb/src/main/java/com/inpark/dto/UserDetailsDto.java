@@ -1,4 +1,4 @@
-package com.inpark.mapper;
+package com.inpark.dto;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
-public class UserDetailsVO implements UserDetails {
+public class UserDetailsDto implements UserDetails {
     // 안만들어도 상관없지만 Warning이 발생함
     private static final long serialVersionUID = 1L;
 

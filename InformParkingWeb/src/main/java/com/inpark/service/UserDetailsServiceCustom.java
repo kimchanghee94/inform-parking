@@ -2,7 +2,7 @@ package com.inpark.service;
 
 import com.inpark.dto.MemberDto;
 import com.inpark.mapper.MemberMapper;
-import com.inpark.mapper.UserDetailsVO;
+import com.inpark.dto.UserDetailsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,7 +19,7 @@ public class UserDetailsServiceCustom implements UserDetailsService {
     public UserDetails loadUserByUsername(String inputUserId) {
         System.out.println("해당 security 검문을 하나??" + inputUserId);
         // 최종적으로 리턴해야할 객체
-        UserDetailsVO userDetails = new UserDetailsVO();
+        UserDetailsDto userDetails = new UserDetailsDto();
 
         // 사용자 정보 select
         MemberDto userInfo = memberMapper.loginMember(inputUserId);

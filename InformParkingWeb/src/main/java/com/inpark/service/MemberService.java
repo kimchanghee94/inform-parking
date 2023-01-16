@@ -5,11 +5,11 @@ import com.inpark.dto.MemberDto;
 public interface MemberService {
     MemberDto selectMember(String id);
 
-    void insertMember(MemberDto mto);
+    void insertMember(MemberDto dto);
 
-    int idCheck(String id);
+    String idCheck(String id);
 
-    int phoneCheck(String phone);
+    String phoneCheck(String phone);
 
     MemberDto loginMember(String id);
 

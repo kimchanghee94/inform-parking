@@ -1,6 +1,6 @@
 package com.inpark.service;
 
-import com.inpark.mapper.UserDetailsVO;
+import com.inpark.dto.UserDetailsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -30,7 +30,7 @@ public class UserLoginAuthenticationProvider implements AuthenticationProvider {
         String userPw = (String) authentication.getCredentials();
 
         /* DB에서 가져온 정보 (커스터마이징 가능) */
-        UserDetailsVO userDetails = (UserDetailsVO) userDetailsServcie
+        UserDetailsDto userDetails = (UserDetailsDto) userDetailsServcie
                 .loadUserByUsername(userId);
 
         if(userDetails != null)
