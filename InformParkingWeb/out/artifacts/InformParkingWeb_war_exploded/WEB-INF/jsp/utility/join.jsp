@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <main id="main">
     <div class="container-join">
         <div class="">
@@ -52,6 +54,7 @@
                                 생성완료
                             </button>
                         </div>
+                        <sec:csrfInput/>
                     </form>
                 </div>
             </div>

@@ -13,6 +13,10 @@
 <head class="home_head">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width", initial-scale="1">
+
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://developer.mozilla.org/ko/docs/Web/API/Geolocation_API"></script>
@@ -20,8 +24,8 @@
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9d3a5d31dd0c907fa7e70281e7a04d44&libraries=clusterer,services">
     </script>
     <script src="/bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/js/home.js"></script>
     <link rel="stylesheet" href="/css/home.css">
+    <script type="text/javascript" src="/js/home.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>주차장을 알리다</title>
 </head>
@@ -133,7 +137,7 @@
     <div class="left-bottom-footer left-layout">
         <p id="footer-text">'주차장을 알리다's Homepage is powered by <span class="text-primary">Changhee</span></p>
     </div>
-    <div class="map-view right-layout" id="kakao_map">
+    <div class="map-view" id="kakao_map">
     </div>
 </body>
 </html>

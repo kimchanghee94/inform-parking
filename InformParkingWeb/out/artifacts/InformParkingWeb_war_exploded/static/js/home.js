@@ -1,10 +1,18 @@
 $(document).ready(execMap(0, null));
 
+//csrf 적용으로 인해 Post로 전송 시 token을 담아 보내야한다.
+const token = $("meta[name='_csrf']").attr("content");
+const header = $("meta[name='_csrf_header']").attr("content");
+console.log("home token : " + token + ", header : " + header);
+
 /* 회원 탈퇴 */
 function logoutFunc(){
     $.ajax({
         type : "post",
-        url : "/logout"
+        url : "/logout",
+        beforeSend : function(xhr){
+            xhr.setRequestHeader(header, token);
+        }
     });
 }
 
@@ -18,7 +26,6 @@ var mylongitude;
 var initMapLevel;
 var clusterer;
 var markers=[];
-
 function enterkey(){
     if(window.event.keyCode == 13){
         keywordSearch();
@@ -43,6 +50,7 @@ function execMap(kmFlag, keywordValue){
           console.log("kmFlag : " + kmFlag + ", kewordValue" + keywordValue);
             mylatitude = position.coords.latitude;
             mylongitude = position.coords.longitude;
+            console.log(mylatitude + ", " + mylongitude)
             if(kmFlag ==0){
                 map = new kakao.maps.Map(document.getElementById('kakao_map'), { // 지도를 표시할 div
                     center : new kakao.maps.LatLng(mylatitude, mylongitude), // 지도의 중심좌표
@@ -200,6 +208,9 @@ function getMapViewMarkers(){
             }
         },
         async : false,
+        beforeSend : function(xhr){
+            xhr.setRequestHeader(header, token);
+        },
         success : function(response){
             console.log(response.header.statusCode);
             if(response.header.statusCode == "00"){

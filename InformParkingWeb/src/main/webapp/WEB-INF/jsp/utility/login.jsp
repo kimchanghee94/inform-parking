@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <main id="main">
     <script type="text/javascript">
         let message = "${requestScope.loginFailMsg}";
@@ -13,6 +15,7 @@
             <div class="d-flex justify-content-center">
                 <div class=login-div>
                     <form class="login-form" action="login" method="post">
+                        <sec:csrfInput/>
                         <div class="p-5 input-form-div">
                             <div class="input-group mb-3">
                                            <span class="input-group-text bg-dark"><i

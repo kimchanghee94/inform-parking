@@ -31,7 +31,9 @@
             logout-success-url="/"
             invalidate-session="true"
             delete-cookies="true" />
-        <security:csrf disabled="true"/>
+
+        <!-- csrf 적용 -->
+        <security:csrf disabled="false"/>
     </security:http>
 
 

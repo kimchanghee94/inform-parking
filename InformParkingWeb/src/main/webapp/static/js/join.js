@@ -5,6 +5,11 @@ let passwd2Flag = false;
 let carNumFlag = false;
 let phoneFlag = false
 
+//csrf 적용으로 인해 Post로 전송 시 token을 담아 보내야한다.
+const token = $("meta[name='_csrf']").attr("content");
+const header = $("meta[name='_csrf_header']").attr("content");
+console.log("join token : " + token + ", header : " + header);
+
 function joinCheck(){
     if(idFlag == true && userNameFlag == true && passwdFlag == true &&
         passwd2Flag == true && carNumFlag == true && phoneFlag == true){
@@ -37,6 +42,9 @@ function idCheck(){
             type : "post",
             url : "/memberIdChk",
             data : data,
+            beforeSend : function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
             success : function(result){
                 if(result == 'success'){
                     document.getElementById("idError").innerHTML="사용 가능한 id입니다.";
@@ -173,6 +181,9 @@ function phoneCheck(){
             type : "post",
             url : "/memberPhoneChk",
             data : data,
+            beforeSend : function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
             success : function(result){
                 if(result == 'success'){
                     document.getElementById("phoneError").innerHTML="";
