@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -107,16 +106,23 @@ public class ParkingServiceImpl implements ParkingService {
     }
 
     @Override
-    public void refreshParkingInfo() throws IOException{
-        List<ParkingDto> parkingList = new ArrayList<>();
-        System.out.println("새벽 1시가 되면 데이터를 한번 비우고 위도와 경도를 DB에 새로 구축한다.");
+    public int countParkingRow(){
+        return parkingMapper.countParkingRow();
+    }
 
+    /* AOP를 적용하여 Transaction 처리를 한다 */
+    @Override
+    //@Transactional(rollbackFor = {Exception.class})
+    public void refreshParkingInfo() throws Exception{
+        List<ParkingDto> parkingList = new ArrayList<>();
+        List<ParkingDto> errParkingList = new ArrayList<>();
+        System.out.println("새벽 1시가 되면 데이터를 한번 비우고 위도와 경도를 DB에 새로 구축한다.");
         parkingMapper.deleteAllParking();
 
         int i=0;
 
-        //현재 147페이지까지 지원
-        while(true && i<148){
+        //현재 143페이지까지 지원
+        while(true){
             String pageStr = String.valueOf(i++);
             StringBuilder urlBuilder = new StringBuilder("http://api.data.go.kr/openapi/tn_pubr_prkplce_info_api"); /*URL*/
             urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=NTcVlKsvXzUj48Saf4Jm63ab%2BPhUSusJytZOsOwuFqm1pO8XJhJRGIUEmKQdMbcoD%2FUcEHyFCcSQ4mHr1Fs2gA%3D%3D"); /*Service Key*/
@@ -148,54 +154,83 @@ public class ParkingServiceImpl implements ParkingService {
                 JSONParser parser = new JSONParser();
                 JSONObject object = (JSONObject) parser.parse(sb.toString());
                 JSONObject response = (JSONObject) object.get("response");
+                JSONObject header = (JSONObject) response.get("header");
+                String resResultCode = (String)header.get("resultCode");
+                if(resResultCode.equals("03")){
+                    System.out.println("**********Total Page is " + i + "**********");
+                    break;
+                }
                 JSONObject body = (JSONObject) response.get("body");
                 JSONArray items = (JSONArray) body.get("items");
 
-                for(int j=0; j<items.size(); j++){
+                for(int j=0; j<items.size(); j++) {
                     object = (JSONObject) items.get(j);
 
-                    if(((String)object.get("latitude")).length() != 0
-                            && ((String)object.get("longitude")).length() != 0){
+                    //위도 경도가 없는 데이터에 대해서는 입력을 하지 않는다.
+                    if (((String) object.get("latitude")).length() != 0
+                            && ((String) object.get("longitude")).length() != 0) {
                         ParkingDto parkingDto = new ParkingDto();
                         parkingDto.setId(parkingList.size());
-                        parkingDto.setParkingName((String)object.get("prkplceNm"));
-                        parkingDto.setLatitude(Double.parseDouble((String)object.get("latitude")));
-                        parkingDto.setLongitude(Double.parseDouble((String)object.get("longitude")));
-                        parkingDto.setPhone((String)object.get("phoneNumber"));
+                        parkingDto.setParkingName((String) object.get("prkplceNm"));
+                        parkingDto.setLatitude(Double.parseDouble((String) object.get("latitude")));
+                        parkingDto.setLongitude(Double.parseDouble((String) object.get("longitude")));
+                        parkingDto.setPhone((String) object.get("phoneNumber"));
 
-                        parkingDto.setParkingFor((String)object.get("prkplceSe"));
-                        parkingDto.setParkingStruct((String)object.get("prkplceType"));
-                        parkingDto.setRdnmadr((String)object.get("rdnmadr"));
-                        parkingDto.setLnmadr((String)object.get("lnmadr"));
-                        parkingDto.setOpenDay((String)object.get("operDay"));
-                        parkingDto.setParkingCnt((String)object.get("prkcmprt"));
+                        parkingDto.setParkingFor((String) object.get("prkplceSe"));
+                        parkingDto.setParkingStruct((String) object.get("prkplceType"));
+                        parkingDto.setRdnmadr((String) object.get("rdnmadr"));
+                        parkingDto.setLnmadr((String) object.get("lnmadr"));
+                        parkingDto.setOpenDay((String) object.get("operDay"));
+                        parkingDto.setParkingCnt((String) object.get("prkcmprt"));
 
-                        parkingDto.setWeekOpen((String)object.get("weekdayOperOpenHhmm"));
-                        parkingDto.setWeekClose((String)object.get("weekdayOperColseHhmm"));
-                        parkingDto.setSatOpen((String)object.get("satOperOperOpenHhmm"));
-                        parkingDto.setSatClose((String)object.get("satOperCloseHhmm"));
-                        parkingDto.setHoliOpen((String)object.get("holidayOperOpenHhmm"));
-                        parkingDto.setHoliClose((String)object.get("holidayCloseOpenHhmm"));
+                        parkingDto.setWeekOpen((String) object.get("weekdayOperOpenHhmm"));
+                        parkingDto.setWeekClose((String) object.get("weekdayOperColseHhmm"));
+                        parkingDto.setSatOpen((String) object.get("satOperOperOpenHhmm"));
+                        parkingDto.setSatClose((String) object.get("satOperCloseHhmm"));
+                        parkingDto.setHoliOpen((String) object.get("holidayOperOpenHhmm"));
+                        parkingDto.setHoliClose((String) object.get("holidayCloseOpenHhmm"));
 
-                        parkingDto.setParkingFreeInfo((String)object.get("parkingchrgeInfo"));
-                        parkingDto.setBasicTime((String)object.get("basicTime"));
-                        parkingDto.setBasicCharge((String)object.get("basicCharge"));
-                        parkingDto.setAddUnitTime((String)object.get("addUnitTime"));
-                        parkingDto.setAddUnitCharge((String)object.get("addUnitCharge"));
-                        parkingDto.setDayChargeTime((String)object.get("dayCmmtktAdjTime"));
-                        parkingDto.setDayCharge((String)object.get("dayCmmtkt"));
-                        parkingDto.setMonthCharge((String)object.get("monthCmmtkt"));
-
-                        parkingList.add(parkingDto);
+                        parkingDto.setParkingFreeInfo((String) object.get("parkingchrgeInfo"));
+                        parkingDto.setBasicTime((String) object.get("basicTime"));
+                        parkingDto.setBasicCharge((String) object.get("basicCharge"));
+                        parkingDto.setAddUnitTime((String) object.get("addUnitTime"));
+                        parkingDto.setAddUnitCharge((String) object.get("addUnitCharge"));
+                        parkingDto.setDayChargeTime((String) object.get("dayCmmtktAdjTime"));
+                        parkingDto.setDayCharge((String) object.get("dayCmmtkt"));
+                        parkingDto.setMonthCharge((String) object.get("monthCmmtkt"));
+                        if (((parkingDto.getRdnmadr() == null || parkingDto.getRdnmadr().length() == 0)
+                                && (parkingDto.getLnmadr() == null || parkingDto.getLnmadr().length() == 0))) {
+                            errParkingList.add(parkingDto);
+                        } else {
+                            parkingList.add(parkingDto);
+                        }
                     }
                 }
             }catch(ParseException pe){
-                pe.printStackTrace();
+                throw new RuntimeException("JSON Parsing is  Fail Caused : " + pe.getCause());
             }
         }
+
+        if(errParkingList.size() > 0){
+            System.out.println("================Check the No Parking Addr Dto Issue List================\n\n");
+            for(ParkingDto dto : errParkingList){
+                System.out.println(dto);
+            }
+        }
+
+        System.out.println("***************Success Dto List***************");
         for(ParkingDto dto : parkingList){
             System.out.println(dto);
         }
+
+        int orgDataSize = parkingMapper.countParkingRow();
+        System.out.println("Origin Total Page : " + orgDataSize);
+
+        /* 하루 주차장 데이터 5000개 가까이 소멸 시 확인 후에 조정 필요 */
+        if(parkingList.size() + 100 < orgDataSize){
+            throw new RuntimeException("Origin Parking Table Size is less than API Data Size 100");
+        }
+
         parkingMapper.insertParking(parkingList);
     }
 }

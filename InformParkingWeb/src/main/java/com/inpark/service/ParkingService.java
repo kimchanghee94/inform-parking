@@ -1,9 +1,6 @@
 package com.inpark.service;
 
-import com.inpark.dto.CompParkingDto;
 import com.inpark.dto.ParkingDto;
-
-import java.io.IOException;
 import java.util.List;
 
 public interface ParkingService {
@@ -13,5 +10,7 @@ public interface ParkingService {
 
     void deleteAllParking();
 
-    void refreshParkingInfo() throws IOException;
+    void refreshParkingInfo() throws Exception;
+
+    int countParkingRow();
 }

@@ -160,10 +160,11 @@
                resourceName="UserDatabase"/>
       </Realm>
 
-      <Host name="localhost" appBase="webapps"
+      <!-- scheduler가 2번 실행되는 문제가 발생하여 appBase에 경로를 전부 적어준다. -->
+      <Host name="localhost" appBase="webapps/InformParkingWeb_war_exploded"
             unpackWARs="true" autoDeploy="true">
 	<!-- >>> KCH 2022/12/17 Tomcat에서 구동했을 때 원하는 경로의 서버를 올리기 위한 작업 추가-->
-	<Context path="" docBase="InformParkingWeb_war_exploded" reloadable="false"/>
+	<Context path="" docBase="" reloadable="false"/>
 	<!-- <<< KCH 2022/12/17 Tomcat에서 구동했을 때 원하는 경로의 서버를 올리기 위한 작업 추가-->
 
 	<!-- SingleSignOn valve, share authentication between web applications

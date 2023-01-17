@@ -26,4 +26,8 @@
         DELETE FROM parking
     </delete>
 
+    <select id="countParkingRow" resultType="int">
+        SELECT COUNT(*) as cnt FROM parking
+    </select>
+
 </mapper>

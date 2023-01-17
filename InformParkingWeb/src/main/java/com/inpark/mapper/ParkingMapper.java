@@ -13,4 +13,6 @@ public interface ParkingMapper {
     void insertParking(List<ParkingDto> dto);
 
     void deleteAllParking();
+
+    int countParkingRow();
 }

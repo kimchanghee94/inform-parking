@@ -15,8 +15,7 @@
     <!-- 스케줄러를 통해 DB에 자동으로 업데이트 되도록 해준다-->
     <bean id="careerAlarmService" class="com.inpark.schedular.ParkingSchedular" />
     <task:scheduler id="gsScheduler" pool-size="10" />
-    <task:executor id="gsTaskExecutor" pool-size="10" />
-    <task:annotation-driven executor="gsTaskExecutor" scheduler="gsScheduler" />
+    <task:annotation-driven scheduler="gsScheduler" />
 
     <mvc:annotation-driven/>
     <context:component-scan base-package="com.inpark.controller" />

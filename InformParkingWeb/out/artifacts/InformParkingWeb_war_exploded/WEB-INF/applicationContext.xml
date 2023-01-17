@@ -3,24 +3,28 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:context="http://www.springframework.org/schema/context"
         xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:aop="http://www.springframework.org/schema/aop"
         xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx-5.2.3.xsd">
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    	http://www.springframework.org/schema/aop
+    	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
     <context:property-placeholder location="/WEB-INF/database.properties"/>
     <context:component-scan base-package="com.inpark"/>
 
+    <!-- id와 비밀번호의 경우 해당 xml파일에 적어주지말고 보안상 따로 파일을 만들어 호출해도록 하라고 한다 -->
      <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
            <property name="driverClassName" value="${jdbc.driver}"/>
            <property name="url" value="${jdbc.url}"/>
            <property name="username" value="${jdbc.username}"/>
            <property name="password" value="${jdbc.password}"/>
      </bean>
-    <!-- Mysql <-> Mybatis를 연결해주는 객체 -->
-    <!-- id와 비밀번호의 경우 해당 xml파일에 적어주지말고 보안상 따로 파일을 만들어 호출해도록 하라고 한다 -->
+
+    <!-- Mysql & Mybatis를 연결해주는 객체 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:/mybatis-config.xml"/>
@@ -44,8 +48,20 @@
     </bean>
 
     <!-- transaction annotation 적용 -->
-    <!--<tx:annotation-driven transaction-manager="transactionManager"/>
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <tx:annotation-driven transaction-manager="txManager"/>
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
-    </bean>-->
+    </bean>
+
+    <!-- aop를 특정 메서드에만 적용 시켜본다 -->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="refreshParkingInfo" rollback-for="Exception"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="requiredTx" expression="execution(* com.inpark.service..ParkingServiceImpl.refreshParkingInfo(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx"/>
+    </aop:config>
 </beans>

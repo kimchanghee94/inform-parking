@@ -232,7 +232,34 @@ public class ParkingDto {
         this.dayChargeTime = dayChargeTime;
     }
 
-    public String toString(){
-        return this.parkingName + ", " + this.latitude + ", " + this.longitude;
+    @Override
+    public String toString() {
+        return "ParkingDto{" +
+                "id=" + id +
+                ", parkingName='" + parkingName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", parkingFor='" + parkingFor + '\'' +
+                ", parkingStruct='" + parkingStruct + '\'' +
+                ", rdnmadr='" + rdnmadr + '\'' +
+                ", lnmadr='" + lnmadr + '\'' +
+                ", openDay='" + openDay + '\'' +
+                ", parkingCnt='" + parkingCnt + '\'' +
+                ", weekOpen='" + weekOpen + '\'' +
+                ", weekClose='" + weekClose + '\'' +
+                ", satOpen='" + satOpen + '\'' +
+                ", satClose='" + satClose + '\'' +
+                ", holiOpen='" + holiOpen + '\'' +
+                ", holiClose='" + holiClose + '\'' +
+                ", parkingFreeInfo='" + parkingFreeInfo + '\'' +
+                ", basicTime='" + basicTime + '\'' +
+                ", basicCharge='" + basicCharge + '\'' +
+                ", addUnitTime='" + addUnitTime + '\'' +
+                ", addUnitCharge='" + addUnitCharge + '\'' +
+                ", dayChargeTime='" + dayChargeTime + '\'' +
+                ", dayCharge='" + dayCharge + '\'' +
+                ", monthCharge='" + monthCharge + '\'' +
+                '}';
     }
 }

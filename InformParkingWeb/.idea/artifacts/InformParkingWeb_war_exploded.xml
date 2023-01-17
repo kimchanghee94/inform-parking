@@ -58,6 +58,7 @@
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:5.0.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-taglibs:5.0.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:5.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.9.19" />
         </element>
       </element>
     </root>
