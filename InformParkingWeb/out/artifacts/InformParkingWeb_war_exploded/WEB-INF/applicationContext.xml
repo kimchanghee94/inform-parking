@@ -54,12 +54,14 @@
     </bean>
 
     <!-- aop를 특정 메서드에만 적용 시켜본다 -->
+    <!-- tx method에서는 특정 메서드에 대한 속성을 부여해주도록 한다. -->
     <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
             <tx:method name="refreshParkingInfo" rollback-for="Exception"/>
         </tx:attributes>
     </tx:advice>
 
+    <!-- aop pointcut을 통해 적용할 범위를 선택해준다. 그리고 advisor를 통해 적용할 advice를 택한다. -->
     <aop:config>
         <aop:pointcut id="requiredTx" expression="execution(* com.inpark.service..ParkingServiceImpl.refreshParkingInfo(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx"/>

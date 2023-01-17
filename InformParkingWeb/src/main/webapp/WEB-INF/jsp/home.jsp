@@ -126,6 +126,7 @@
                 <h4 class="parking-price-list" id="month-price-text"></h4>
                 <button type="button" class="btn btn-primary custom-button" id="day-buy-button">하루 정기권 구매</button>
                 <button type="button" class="btn btn-primary custom-button" id="month-buy-button">월 정기권 구매</button>
+                <button type="button" class="btn btn-primary custom-button" id="nav-button">길 찾기</button>
             </div>
             <div class="parking-price-info HIDDEN" id="non-pay-parking">
                 <div id="non-pay-text">

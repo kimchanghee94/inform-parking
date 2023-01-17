@@ -308,15 +308,23 @@ input::placeholder{
 
 .custom-button{
     width: 370px;
-    left: 8px;
+    left: 10px;
 }
 
 #day-buy-button{
     position: absolute;
     top: 200px;
+    width: 180px;
 }
 
 #month-buy-button{
+    position: absolute;
+    top: 200px;
+    left: 199px;
+    width: 180px;
+}
+
+#nav-button{
     position: absolute;
     top: 240px;
 }
@@ -397,4 +405,15 @@ input::placeholder{
         top: 1070px;
         width: 100%;
     }
+}
+
+.info-title {
+    display: block;
+    background: #50627F;
+    color: #fff;
+    text-align: center;
+    height: 24px;
+    line-height:22px;
+    border-radius:4px;
+    padding:0px 10px;
 }

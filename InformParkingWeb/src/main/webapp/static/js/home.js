@@ -16,6 +16,12 @@ function logoutFunc(){
     });
 }
 
+function enterkey(){
+    if(window.event.keyCode == 13){
+        keywordSearch();
+    }
+}
+
 /* 맵 작업 */
 /* 주소 검색 메서드*/
 
@@ -26,11 +32,10 @@ var mylongitude;
 var initMapLevel;
 var clusterer;
 var markers=[];
-function enterkey(){
-    if(window.event.keyCode == 13){
-        keywordSearch();
-    }
-}
+
+/*인포윈도우 클릭 후 유지 조건 분기 처리에 필요한 변수 */
+var selectedMarker;
+var clickInfowindows = [];
 
 function keywordSearch() {
     var keywordValue = document.getElementById("search-place-input");
@@ -119,8 +124,17 @@ function mapInitSetting(){
         // 레벨에 따라 클러스터러에 마커들을 추가
         if(map.getLevel() > 7){
             clusterer.clear();
+
         }else{
             getMapViewMarkers();
+        }
+
+        if(clickInfowindows.length !== 0) {
+            if (map.getLevel() > 6) {
+                clickInfowindows[0].close();
+            }else {
+                clickInfowindows[0].open(map, selectedMarker);
+            }
         }
     });
 
@@ -128,6 +142,14 @@ function mapInitSetting(){
     kakao.maps.event.addListener(map, 'dragend', function() {
         if(map.getLevel() < 8 ){
             getMapViewMarkers();
+        }
+    });
+
+    //지도 이동 이벤트
+    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+        console.log("map Clicked!!");
+        if(clickInfowindows.length !== 0) {
+            clickInfowindows[0].close();
         }
     });
 
@@ -187,6 +209,8 @@ function getMapViewMarkers(){
     var swLat = map.getBounds().getSouthWest().getLat();
     var swLng = map.getBounds().getSouthWest().getLng();
 
+    markers=[];
+
     var data = {
         neLat : neLat,
         neLng : neLng,
@@ -224,16 +248,33 @@ function getMapViewMarkers(){
     $(itemInfoJson.items).map(function(i, item) {
         var marker =  new kakao.maps.Marker({
             map : map,
-            position : new kakao.maps.LatLng(item.latitude, item.longitude)
+            position : new kakao.maps.LatLng(item.latitude, item.longitude),
+            clickable: true
         });
 
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="padding-left: 5px;">'+item.parkingName+'</div>' // 인포윈도우에 표시할 내용
+            content: '<span class="info-title">' + item.parkingName + '</span>'
+                /*'<div style="padding-left: 5px;">'
+                +item.parkingName
+                +'</div>' // 인포윈도우에 표시할 내용*/
+                ,
+            /*인포윈도우가 뒤로 가려지는 현상 때문에 설정 */
+            zIndex : 10
         });
 
         kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-        kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+        kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(marker, infowindow));
         kakao.maps.event.addListener(marker, 'click', function() {
+            /* click한 인포윈도우 값이 비어있지 않을 경우 기존 인포윈도우를 닫아주고 지운다 */
+            if(clickInfowindows.length !== 0){
+                clickInfowindows[0].close();
+                clickInfowindows = [];
+            }
+
+            infowindow.open(map, marker);
+            clickInfowindows.push(infowindow);
+            selectedMarker = marker;
+
             document.getElementById("markerNonClick-page").className = "left-bottom-main markerNonClick HIDDEN";
             document.getElementById("markerClick-page").className = "left-bottom-main markerClick";
 
@@ -447,23 +488,44 @@ function getMapViewMarkers(){
                 document.getElementById("holi-time-list").className = "";
             }
         });
-
         markers.push(marker);
     });
-
     clusterer.addMarkers(markers);
 
     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
     function makeOverListener(map, marker, infowindow) {
         return function() {
             infowindow.open(map, marker);
+            /* 제일 처음 인포윈도우가 발생하는 지점에 css설정이 먹히도록 설정한다 */
+            infoCssCustom();
         };
     }
 
     // 인포윈도우를 닫는 클로저를 만드는 함수입니다
-    function makeOutListener(infowindow) {
+    function makeOutListener(marker, infowindow) {
         return function() {
-            infowindow.close();
+            if(clickInfowindows.length == 0 || selectedMarker !== marker) {
+                infowindow.close();
+            }
         };
     }
+}
+
+/* info windown 강제로 css 변경하기 */
+function infoCssCustom(){
+    var infoTitle = document.querySelectorAll('.info-title');
+    infoTitle.forEach(function(e) {
+        // 인포윈도우 마진 값 때문에 한번 거친 element의 경우 또 거칠 경우 가로 길이가 계속 커지는 문제점이 발생하여 조건분기로 막아준다.
+        if(e.className.includes("adapt-css") == false){
+            var w = e.offsetWidth + 10;
+            var ml = w/2;
+            e.parentElement.style.left = "50%";
+            e.parentElement.style.marginLeft = -ml+"px";
+            e.parentElement.style.width = w+"px";
+            e.parentElement.previousSibling.style.display = "none";
+            e.parentElement.parentElement.style.border = "0px";
+            e.parentElement.parentElement.style.background = "unset";
+            e.className = 'info-title adapt-css';
+        }
+    });
 }
