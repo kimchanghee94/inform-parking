@@ -16,6 +16,12 @@ a:active{
     text-decoration-line: underline;
 }
 
+
+textarea:active, textarea:focus, input:active, input:focus, .btn:active, .btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 .login-join-info{
     width: 100%;
     margin : 0;

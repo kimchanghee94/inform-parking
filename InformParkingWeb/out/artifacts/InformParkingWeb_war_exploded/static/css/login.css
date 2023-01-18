@@ -27,6 +27,12 @@ a:hover{
 a:active {
     text-decoration-line: underline;
 }
+
+textarea:active, textarea:focus, input:active, input:focus, .btn:active, .btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 .container{
     margin: 0;
     padding: 0;

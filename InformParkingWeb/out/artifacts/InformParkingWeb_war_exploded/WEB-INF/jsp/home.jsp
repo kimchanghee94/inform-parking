@@ -13,10 +13,11 @@
 <head class="home_head">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width", initial-scale="1">
-
     <meta name="_csrf" content="${_csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
+    <link rel="shortcut icon" href="<c:url value='/static/image/favicons96.ico'/>" type="image/x-icon"/>
+    <link rel="icon" href="<c:url value='/static/image/favicons96.ico'/>" type="image/x-icon"/>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://developer.mozilla.org/ko/docs/Web/API/Geolocation_API"></script>
@@ -24,9 +25,9 @@
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9d3a5d31dd0c907fa7e70281e7a04d44&libraries=clusterer,services">
     </script>
     <script src="/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/css/home.css">
     <script type="text/javascript" src="/js/home.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>주차장을 알리다</title>
 </head>
 <body class="home_body">
@@ -124,9 +125,10 @@
                 <h4 class="parking-price-list" id="empty"></h4>
                 <h4 class="parking-price-list" id="day-price-text"></h4>
                 <h4 class="parking-price-list" id="month-price-text"></h4>
-                <button type="button" class="btn btn-primary custom-button" id="day-buy-button">하루 정기권 구매</button>
-                <button type="button" class="btn btn-primary custom-button" id="month-buy-button">월 정기권 구매</button>
-                <button type="button" class="btn btn-primary custom-button" id="nav-button">길 찾기</button>
+                <!-- mouse가 버튼 밖으로 이동시 포커스를 없애기 위해 blur처리 -->
+                <button type="button" class="btn btn-primary custom-button" id="day-buy-button" onmouseout="blur()">하루 정기권 구매</button>
+                <button type="button" class="btn btn-primary custom-button" id="month-buy-button" onmouseout="blur()">월 정기권 구매</button>
+                <button type="button" class="btn btn-primary custom-button" id="nav-road-button" onclick="naviRoad()" onmouseout="blur()">길찾기</button>
             </div>
             <div class="parking-price-info HIDDEN" id="non-pay-parking">
                 <div id="non-pay-text">
@@ -139,6 +141,20 @@
         <p id="footer-text">'주차장을 알리다's Homepage is powered by <span class="text-primary">Changhee</span></p>
     </div>
     <div class="map-view" id="kakao_map">
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="/static/image/faviconsMac.svg" class="rounded me-2" alt="..." style="width:20px; height: 20px">
+                <strong class="me-auto">Bootstrap</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Hello, world! This is a toast message.
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -1,4 +1,6 @@
-$(document).ready(execMap(0, null));
+$(document).ready(
+    execMap(0, null),
+);
 
 //csrf 적용으로 인해 Post로 전송 시 token을 담아 보내야한다.
 const token = $("meta[name='_csrf']").attr("content");
@@ -16,6 +18,7 @@ function logoutFunc(){
     });
 }
 
+/* 주소 검색 메서드*/
 function enterkey(){
     if(window.event.keyCode == 13){
         keywordSearch();
@@ -23,8 +26,6 @@ function enterkey(){
 }
 
 /* 맵 작업 */
-/* 주소 검색 메서드*/
-
 var map;
 var ps;
 var mylatitude;
@@ -36,6 +37,16 @@ var markers=[];
 /*인포윈도우 클릭 후 유지 조건 분기 처리에 필요한 변수 */
 var selectedMarker;
 var clickInfowindows = [];
+
+/*내비 길찾기에 필요한 변수*/
+var selectedMarkerLat;
+var selectedMarkerLng;
+
+/* 내비경로 폴리라인 요소 */
+var startPoly;
+var endPoly;
+var linePoly;
+var lineOrderNum = [];
 
 function keywordSearch() {
     var keywordValue = document.getElementById("search-place-input");
@@ -145,9 +156,8 @@ function mapInitSetting(){
         }
     });
 
-    //지도 이동 이벤트
+    //지도 클 이벤릭트
     kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-        console.log("map Clicked!!");
         if(clickInfowindows.length !== 0) {
             clickInfowindows[0].close();
         }
@@ -274,6 +284,10 @@ function getMapViewMarkers(){
             infowindow.open(map, marker);
             clickInfowindows.push(infowindow);
             selectedMarker = marker;
+
+            /* 내비의 목적지를 담는다. */
+            selectedMarkerLat = item.latitude;
+            selectedMarkerLng = item.longitude;
 
             document.getElementById("markerNonClick-page").className = "left-bottom-main markerNonClick HIDDEN";
             document.getElementById("markerClick-page").className = "left-bottom-main markerClick";
@@ -528,4 +542,168 @@ function infoCssCustom(){
             e.className = 'info-title adapt-css';
         }
     });
+}
+
+/* 내비 길 찍어주는 로직 */
+function naviRoad(){
+    /* 출발지 및 도착지 url에 맞게 조합 */
+    var org = mylongitude + "," + mylatitude;
+    var dest = selectedMarkerLng + "," + selectedMarkerLat;
+
+    var roadsJsonArray;
+    var guidesJsonArray;
+
+    var toastInfo = document.getElementById("liveToast");
+    toastInfo.className = "toast";
+
+    console.log("navi Road Btn Clicked!");
+
+    /* Poly 라인 초기화 */
+    if(startPoly != null){
+        startPoly.setMap(null);
+    }
+    if(linePoly != null){
+        linePoly.setMap(null);
+    }
+    if(endPoly != null){
+        endPoly.setMap(null);
+    }
+    if(lineOrderNum.length != 0){
+        $(lineOrderNum).map(function (i, lineOrder) {
+            lineOrder.setMap(null);
+        });
+        lineOrderNum=[];
+    }
+
+    /*내비 호출*/
+    $.ajax({
+        type : "GET",
+        url : "https://apis-navi.kakaomobility.com/v1/directions?" +
+            "origin=" + org +
+            "&destination=" + dest +
+            "&waypoints=" +
+            "&priority=RECOMMEND" +
+            "&car_fuel=GASOLINE" +
+            "&car_hipass=false" +
+            "&alternatives=false" +
+            "&road_details=false",
+        headers : {'Authorization': 'KakaoAK 344e68558b6ae398a53fbad7ddd5f4b9'},
+        async :  false,
+        success : function(data){
+            roadsJsonArray = data.routes[0].sections[0].roads;
+            guidesJsonArray = data.routes[0].sections[0].guides;
+            console.log("Navi Response Success");
+        },
+        error : function(data){
+            console.log("Navi Response error");
+        }
+    });
+
+    /* 위도와 경도를 받아온다 */
+    var naviLng = [];
+    var naviLat = [];
+
+    for(var i=0; i<roadsJsonArray.length; i++){
+        var road = roadsJsonArray[i];
+        /* road의 마지막과 다음 road의 처음은 겹치므로 이에 대한 조건 분기 처리를 해준다. */
+        if(i == roadsJsonArray.length - 1){
+            for(var ri=0; ri<road.vertexes.length; ri++){
+                if(ri % 2 === 0) naviLng.push(road.vertexes[ri]);
+                else naviLat.push(road.vertexes[ri]);
+            }
+        }else{
+            for(var ri=0; ri<road.vertexes.length - 2; ri++){
+                if(ri % 2 === 0) naviLng.push(road.vertexes[ri]);
+                else naviLat.push(road.vertexes[ri]);
+            }
+        }
+    }
+
+    /* Poly line을 통해 길을 그린다. */
+    //시작선과 끝선에 대해서는 건물에서 출발하므로 연한 선으로 표시한다.
+    var startPath = [
+        new kakao.maps.LatLng(mylatitude, mylongitude),
+        new kakao.maps.LatLng(naviLat[0], naviLng[0])
+    ];
+
+    var endPath = [
+        new kakao.maps.LatLng(naviLat[naviLat.length-1], naviLng[naviLng.length-1]),
+        new kakao.maps.LatLng(selectedMarkerLat, selectedMarkerLng)
+    ];
+
+    startPoly = new kakao.maps.Polyline({
+        path: startPath, // 선을 구성하는 좌표배열 입니다
+        strokeWeight: 6, // 선의 두께 입니다
+        strokeColor: 'blue', // 선의 색깔입니다
+        strokeOpacity: 0.4, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+        strokeStyle: 'solid' // 선의 스타일입니다
+    });
+
+    endPoly = new kakao.maps.Polyline({
+        path: endPath, // 선을 구성하는 좌표배열 입니다
+        strokeWeight: 6, // 선의 두께 입니다
+        strokeColor: 'cornflowerblue', // 선의 색깔입니다
+        strokeOpacity: 0.4, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+        strokeStyle: 'solid' // 선의 스타일입니다
+    });
+
+    startPoly.setMap(map);
+    endPoly.setMap(map);
+
+    // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+    var linePath = [];
+    for(var i=0; i<naviLng.length; i++){
+        linePath.push(new kakao.maps.LatLng(naviLat[i], naviLng[i]));
+    }
+
+    // 지도에 표시할 선을 생성합니다
+    linePoly = new kakao.maps.Polyline({
+        path: linePath, // 선을 구성하는 좌표배열 입니다
+        strokeWeight: 8, // 선의 두께 입니다
+        strokeColor: 'cornflowerblue', // 선의 색깔입니다
+        strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+        strokeStyle: 'solid' // 선의 스타일입니다
+    });
+
+    // 지도에 선을 표시합니다
+    linePoly.setMap(map);
+
+    /* 경로에 순서 번호를 추가하기 위한 작업 */
+    var startContent = '<div class ="label" style="border: 1px solid cornflowerblue; border-radius: 50%; background: cornflowerblue; color: white; font-size: 10px">' +
+        '<span class="center">S</span>' +
+        '</div>';
+
+    var startLineOrderNum = new kakao.maps.CustomOverlay({
+        position : new kakao.maps.LatLng(mylatitude, mylongitude),
+        content : startContent
+    });
+
+    startLineOrderNum.setMap(map);
+    lineOrderNum.push(startLineOrderNum);
+
+    for(var i=0; i<guidesJsonArray.length; i++){
+        var guide = guidesJsonArray[i];
+        var content = '<div class ="numbering-navi" style="border: 1px solid gray; ' +
+            'width: 20px;' +
+            'height: 20px;' +
+            'padding-top: 2px;' +
+            'border-radius: 50%;' +
+            'background: whitesmoke;' +
+            'color: dimgray;' +
+            'font-size: 10px;' +
+            'text-align: center">' +
+            + (i + 1) + '</div>';
+        // 커스텀 오버레이가 표시될 위치입니다
+        var position = new kakao.maps.LatLng(guide.y, guide.x);
+
+// 커스텀 오버레이를 생성합니다
+        var tmpLineOrderNum = new kakao.maps.CustomOverlay({
+            position: position,
+            content: content
+        });
+
+// 커스텀 오버레이를 지도에 표시합니다
+        tmpLineOrderNum.setMap(map);
+        lineOrderNum.push(tmpLineOrderNum);
+    }
 }

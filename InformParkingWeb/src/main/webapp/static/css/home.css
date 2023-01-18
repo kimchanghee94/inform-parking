@@ -28,6 +28,11 @@ a:active{
     text-decoration-line: underline;
 }
 
+textarea:active, textarea:focus, input:active, input:focus, .btn:active, .btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 .left-top-layout{
     position: relative;
     height: 160px;
@@ -324,7 +329,7 @@ input::placeholder{
     width: 180px;
 }
 
-#nav-button{
+#nav-road-button{
     position: absolute;
     top: 240px;
 }
@@ -345,6 +350,15 @@ input::placeholder{
     margin: 2px 0 0 70px;
 }
 
+/*토스트 처리*/
+#toast-div{
+    position: absolute;
+    background-color: whitesmoke;
+    right: 20px;
+    bottom: 30px;
+    border-radius: 3px;
+    border: 1px solid darkgray;
+}
 
 /* 맵 정보 표시 레이아웃*/
 .map-view{
@@ -353,6 +367,17 @@ input::placeholder{
     left: 390px;
     right: 0;
     top: 0;
+}
+
+.info-title {
+    display: block;
+    background: #50627F;
+    color: #fff;
+    text-align: center;
+    height: 24px;
+    line-height:22px;
+    border-radius:4px;
+    padding:0px 10px;
 }
 
 @media only screen and (max-width: 600px){
@@ -405,15 +430,4 @@ input::placeholder{
         top: 1070px;
         width: 100%;
     }
-}
-
-.info-title {
-    display: block;
-    background: #50627F;
-    color: #fff;
-    text-align: center;
-    height: 24px;
-    line-height:22px;
-    border-radius:4px;
-    padding:0px 10px;
 }
