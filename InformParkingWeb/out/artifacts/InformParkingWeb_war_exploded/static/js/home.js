@@ -86,6 +86,15 @@ function execMap(kmFlag, keywordValue){
                 ps = new kakao.maps.services.Places();
                 ps.keywordSearch(keywordValue, placesSearchCB);
 
+                /*키워드 검색 시 경로 infowindow를 지워준다. */
+                if(clickInfowindows.length !== 0) {
+                    clickInfowindows[0].close();
+                    clickInfowindows= [];
+                }
+
+                /*poly라인도 초기화*/
+                initPolyLine();
+
                 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
                 function placesSearchCB (data, status, pagination) {
                     if (status === kakao.maps.services.Status.OK) {
@@ -544,21 +553,8 @@ function infoCssCustom(){
     });
 }
 
-/* 내비 길 찍어주는 로직 */
-function naviRoad(){
-    /* 출발지 및 도착지 url에 맞게 조합 */
-    var org = mylongitude + "," + mylatitude;
-    var dest = selectedMarkerLng + "," + selectedMarkerLat;
-
-    var roadsJsonArray;
-    var guidesJsonArray;
-
-    var toastInfo = document.getElementById("liveToast");
-    toastInfo.className = "toast";
-
-    console.log("navi Road Btn Clicked!");
-
-    /* Poly 라인 초기화 */
+/* Poly 라인 초기화 */
+function initPolyLine(){
     if(startPoly != null){
         startPoly.setMap(null);
     }
@@ -574,6 +570,23 @@ function naviRoad(){
         });
         lineOrderNum=[];
     }
+}
+
+/* 내비 길 찍어주는 로직 */
+function naviRoad(){
+    /* 출발지 및 도착지 url에 맞게 조합 */
+    var org = mylongitude + "," + mylatitude;
+    var dest = selectedMarkerLng + "," + selectedMarkerLat;
+
+    var roadsJsonArray;
+    var guidesJsonArray;
+
+    var distance;
+    var duration;
+
+    initPolyLine();
+
+    console.log("navi Road Btn Clicked!");
 
     /*내비 호출*/
     $.ajax({
@@ -592,12 +605,61 @@ function naviRoad(){
         success : function(data){
             roadsJsonArray = data.routes[0].sections[0].roads;
             guidesJsonArray = data.routes[0].sections[0].guides;
+            distance = data.routes[0].summary.distance;
+            duration = data.routes[0].summary.duration;
             console.log("Navi Response Success");
         },
         error : function(data){
             console.log("Navi Response error");
         }
     });
+
+    /* 토스트로 걸리는 시간과 거리를 알려준다. */
+    const toastLiveExample = document.getElementById('liveToast');
+    const toast = new bootstrap.Toast(toastLiveExample);
+
+    const toastInfo = document.getElementById('nav-road-inform');
+
+    var kmDist, mDist, hDur, mDur;
+
+    console.log(distance + ", " + duration);
+
+    kmDist = parseInt(distance / 1000);
+    mDist = distance % 1000;
+
+    console.log(kmDist + ", " + mDist);
+
+    hDur = parseInt(duration / 3600);
+    duration = duration % 3600;
+
+    console.log(hDur + ", " + duration);
+
+    /* 분 단위까지만 표시한다 */
+    mDur = parseInt(duration / 60);
+    console.log(mDur + ", " + duration);
+
+    var infoDist ="", infoTime="";
+
+    if(kmDist != 0){
+        infoDist = kmDist + "km ";
+    }
+    if(mDist != 0){
+        infoDist = infoDist + mDist + "m";
+    }
+
+    if(hDur != 0){
+        infoTime = hDur + "시간 ";
+    }
+    if(mDur != 0){
+        infoTime = infoTime + mDur + "분";
+    }
+
+    console.log(infoDist + ", " + infoTime);
+
+    toastInfo.innerHTML = '<strong>예상 걸릴 시간:</strong> ' + infoTime + '<br>'
+        + '<strong>거리:</strong> ' + infoDist;
+
+    toast.show();
 
     /* 위도와 경도를 받아온다 */
     var naviLng = [];

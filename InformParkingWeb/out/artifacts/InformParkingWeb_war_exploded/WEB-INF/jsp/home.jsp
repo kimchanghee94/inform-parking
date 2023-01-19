@@ -18,13 +18,14 @@
 
     <link rel="shortcut icon" href="<c:url value='/static/image/favicons96.ico'/>" type="image/x-icon"/>
     <link rel="icon" href="<c:url value='/static/image/favicons96.ico'/>" type="image/x-icon"/>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://developer.mozilla.org/ko/docs/Web/API/Geolocation_API"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9d3a5d31dd0c907fa7e70281e7a04d44&libraries=clusterer,services">
     </script>
-    <script src="/bootstrap/js/bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/css/home.css">
     <script type="text/javascript" src="/js/home.js"></script>
@@ -35,42 +36,39 @@
         <div class="left-top-header">
             <h1 class="brand-title"><strong>주차장</strong>을 알리다</h1>
             <a id="move-my-pos" href="#" onclick="moveCurPos()">현재 위치로</a>
-            <button class="user-inform-button btn-modal" data-toggle="modal" data-target="#user-info-modal">
+            <button class="user-inform-button" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                 <img src="https://t1.daumcdn.net/localimg/localimages/07/2018/pc/title/ico_menu.png" alt="drop down button">
             </button>
-            <div class="modal" id="user-info-modal" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="modal-close-btn close" data-dismiss="modal">x</button>
-                            <h4 class="modal-title"><strong>주차장</strong>을 알리다 🚙</h4>
-                        </div>
-                        <div class="modal-body">
-                            <ul class="usr-inform-body">
-                                <sec:authorize access="isAnonymous()">
-                                    <li><a id="submenu-login" href="login">로그인</a></li>
-                                    <li><a id="submenu-join" href="join">회원가입</a></li>
-                                </sec:authorize>
-                                <sec:authorize access="isAuthenticated()">
-                                    <sec:authentication property="principal" var="user"/>
-                                    <sec:authorize access="hasRole('admin')">
-                                        <li><a id="submenu-admin-page" href="/loginResultView/${user.username}">관리자 전용 페이지</a></li>
-                                    </sec:authorize>
-                                    <li><a id="submenu-logout" href="login" onclick="logoutFunc()">로그아웃</a></li>
-                                    <li><a id="submenu-reserve" href="#">예매내역</a></li>
-                                    <li><a id="submenu-admin" href="#">관리자로 전환</a></li>
-                                    <li><a id="submenu-withdrawal" href="#">회원탈퇴</a></li>
-                                </sec:authorize>
-                            </ul>
-                        </div>
-                        <div class="modal-footer">
-                            <ul class="usr-inform-footer">
-                                <!--<li><a href="#">관리자 신청하기</a></li>-->
-                                <li><a href="#">공지사항</a></li>
-                                <li><a href="#">고객센터</a></li>
-                            </ul>
-                        </div>
-                    </div>
+            <div class="offcanvas offcanvas-start" style="width: 300px" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel"><strong>주차장</strong>을 알리다
+                    <img src="/static/image/faviconsMac.svg" style="width: 30px; padding-bottom: 4px" alt="...">
+                    </h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="canvas-top-ul">
+                        <sec:authorize access="isAnonymous()">
+                            <li><a id="submenu-login" href="login">로그인</a></li>
+                            <li><a id="submenu-join" href="join">회원가입</a></li>
+                        </sec:authorize>
+                        <sec:authorize access="isAuthenticated()">
+                            <sec:authentication property="principal" var="user"/>
+                            <sec:authorize access="hasRole('admin')">
+                                <li><a id="submenu-admin-page" href="/loginResultView/${user.username}">관리자 전용 페이지</a></li>
+                            </sec:authorize>
+                            <li><a id="submenu-logout" href="login" onclick="logoutFunc()">로그아웃</a></li>
+                            <li><a id="submenu-reserve" href="#">예매내역</a></li>
+                            <li><a id="submenu-admin" href="#">관리자로 전환</a></li>
+                            <li><a id="submenu-withdrawal" href="#">회원탈퇴</a></li>
+                        </sec:authorize>
+                    </ul>
+
+                    <ul class="canvas-top-ul" style="border-top: 1px solid black">
+                        <!--<li><a href="#">관리자 신청하기</a></li>-->
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="#">고객센터</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="search">
@@ -143,17 +141,16 @@
     <div class="map-view" id="kakao_map">
     </div>
 
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+    <!-- 토스트 레이아웃 -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <img src="/static/image/faviconsMac.svg" class="rounded me-2" alt="..." style="width:20px; height: 20px">
-                <strong class="me-auto">Bootstrap</strong>
-                <small>11 mins ago</small>
+                <strong class="me-auto">주차장을 알리다</strong>
+                <small>길찾기 정보</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-            <div class="toast-body">
-                Hello, world! This is a toast message.
-            </div>
+            <div class="toast-body" id="nav-road-inform"></div>
         </div>
     </div>
 </body>
