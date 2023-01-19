@@ -3,7 +3,7 @@
 
 * Front : jsp, html, css, java-script, bootstrap, apache tile
 * Server : Apache, Tomcat, MySQL, Docker(각 이미지 서브넷으로 만들어 docker에 등록)
-* DataBase : 로컬에 구축 MySQL(Mybatis, MySQLWorkBench 사용)
+* DataBase : 로컬에 구축 (Mybatis, MySQLWorkBench 사용)
 * IDE : intellij
 * Framework : Spring MVC - Maven사용
 * 주요 Library : 
