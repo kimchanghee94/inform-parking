@@ -280,7 +280,7 @@ input::placeholder{
 
 .parking-price-list{
     height: 25px;
-    font-size: 17px;
+    font-size: 15px;
     margin: 10px 0 0 17px;
 }
 
@@ -299,20 +299,20 @@ input::placeholder{
 
 #day-buy-button{
     position: absolute;
-    top: 200px;
+    top: 190px;
     width: 180px;
 }
 
 #month-buy-button{
     position: absolute;
-    top: 200px;
+    top: 190px;
     left: 199px;
     width: 180px;
 }
 
 #nav-road-button{
     position: absolute;
-    top: 240px;
+    top: 230px;
 }
 
 /*주차장 푸터 레이아웃*/
@@ -359,6 +359,13 @@ input::placeholder{
     line-height:22px;
     border-radius:4px;
     padding:0px 10px;
+}
+
+.toast-container{
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    padding: 10px;
 }
 
 @media only screen and (max-width: 600px){
@@ -410,5 +417,14 @@ input::placeholder{
         position: absolute;
         top: 1070px;
         width: 100%;
+    }
+
+    .toast-container{
+        position: absolute;
+        top: 870px;
+        bottom: unset;
+        left: unset;
+        right: 20px;
+        padding: unset;
     }
 }

@@ -622,21 +622,14 @@ function naviRoad(){
 
     var kmDist, mDist, hDur, mDur;
 
-    console.log(distance + ", " + duration);
-
     kmDist = parseInt(distance / 1000);
     mDist = distance % 1000;
-
-    console.log(kmDist + ", " + mDist);
 
     hDur = parseInt(duration / 3600);
     duration = duration % 3600;
 
-    console.log(hDur + ", " + duration);
-
     /* 분 단위까지만 표시한다 */
     mDur = parseInt(duration / 60);
-    console.log(mDur + ", " + duration);
 
     var infoDist ="", infoTime="";
 
@@ -653,8 +646,6 @@ function naviRoad(){
     if(mDur != 0){
         infoTime = infoTime + mDur + "분";
     }
-
-    console.log(infoDist + ", " + infoTime);
 
     toastInfo.innerHTML = '<strong>예상 걸릴 시간:</strong> ' + infoTime + '<br>'
         + '<strong>거리:</strong> ' + infoDist;
