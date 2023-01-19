@@ -2,8 +2,8 @@
 주차장 위치와 남은 공간, 가격 등을 제공하는 웹프로젝트
 
 * Front : jsp, html, css, java-script, bootstrap, apache tile
-* Server : Apache, Tomcat, Docker
-* DataBase : MyBatis, MySQL, MySQLWorkBench
+* Server : Apache, Tomcat, MySQL, Docker(각 이미지 서브넷으로 만들어 docker에 등록)
+* DataBase : 로컬에 구축 MySQL(Mybatis, MySQLWorkBench 사용)
 * IDE : intellij
 * Framework : Spring MVC - Maven사용
 * 주요 Library : 
