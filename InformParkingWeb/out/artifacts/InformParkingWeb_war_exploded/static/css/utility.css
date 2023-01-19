@@ -1,0 +1,89 @@
+/* utility 공통된 Css처리를 묶는다 */
+.layout_html{
+    height: 100%;
+    width: 100%;
+}
+
+.layout_body{
+    margin:0;
+    padding:0;
+    height: 100%;
+    width: 100%;
+}
+
+a:link{
+    text-decoration-line: none;
+    color: black;
+}
+
+a:visited{
+    text-decoration-line: none;
+    color: black;
+}
+
+a:hover{
+    text-decoration-line: underline;
+}
+
+a:active {
+    text-decoration-line: underline;
+}
+
+textarea:active, textarea:focus, input:active, input:focus, .btn:active, .btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.sub-menu{
+    margin-top: 10%;
+    margin-left: 10%;
+    line-height: 40px;
+}
+
+.login-join-info{
+    width: 100%;
+    margin : 0;
+    paddig : 0;
+}
+
+.column1{
+    position: absolute;
+    top:285px;
+    width: 200px;
+}
+
+.mobile{
+    display: none;
+}
+
+.desktop{
+    display: flow;
+}
+
+@media only screen and (max-width: 576px) {
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: list-item;
+    }
+
+    .container {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        display: unset;
+    }
+
+    .column2 {
+        width: 100%;
+    }
+}

@@ -82,6 +82,7 @@ textarea:active, textarea:focus, input:active, input:focus, .btn:active, .btn:fo
 
 .canvas-top-ul{
     line-height: 40px;
+    font-size: 20px;
 }
 
 .usr-inform-body{
@@ -368,7 +369,7 @@ input::placeholder{
     padding: 10px;
 }
 
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 576px){
     .home_html{
         height: 100%;
         width: 100%;
@@ -426,5 +427,13 @@ input::placeholder{
         left: unset;
         right: 20px;
         padding: unset;
+    }
+
+    .btn:hover{
+        background-color: #0d6efd;
+    }
+
+    #move-my-pos{
+        text-decoration-line: none;
     }
 }

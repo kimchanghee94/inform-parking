@@ -291,6 +291,12 @@ function getMapViewMarkers(){
             }
 
             infowindow.open(map, marker);
+
+            if (matchMedia("screen and (max-width: 600px)").matches) {
+                console.log("phone info css Custom action");
+                infoCssCustom();
+            }
+
             clickInfowindows.push(infowindow);
             selectedMarker = marker;
 
@@ -537,6 +543,7 @@ function getMapViewMarkers(){
 /* info windown 강제로 css 변경하기 */
 function infoCssCustom(){
     var infoTitle = document.querySelectorAll('.info-title');
+
     infoTitle.forEach(function(e) {
         // 인포윈도우 마진 값 때문에 한번 거친 element의 경우 또 거칠 경우 가로 길이가 계속 커지는 문제점이 발생하여 조건분기로 막아준다.
         if(e.className.includes("adapt-css") == false){
