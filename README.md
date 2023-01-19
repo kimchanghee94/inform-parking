@@ -16,7 +16,8 @@
 
 --메인페이지--
 
-![image](https://user-images.githubusercontent.com/45596085/213401237-4267d9f0-6f18-4719-8754-3fbdd5909da6.png)
+![image](https://user-images.githubusercontent.com/45596085/213401710-7b3c50e3-c3c0-4c30-8711-5206e336a1f6.png)
+
 
 
 
