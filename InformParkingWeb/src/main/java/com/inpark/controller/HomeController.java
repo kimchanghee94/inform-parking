@@ -82,13 +82,13 @@ public class HomeController {
     @RequestMapping(value = "/memberIdChk", method=RequestMethod.POST)
     @ResponseBody
     public String memberIdChk(String id) {
-        return memberService.idCheck(id);
+        return memberService.selectIdCheck(id);
     }
 
     @RequestMapping(value = "/memberPhoneChk", method=RequestMethod.POST)
     @ResponseBody
     public String memberPhoneChk(String phone){
-        return memberService.phoneCheck(phone);
+        return memberService.selectPhoneCheck(phone);
     }
 
     @RequestMapping("/home")

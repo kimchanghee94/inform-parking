@@ -19,4 +19,23 @@ public class ParkingController {
     public String getMapViewMarkers(String neLat, String neLng, String swLat, String swLng){
         return parkingService.combSelectParking(neLat, neLng, swLat, swLng);
     }
+
+    @RequestMapping(value="/getParkingAuthCheck", method=RequestMethod.POST)
+    @ResponseBody
+    public String getParkingAuthCheck(String parkingNo, String referenceDate){
+        System.out.println("parkingNo : " + parkingNo + "referenceDate : " + referenceDate);
+        return parkingService.selectAuthParkingAdmin(parkingNo, referenceDate);
+    }
+
+    @RequestMapping(value="/getParkingName", method=RequestMethod.POST)
+    @ResponseBody
+    public String getParkingName(String parkingNo, String referenceDate){
+        return parkingService.selectGetParkingName(parkingNo, referenceDate);
+    }
+
+    @RequestMapping(value="/addDBAdminRolePage", method=RequestMethod.POST)
+    @ResponseBody
+    public String addDBAdminRolePage(String parkingNo, String referenceDate){
+        return parkingService.insertAdminParking(parkingNo, referenceDate);
+    }
 }

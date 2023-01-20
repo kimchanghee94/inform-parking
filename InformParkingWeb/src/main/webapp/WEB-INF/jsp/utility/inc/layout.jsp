@@ -22,7 +22,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <!-- utility layout 공통 js css 처리 -->
     <link rel="stylesheet" href="/css/utility.css"/>
-    <script src="/css/utility.js"></script>
+    <script src="/js/utility.js"></script>
     <!-- login, join 기능 js css 분리 -->
     <link rel="stylesheet" id="main-css" href=<tiles:getAsString name="css-path"/>/>
     <script src=<tiles:getAsString name="js-path"/>></script>

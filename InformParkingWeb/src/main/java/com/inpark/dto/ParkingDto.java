@@ -32,6 +32,26 @@ public class ParkingDto {
     private String dayCharge;
     private String monthCharge;
 
+    /* 주차장 인증하기 */
+    private String parkingNo;
+    private String referenceDate;
+
+    public String getParkingNo() {
+        return parkingNo;
+    }
+
+    public void setParkingNo(String parkingNo) {
+        this.parkingNo = parkingNo;
+    }
+
+    public String getReferenceDate() {
+        return referenceDate;
+    }
+
+    public void setReferenceDate(String referenceDate) {
+        this.referenceDate = referenceDate;
+    }
+
     public int getId() {
         return id;
     }

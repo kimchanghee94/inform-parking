@@ -2,8 +2,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.inpark.mapper.ParkingMapper">
-    <select id="selectViewParking" parameterType="compParkingDto" resultType="parkingDto">
-        SELECT * from parking
+    <select id="selectViewParking" parameterType="CompParkingDto" resultType="parkingDto">
+        SELECT * FROM parking
         WHERE (longitude BETWEEN ${swLng} AND ${neLng}) AND (latitude BETWEEN ${swLat} AND ${neLat})
     </select>
 
@@ -12,13 +12,14 @@
         parkingFor, parkingStruct, rdnmadr, lnmadr, openDay, parkingCnt,
         weekOpen, weekClose, satOpen, satClose, holiOpen, holiClose,
         parkingFreeInfo, basicTime, basicCharge, addUnitTime, addUnitCharge,
-        dayChargeTime, dayCharge, monthCharge) VALUES
+        dayChargeTime, dayCharge, monthCharge, parkingNo, referenceDate) VALUES
         <foreach collection="list" item="item" separator=",">
         (#{item.id}, #{item.parkingName}, #{item.longitude}, #{item.latitude}, #{item.phone},
         #{item.parkingFor}, #{item.parkingStruct}, #{item.rdnmadr}, #{item.lnmadr}, #{item.openDay},
         #{item.parkingCnt}, #{item.weekOpen}, #{item.weekClose}, #{item.satOpen}, #{item.satClose},
         #{item.holiOpen}, #{item.holiClose}, #{item.parkingFreeInfo}, #{item.basicTime}, #{item.basicCharge},
-        #{item.addUnitTime}, #{item.addUnitCharge}, #{item.dayChargeTime}, #{item.dayCharge}, #{item.monthCharge})
+        #{item.addUnitTime}, #{item.addUnitCharge}, #{item.dayChargeTime}, #{item.dayCharge}, #{item.monthCharge},
+        #{item.parkingNo}, #{item.referenceDate})
         </foreach>
     </insert>
 
@@ -26,8 +27,31 @@
         DELETE FROM parking
     </delete>
 
-    <select id="countParkingRow" resultType="int">
-        SELECT COUNT(*) as cnt FROM parking
+    <select id="selectCountParkingRow" resultType="int">
+        SELECT COUNT(*) AS cnt FROM parking
     </select>
 
+    <select id="selectAuthParkingAdmin" resultType="int">
+        SELECT COUNT(*) AS cnt FROM parking
+        WHERE parkingNo=#{parkingNo} AND referenceDate=#{referenceDate}
+    </select>
+
+    <select id="selectGetParkingName" resultType="String">
+        SELECT parkingName FROM parking
+        WHERE parkingNo=#{parkingNo} AND referenceDate=#{referenceDate}
+    </select>
+
+    <select id="selectCheckAuthParkingAdmin" resultType="int">
+        SELECT COUNT(*) AS cnt FROM adminparking
+        WHERE parkingNo=#{parkingNo}
+    </select>
+
+    <delete id="deleteAuthParkingAdmin">
+        DELETE FROM adminparking
+        WHERE parkingNo=#{parkingNo}
+    </delete>
+
+    <insert id="insertAdminParking">
+        INSERT INTO adminparking(users_id, parkingNo, parkingUseCnt) VALUES(#{id}, #{parkingNo}, #{parkingCnt})
+    </insert>
 </mapper>

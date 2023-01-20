@@ -8,7 +8,6 @@ let phoneFlag = false
 //csrf 적용으로 인해 Post로 전송 시 token을 담아 보내야한다.
 const token = $("meta[name='_csrf']").attr("content");
 const header = $("meta[name='_csrf_header']").attr("content");
-console.log("join token : " + token + ", header : " + header);
 
 function joinCheck(){
     if(idFlag == true && userNameFlag == true && passwdFlag == true &&

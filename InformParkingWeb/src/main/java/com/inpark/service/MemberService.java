@@ -7,11 +7,11 @@ public interface MemberService {
 
     void insertMember(MemberDto dto);
 
-    String idCheck(String id);
+    String selectIdCheck(String id);
 
-    String phoneCheck(String phone);
+    String selectPhoneCheck(String phone);
 
-    MemberDto loginMember(String id);
+    MemberDto selectLoginMember(String id);
 
     void insertAuth(String id, String auth);
 }

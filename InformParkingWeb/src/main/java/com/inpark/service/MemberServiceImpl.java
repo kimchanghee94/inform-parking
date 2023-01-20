@@ -1,6 +1,5 @@
 package com.inpark.service;
 
-import com.inpark.dao.MemberDao;
 import com.inpark.dto.MemberDto;
 import com.inpark.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +34,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String idCheck(String id){
+    public String selectIdCheck(String id){
         System.out.println("id 중복체크 컨트롤러 진입" + id);
-        int result = memberMapper.idCheck(id);
+        int result = memberMapper.selectIdCheck(id);
         System.out.println("result : " + result);
         if(result != 0){
             return "fail";
@@ -47,9 +46,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String phoneCheck(String phone){
+    public String selectPhoneCheck(String phone){
         System.out.println("phone 중복 체크" + phone);
-        int result = memberMapper.phoneCheck(phone);
+        int result = memberMapper.selectPhoneCheck(phone);
         System.out.println("result : " + result);
         if(result != 0){
             return "fail";
@@ -59,8 +58,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberDto loginMember(String id){
-        return memberMapper.loginMember(id);
+    public MemberDto selectLoginMember(String id){
+        return memberMapper.selectLoginMember(id);
     }
 
     @Override

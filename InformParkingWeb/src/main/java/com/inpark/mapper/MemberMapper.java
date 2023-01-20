@@ -14,16 +14,16 @@ public interface MemberMapper {
     void insertMember(MemberDto mto);
 
     /*id 중복 검사*/
-    int idCheck(String id);
+    int selectIdCheck(String id);
 
     /*phone 중복 검사*/
-    int phoneCheck(String phone);
+    int selectPhoneCheck(String phone);
 
     /*로그인*/
-    MemberDto loginMember(String id);
+    MemberDto selectLoginMember(String id);
 
     /*권한 가져오기 */
-    List<String> selectUserAuthOne(String id);
+    List<String> selectUserAuth(String id);
 
     /*회원가입 시 권한 설정도 넣기*/
     void insertAuth(@Param("id")String id, @Param("auth")String auth);

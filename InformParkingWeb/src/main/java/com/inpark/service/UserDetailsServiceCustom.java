@@ -22,7 +22,7 @@ public class UserDetailsServiceCustom implements UserDetailsService {
         UserDetailsDto userDetails = new UserDetailsDto();
 
         // 사용자 정보 select
-        MemberDto userInfo = memberMapper.loginMember(inputUserId);
+        MemberDto userInfo = memberMapper.selectLoginMember(inputUserId);
         System.out.println(userInfo);
         // 사용자 정보 없으면 null 처리
         if (userInfo == null) {
@@ -36,7 +36,7 @@ public class UserDetailsServiceCustom implements UserDetailsService {
             userDetails.setPhone(userInfo.getPhone());
             userDetails.setCarNum(userInfo.getCarNum());
             // 사용자 권한 select해서 받아온 List<String> 객체 주입
-            List<String> userAuthList = memberMapper.selectUserAuthOne(inputUserId);
+            List<String> userAuthList = memberMapper.selectUserAuth(inputUserId);
             System.out.println(userAuthList.toString());
             userDetails.setAuthorities(userAuthList);
         }

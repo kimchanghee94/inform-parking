@@ -1,6 +1,8 @@
 package com.inpark.service;
 
 import com.inpark.dto.ParkingDto;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface ParkingService {
@@ -10,7 +12,13 @@ public interface ParkingService {
 
     void deleteAllParking();
 
-    void refreshParkingInfo() throws Exception;
+    void insertRefreshParkingInfo() throws Exception;
 
-    int countParkingRow();
+    int selectCountParkingRow();
+
+    String selectAuthParkingAdmin(String parkingNo, String referenceDate);
+
+    String selectGetParkingName(String parkingNo, String referenceDate);
+
+    String insertAdminParking(String parkingNo, String referenceDate);
 }

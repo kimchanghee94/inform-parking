@@ -82,7 +82,7 @@ textarea:active, textarea:focus, input:active, input:focus, .btn:active, .btn:fo
 
 .canvas-top-ul{
     line-height: 40px;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .usr-inform-body{
@@ -369,6 +369,12 @@ input::placeholder{
     padding: 10px;
 }
 
+#spinner-content{
+    display: flex;
+    justify-content: center;
+    margin-top: 50vh;
+}
+
 @media only screen and (max-width: 576px){
     .home_html{
         height: 100%;
@@ -433,7 +439,24 @@ input::placeholder{
         background-color: #0d6efd;
     }
 
+    .search_button:hover img.onmouse{
+        display: none;
+    }
+
+    .search_button:hover img.offmouse{
+        display: unset;
+    }
+
     #move-my-pos{
         text-decoration-line: none;
+    }
+
+    #spinner-content{
+        display: unset;
+        position: absolute;
+        margin-top: unset;
+        justify-content: unset;
+        left: 47vw;
+        top: 190px;
     }
 }

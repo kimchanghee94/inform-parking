@@ -2,12 +2,19 @@ package com.inpark.service;
 
 import com.inpark.dto.CompParkingDto;
 import com.inpark.dto.ParkingDto;
+import com.inpark.mapper.MemberMapper;
 import com.inpark.mapper.ParkingMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -16,6 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service("ParkingService")
@@ -23,6 +31,9 @@ public class ParkingServiceImpl implements ParkingService {
 
     @Autowired
     private ParkingMapper parkingMapper;
+
+    @Autowired
+    private MemberMapper memberMapper;
 
     @Override
     public String combSelectParking(String neLat, String neLng, String swLat, String swLng){
@@ -106,14 +117,135 @@ public class ParkingServiceImpl implements ParkingService {
     }
 
     @Override
-    public int countParkingRow(){
-        return parkingMapper.countParkingRow();
+    public int selectCountParkingRow(){
+        return parkingMapper.selectCountParkingRow();
     }
+
+    @Override
+    public String insertAdminParking(String parkingNo, String referenceDate){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails)principal;
+        String id = userDetails.getUsername();
+
+        List<String> userAuthList = memberMapper.selectUserAuth(id);
+
+        /* 관리자 역할 추가해주기 */
+        boolean isContainsAdmin = userAuthList.contains("ROLE_admin");
+        if(isContainsAdmin == false){
+            memberMapper.insertAuth(id, "ROLE_admin");
+            /* security 로그인 로그아웃 없이 바로 정보에 재입력 */
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+            List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
+
+            updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_admin"));
+            //add your role here [e.g., new SimpleGrantedAuthority("ROLE_NEW_ROLE")]
+
+            Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), null, updatedAuthorities);
+            SecurityContextHolder.getContext().setAuthentication(newAuth);
+        }
+
+        parkingMapper.insertAdminParking(id, parkingNo, 0);
+        String parkingName = parkingMapper.selectGetParkingName(parkingNo, referenceDate);
+
+        /*json작업 시작*/
+        JSONObject root = new JSONObject();
+        JSONObject header = new JSONObject();
+        JSONObject body = new JSONObject();
+
+        body.put("parkingNo", parkingNo);
+        body.put("parkingName", parkingName);
+        body.put("referenceDate", referenceDate);
+
+        if(isContainsAdmin == false){
+            header.put("statusCode", "001");
+            header.put("msg", "Success Insert Admin Parking and User Role add Admin");
+        }else{
+            header.put("statusCode", "000");
+            header.put("msg", "Success Insert Admin Parking and User is already Admin");
+        }
+
+        root.put("header", header);
+        root.put("body", body);
+
+        System.out.println(root.toString());
+
+        return root.toJSONString();
+    }
+
+
+    /* parking no, referenceDate가 고유한지 식별한다. */
+    @Override
+    public String selectAuthParkingAdmin(String parkingNo, String referenceDate){
+        int result = parkingMapper.selectAuthParkingAdmin(parkingNo, referenceDate);
+
+        /* 이미 등록된 주차장인지 확인한다. */
+        int checkDupResult = parkingMapper.selectCheckAuthParkingAdmin(parkingNo);
+
+        /*json작업 시작*/
+        JSONObject root = new JSONObject();
+        JSONObject header = new JSONObject();
+        JSONObject body = new JSONObject();
+
+        body.put("authParkingCnt", result);
+
+        if(checkDupResult == 0){
+            if(result == 0){
+                header.put("statusCode", "01");
+                header.put("msg", "No Parking List");
+            }else if(result == 1){
+                header.put("statusCode", "00");
+                header.put("msg", "Success Auth Parking");
+            }else{
+                header.put("statusCode", "02");
+                header.put("msg", "There duplicate parking auth");
+            }
+        }else{
+            header.put("statusCode", "03");
+            header.put("msg", "Already register");
+        }
+
+        root.put("header", header);
+        root.put("body", body);
+
+        System.out.println(root.toString());
+
+        return root.toJSONString();
+    }
+
+    @Override
+    public String selectGetParkingName(String parkingNo, String referenceDate){
+        String result = parkingMapper.selectGetParkingName(parkingNo, referenceDate);
+
+        /*json작업 시작*/
+        JSONObject root = new JSONObject();
+        JSONObject header = new JSONObject();
+        JSONObject body = new JSONObject();
+
+        body.put("parkingName", result);
+
+        if(result == null || result.length() == 0){
+            header.put("statusCode", "01");
+            header.put("msg", "No Parking Name");
+        }else {
+            header.put("statusCode", "00");
+            header.put("msg", "Success Get Parking Name");
+        }
+
+
+        root.put("header", header);
+        root.put("body", body);
+
+        System.out.println(root.toString());
+
+        return root.toJSONString();
+    }
+
 
     /* AOP를 적용하여 Transaction 처리를 한다 */
     @Override
     //@Transactional(rollbackFor = {Exception.class})
-    public void refreshParkingInfo() throws Exception{
+    public void insertRefreshParkingInfo() throws Exception{
         List<ParkingDto> parkingList = new ArrayList<>();
         List<ParkingDto> errParkingList = new ArrayList<>();
         System.out.println("새벽 1시가 되면 데이터를 한번 비우고 위도와 경도를 DB에 새로 구축한다.");
@@ -168,7 +300,11 @@ public class ParkingServiceImpl implements ParkingService {
 
                     //위도 경도가 없는 데이터에 대해서는 입력을 하지 않는다.
                     if (((String) object.get("latitude")).length() != 0
-                            && ((String) object.get("longitude")).length() != 0) {
+                            && ((String) object.get("longitude")).length() != 0
+                    //인증에 필요한 정보가 없는 데이터에 대해서는 입력을 하지 않는다.
+                            && ((String) object.get("prkplceNo")).length() != 0
+                            && ((String) object.get("referenceDate")).length() != 0) {
+
                         ParkingDto parkingDto = new ParkingDto();
                         parkingDto.setId(parkingList.size());
                         parkingDto.setParkingName((String) object.get("prkplceNm"));
@@ -198,6 +334,10 @@ public class ParkingServiceImpl implements ParkingService {
                         parkingDto.setDayChargeTime((String) object.get("dayCmmtktAdjTime"));
                         parkingDto.setDayCharge((String) object.get("dayCmmtkt"));
                         parkingDto.setMonthCharge((String) object.get("monthCmmtkt"));
+
+                        parkingDto.setParkingNo((String) object.get("prkplceNo"));
+                        parkingDto.setReferenceDate((String) object.get("referenceDate"));
+
                         if (((parkingDto.getRdnmadr() == null || parkingDto.getRdnmadr().length() == 0)
                                 && (parkingDto.getLnmadr() == null || parkingDto.getLnmadr().length() == 0))) {
                             errParkingList.add(parkingDto);
@@ -223,7 +363,7 @@ public class ParkingServiceImpl implements ParkingService {
             System.out.println(dto);
         }
 
-        int orgDataSize = parkingMapper.countParkingRow();
+        int orgDataSize = parkingMapper.selectCountParkingRow();
         System.out.println("Origin Total Page : " + orgDataSize);
 
         /* 하루 주차장 데이터 5000개 가까이 소멸 시 확인 후에 조정 필요 */

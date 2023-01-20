@@ -14,7 +14,7 @@ public class UserLoginAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
     // DB의 값을 가져다주는 커스터마이징 클래스
-            UserDetailsService userDetailsServcie;
+    UserDetailsService userDetailsServcie;
 
     // 패스워드 암호화 객체
     @Autowired

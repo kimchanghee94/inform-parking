@@ -55,11 +55,40 @@
                         <sec:authorize access="isAuthenticated()">
                             <sec:authentication property="principal" var="user"/>
                             <sec:authorize access="hasRole('admin')">
-                                <li><a id="submenu-admin-page" href="/loginResultView/${user.username}">관리자 전용 페이지</a></li>
+                                <li><a type="button" id="submenu-admin-page" data-bs-toggle="modal" href="#admin-role-page">관리자 전용 페이지</a></li>
+
+                                <!-- 관리자 전용 페이지 -->
+                                <div class="modal fade" id="admin-role-page" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5">관리자 전용 페이지</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body" id="parking-admin-page-modal-body">
+                                                <table class="table" id="parking-admin-page-table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">주차장 관리 번호</th>
+                                                        <th scope="col">주차장 이름</th>
+                                                        <th scope="col">등록 일자</th>
+                                                        <th scope="col">사용중인 차 대수</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody class="table-group-divider" id="parking-admin-page-table-body">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </sec:authorize>
                             <li><a id="submenu-logout" href="login" onclick="logoutFunc()">로그아웃</a></li>
                             <li><a id="submenu-reserve" href="#">예매내역</a></li>
-                            <li><a id="submenu-admin" href="#">관리자로 전환</a></li>
                             <li><a id="submenu-withdrawal" href="#">회원탈퇴</a></li>
                         </sec:authorize>
                     </ul>
@@ -68,9 +97,41 @@
                         <!--<li><a href="#">관리자 신청하기</a></li>-->
                         <li><a href="#">공지사항</a></li>
                         <li><a href="#">고객센터</a></li>
+                        <sec:authorize access="hasAnyRole('manager', 'admin')">
+                            <li><a type="button" id="submenu-admin" data-bs-toggle="modal" href="#role-change-admin">주차장 등록</a></li>
+
+                            <!-- 관리자 전환 Modal -->
+                            <!-- 앞으로 어떤 관리 창을 띄어야 할 경우 해당 버튼 아래에 기록하도록 하자 -->
+                            <div class="modal fade" id="role-change-admin" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">주차장 등록</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body" id="parking-admin-change-modal-body">
+                                            <div class="input-group mb-0">
+                                                <span class="input-group-text">주차장 고유번호</span>
+                                                <input id="parkingNo-id-0" type="text" name="parkingNo" class="form-control" placeholder="(-) 하이폰까지 표기">
+                                                <span class="input-group-text">주차장 등록</span>
+                                                <input id="referenceDate-id-0" type="text" name="referenceDate" class="form-control" placeholder="ex) 2023-01-01">
+                                                <button type="button" class="btn btn-outline-danger" onclick="deleteAdminParkingRow(this)" onmouseout="blur()">삭제</button>
+                                                <button type="button" class="btn btn-primary" onclick="checkAuthParkingAdmin()" onmouseout="blur()">인증</button>
+                                            </div>
+                                            <div id="auth-check-id-0" style="margin-bottom: 8px;" className="auth-check-result"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-primary" onclick="addParkingAdmin()">관리 주차장 추가</button>
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </sec:authorize>
                     </ul>
                 </div>
             </div>
+
             <div class="search">
                 <form class="keyword-search-form" onsubmit="return false">
                     <fieldset class="keyword-search-fieldset">
@@ -135,10 +196,16 @@
             </div>
         </div>
     </div>
+
     <div class="left-bottom-footer left-layout">
         <p id="footer-text">'주차장을 알리다's Homepage is powered by <span class="text-primary">Changhee</span></p>
     </div>
     <div class="map-view" id="kakao_map">
+        <div id="spinner-content" class="">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
     </div>
 
     <!-- 토스트 레이아웃 -->
@@ -153,5 +220,6 @@
             <div class="toast-body" id="nav-road-inform"></div>
         </div>
     </div>
+
 </body>
 </html>

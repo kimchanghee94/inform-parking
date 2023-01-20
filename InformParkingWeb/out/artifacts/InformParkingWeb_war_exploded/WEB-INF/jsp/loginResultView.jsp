@@ -23,33 +23,40 @@ phone: ${member.phone}
 name: ${member.userName}
 car number: ${member.carNum}
 
-<button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <img src="..." class="rounded me-2" alt="...">
-            <strong class="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            Hello, world! This is a toast message.
-        </div>
-    </div>
-</div>
-
+<table class="table" id="parking-admin-page-table">
+    <thead>
+    <tr>
+        <th scope="col">주차장 관리 번호</th>
+        <th scope="col">등록 일자</th>
+        <th scope="col">주차장 이름</th>
+        <th scope="col">사용중인 차 대수</th>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+    <tr>
+        <th scope="row">Mark</th>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td>@mdo</td>
+    </tr>
+    <tr>
+        <th scope="row">Jacob</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+    </tr>
+    <tr>
+        <th scope="row">Thornton</th>
+        <td>Larry the Bird</td>
+        <td>Larry the Bird</td>
+        <td>
+            <input id="" type="text" name="parkingNo" class="form-control"
+                   placeholder="숫자 입력"
+            style="width: 100px">
+        </td>
+    </tr>
+    </tbody>
+</table>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script>
-    const toastTrigger = document.getElementById('liveToastBtn');
-    const toastLiveExample = document.getElementById('liveToast');
-    if (toastTrigger) {
-        toastTrigger.addEventListener('click', () => {
-            const toast = new bootstrap.Toast(toastLiveExample);
-
-            toast.show();
-        });
-    }
-</script>
 </body>
 </html>

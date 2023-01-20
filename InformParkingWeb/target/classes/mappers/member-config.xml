@@ -6,15 +6,15 @@
         SELECT id, userName, passwd, carNum, phone FROM users WHERE id =#{id}
     </select>
 
-    <select id="idCheck" resultType="int">
+    <select id="selectIdCheck" parameterType="String" resultType="int">
         SELECT count(*) FROM users WHERE id = #{id}
     </select>
 
-    <select id="phoneCheck" resultType="int">
+    <select id="selectPhoneCheck" parameterType="String" resultType="int">
         SELECT count(*) FROM users WHERE phone = #{phone}
     </select>
 
-    <insert id="insertMember">
+    <insert id="insertMember" parameterType="MemberDto">
         INSERT INTO users(id, passwd, userName, phone, carNum) VALUES(
         #{id}, #{passwd}, #{userName}, #{phone}, #{carNum})
     </insert>
@@ -23,11 +23,11 @@
         INSERT INTO usersauth(users_id, auth) VALUES(#{id}, #{auth})
     </insert>
 
-    <select id="loginMember" parameterType="String" resultType="memberDto">
+    <select id="selectLoginMember" parameterType="String" resultType="memberDto">
         SELECT * FROM users WHERE id=#{id}
     </select>
 
-    <select id="selectUserAuthOne" parameterType="String" resultType="String">
+    <select id="selectUserAuth" parameterType="String" resultType="String">
         SELECT auth FROM usersauth WHERE users_id = #{id}
     </select>
 </mapper>
