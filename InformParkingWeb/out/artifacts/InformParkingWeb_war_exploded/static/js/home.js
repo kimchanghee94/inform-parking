@@ -129,7 +129,7 @@ function addParkingAdmin(){
                 }else if(response.header.statusCode == "02"){
                     newAuthDiv.style.color="red";
                     newAuthDiv.innerHTML="인증 정보가 중복된 주차장입니다.";
-                }else if(reponse.header.statusCode == "03"){
+                }else if(response.header.statusCode == "03"){
                     newAuthDiv.style.color="red";
                     newAuthDiv.innerHTML="이미 등록된 주차장입니다.";
                 }
@@ -214,12 +214,12 @@ function checkAuthParkingAdmin(){
 function deleteAdminParkingRow(curElem){
     var divP = curElem.parentElement; //부모 div
     var bodyP = divP.parentElement;
+    var parkingNo = document.getElementById("parkingNo-id-0").value.toString().trim();
     bodyP.removeChild(document.getElementById("auth-check-id-0"));
     bodyP.removeChild(divP); // 자신을 부모 태그로 부터 제거
 
     /*관리자 페이지에서도 제거*/
     var adminPageBody = document.getElementById("parking-admin-page-table-body");
-    var parkingNo = document.getElementById("parkingNo-id-0").value.toString().trim();
     var adminPageTableRow = document.getElementById("admin-page-table-row-id-" + parkingNo);
     if(adminPageTableRow !== null)
         adminPageBody.removeChild(adminPageTableRow);
@@ -247,7 +247,7 @@ function addDBAdminRolePage(parkingNo, referenceDate){
             }
         },
         success : function(response){
-            if(response.header.statusCode == "00"){
+            if(response.header.statusCode == "001" || response.header.statusCode == "000"){
                 console.log("add data success");
                 adminRolePage(response.body.parkingNo, response.body.parkingName, response.body.referenceDate);
             }else {

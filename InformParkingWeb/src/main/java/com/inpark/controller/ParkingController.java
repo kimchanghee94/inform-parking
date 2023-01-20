@@ -35,7 +35,7 @@ public class ParkingController {
 
     @RequestMapping(value="/addDBAdminRolePage", method=RequestMethod.POST)
     @ResponseBody
-    public String addDBAdminRolePage(String parkingNo, String referenceDate){
+    public String addDBAdminRolePage(String parkingNo, String referenceDate) throws Exception{
         return parkingService.insertAdminParking(parkingNo, referenceDate);
     }
 }

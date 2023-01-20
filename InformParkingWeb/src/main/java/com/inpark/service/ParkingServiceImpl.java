@@ -107,7 +107,7 @@ public class ParkingServiceImpl implements ParkingService {
     }
 
     @Override
-    public void insertParking(List<ParkingDto> dto){
+    public void insertParking(List<ParkingDto> dto) throws Exception{
         parkingMapper.insertParking(dto);
     }
 
@@ -122,7 +122,7 @@ public class ParkingServiceImpl implements ParkingService {
     }
 
     @Override
-    public String insertAdminParking(String parkingNo, String referenceDate){
+    public String insertAdminParking(String parkingNo, String referenceDate) throws Exception{
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails)principal;
         String id = userDetails.getUsername();

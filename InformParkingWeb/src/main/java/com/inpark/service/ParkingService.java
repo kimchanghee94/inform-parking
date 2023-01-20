@@ -8,7 +8,7 @@ import java.util.List;
 public interface ParkingService {
     String combSelectParking(String neLat, String neLng, String swLat, String swLng);
 
-    void insertParking(List<ParkingDto> dto);
+    void insertParking(List<ParkingDto> dto) throws Exception;
 
     void deleteAllParking();
 
@@ -20,5 +20,5 @@ public interface ParkingService {
 
     String selectGetParkingName(String parkingNo, String referenceDate);
 
-    String insertAdminParking(String parkingNo, String referenceDate);
+    String insertAdminParking(String parkingNo, String referenceDate) throws Exception;
 }
