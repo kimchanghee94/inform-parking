@@ -1,5 +1,6 @@
 package com.inpark.service;
 
+import com.inpark.dto.AdminParkingDto;
 import com.inpark.dto.CompParkingDto;
 import com.inpark.dto.ParkingDto;
 import com.inpark.mapper.MemberMapper;
@@ -122,6 +123,47 @@ public class ParkingServiceImpl implements ParkingService {
     }
 
     @Override
+    public String selectAdminParkingList(String id){
+
+        List<AdminParkingDto> listApd = parkingMapper.selectAdminParkingList(id);
+
+        /*json작업 시작*/
+        JSONObject root = new JSONObject();
+        JSONObject header = new JSONObject();
+        JSONObject body = new JSONObject();
+        JSONArray items = new JSONArray();
+
+        if(listApd.size() > 0){
+            for(AdminParkingDto apd : listApd){
+                JSONObject temp = new JSONObject();
+                temp.put("parkingName", apd.getParkingName());
+                temp.put("parkingNo", apd.getParkingNo());
+                temp.put("parkingUseCnt", apd.getParkingUseCnt());
+                temp.put("referenceDate", apd.getReferenceDate());
+
+                items.add(temp);
+            }
+
+            body.put("items", items);
+            body.put("id", id);
+
+            header.put("statusCode", "00");
+            header.put("msg", id + " has a Admin Parking Data");
+        }else{
+            header.put("statusCode", "01");
+            header.put("msg", id + " hasn't Admin Parking Data");
+        }
+
+        root.put("header", header);
+        root.put("body", body);
+
+        System.out.println(root.toString());
+
+        return root.toJSONString();
+    }
+
+
+    @Override
     public String insertAdminParking(String parkingNo, String referenceDate) throws Exception{
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails)principal;
@@ -145,8 +187,17 @@ public class ParkingServiceImpl implements ParkingService {
             SecurityContextHolder.getContext().setAuthentication(newAuth);
         }
 
-        parkingMapper.insertAdminParking(id, parkingNo, 0);
+        /* 관리자 정보 dto 조합하기 */
         String parkingName = parkingMapper.selectGetParkingName(parkingNo, referenceDate);
+
+        AdminParkingDto adminParkingDto = new AdminParkingDto();
+        adminParkingDto.setParkingNo(parkingNo);
+        adminParkingDto.setParkingName(parkingName);
+        adminParkingDto.setUsers_id(id);
+        adminParkingDto.setParkingUseCnt(0);
+        adminParkingDto.setReferenceDate(referenceDate);
+
+        parkingMapper.insertAdminParking(adminParkingDto);
 
         /*json작업 시작*/
         JSONObject root = new JSONObject();
@@ -167,6 +218,66 @@ public class ParkingServiceImpl implements ParkingService {
 
         root.put("header", header);
         root.put("body", body);
+
+        System.out.println(root.toString());
+
+        return root.toJSONString();
+    }
+
+    @Override
+    public String updateParkingUseCnt(String parkingNo, String referenceDate, int parkingUseCnt) throws Exception{
+        parkingMapper.updateParkingUseCnt(parkingNo, referenceDate, parkingUseCnt);
+
+        /*json작업 시작*/
+        JSONObject root = new JSONObject();
+        JSONObject header = new JSONObject();
+
+        header.put("msg", "Success update Parking Use Cnt");
+        header.put("statusCode", "00");
+        root.put("header", header);
+
+        System.out.println(root.toString());
+
+        return root.toJSONString();
+    }
+
+    @Override
+    //AOP로 Transaction처리
+    public String deleteAdminParkingField(String parkingNo, String referenceDate){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails)principal;
+        String id = userDetails.getUsername();
+
+        parkingMapper.deleteAdminParkingField(parkingNo, referenceDate);
+
+        List<AdminParkingDto> listApd = parkingMapper.selectAdminParkingList(id);
+
+        /*json작업 시작*/
+        JSONObject root = new JSONObject();
+        JSONObject header = new JSONObject();
+
+        /* 등록된 주차장이 없으면 관리자 권한을 삭제해준다. */
+        if(listApd.size() == 0){
+
+            memberMapper.deleteAuthUserRoleAdmin(id);
+
+            /* security 로그인 로그아웃 없이 바로 정보에 재입력 */
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+            List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
+            updatedAuthorities.remove(new SimpleGrantedAuthority("ROLE_admin"));
+            //add your role here [e.g., new SimpleGrantedAuthority("ROLE_NEW_ROLE")]
+
+            Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), null, updatedAuthorities);
+            SecurityContextHolder.getContext().setAuthentication(newAuth);
+
+            header.put("msg", "Spring-Security remove Admin Role");
+            header.put("statusCode", "00");
+        }else{
+            header.put("msg", "Spring-Security doesn't remove Admin Role");
+            header.put("statusCode", "01");
+        }
+        root.put("header", header);
 
         System.out.println(root.toString());
 

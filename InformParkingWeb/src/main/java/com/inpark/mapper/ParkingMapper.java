@@ -1,5 +1,6 @@
 package com.inpark.mapper;
 
+import com.inpark.dto.AdminParkingDto;
 import com.inpark.dto.CompParkingDto;
 import com.inpark.dto.ParkingDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,5 +24,11 @@ public interface ParkingMapper {
 
     String selectGetParkingName(@Param("parkingNo")String parkingNo, @Param("referenceDate")String referenceDate);
 
-    void insertAdminParking(@Param("id")String id, @Param("parkingNo")String parkingNo, @Param("parkingCnt")int parkingCnt);
+    void insertAdminParking(AdminParkingDto apDto);
+
+    List<AdminParkingDto> selectAdminParkingList(@Param("id")String id);
+
+    void deleteAdminParkingField(@Param("parkingNo")String parkingNo, @Param("referenceDate")String referenceDate);
+
+    void updateParkingUseCnt(@Param("parkingNo")String parkingNo, @Param("referenceDate")String referenceDate, @Param("parkingUseCnt")int parkingUseCnt);
 }

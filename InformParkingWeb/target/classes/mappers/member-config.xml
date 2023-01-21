@@ -30,4 +30,9 @@
     <select id="selectUserAuth" parameterType="String" resultType="String">
         SELECT auth FROM usersauth WHERE users_id = #{id}
     </select>
+
+    <delete id="deleteAuthUserRoleAdmin">
+        DELETE FROM usersauth
+        WHERE users_id=#{id} AND auth='ROLE_ADMIN'
+    </delete>
 </mapper>

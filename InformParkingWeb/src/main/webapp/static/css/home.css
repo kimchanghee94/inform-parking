@@ -28,7 +28,9 @@ a:active{
     text-decoration-line: underline;
 }
 
-textarea:active, textarea:focus, input:active, input:focus, .btn:active, .btn:focus {
+textarea:active, textarea:focus, input:active, input:focus,
+.btn:active, .btn:focus,
+.btn_close:active, .btn_close:focus{
     outline: none !important;
     box-shadow: none !important;
 }

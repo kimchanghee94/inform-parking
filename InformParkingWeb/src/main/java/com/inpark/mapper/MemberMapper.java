@@ -27,4 +27,6 @@ public interface MemberMapper {
 
     /*회원가입 시 권한 설정도 넣기*/
     void insertAuth(@Param("id")String id, @Param("auth")String auth);
+
+    void deleteAuthUserRoleAdmin(@Param("id")String id);
 }

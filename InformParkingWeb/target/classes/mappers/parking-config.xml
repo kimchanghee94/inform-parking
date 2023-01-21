@@ -2,7 +2,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.inpark.mapper.ParkingMapper">
-    <select id="selectViewParking" parameterType="CompParkingDto" resultType="parkingDto">
+    <select id="selectViewParking" parameterType="compParkingDto" resultType="parkingDto">
         SELECT * FROM parking
         WHERE (longitude BETWEEN ${swLng} AND ${neLng}) AND (latitude BETWEEN ${swLat} AND ${neLat})
     </select>
@@ -46,12 +46,23 @@
         WHERE parkingNo=#{parkingNo}
     </select>
 
-    <delete id="deleteAuthParkingAdmin">
+    <delete id="deleteAdminParkingField">
         DELETE FROM adminparking
-        WHERE parkingNo=#{parkingNo}
+        WHERE parkingNo=#{parkingNo} AND referenceDate=#{referenceDate}
     </delete>
 
-    <insert id="insertAdminParking">
-        INSERT INTO adminparking(users_id, parkingNo, parkingUseCnt) VALUES(#{id}, #{parkingNo}, #{parkingCnt})
+    <insert id="insertAdminParking" parameterType="adminParkingDto">
+        INSERT INTO adminparking(users_id, parkingNo, parkingUseCnt, parkingName, referenceDate)
+        VALUES(#{users_id}, #{parkingNo}, #{parkingUseCnt}, #{parkingName}, #{referenceDate})
     </insert>
+
+    <select id="selectAdminParkingList" resultType="adminParkingDto">
+        SELECT parkingNo, parkingUseCnt, parkingName, referenceDate, users_id FROM adminparking
+        WHERE users_id=#{id}
+    </select>
+
+    <update id="updateParkingUseCnt">
+        UPDATE adminparking SET parkingUseCnt = #{parkingUseCnt}
+        WHERE parkingNo=#{parkingNo} AND referenceDate=#{referenceDate}
+    </update>
 </mapper>

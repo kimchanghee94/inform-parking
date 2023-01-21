@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/css/home.css">
     <script type="text/javascript" src="/js/home.js"></script>
+    <script type="text/javascript" src="/js/home_admin.js"></script>
     <title>주차장을 알리다</title>
 </head>
 <body class="home_body">
@@ -55,7 +56,7 @@
                         <sec:authorize access="isAuthenticated()">
                             <sec:authentication property="principal" var="user"/>
                             <sec:authorize access="hasRole('admin')">
-                                <li><a type="button" id="submenu-admin-page" data-bs-toggle="modal" href="#admin-role-page">관리자 전용 페이지</a></li>
+                                <li><a type="button" id="submenu-admin-page" data-bs-toggle="modal" href="#admin-role-page" onclick="initSettingParkingAdminRolePage()">관리자 전용 페이지</a></li>
 
                                 <!-- 관리자 전용 페이지 -->
                                 <div class="modal fade" id="admin-role-page" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -98,7 +99,7 @@
                         <li><a href="#">공지사항</a></li>
                         <li><a href="#">고객센터</a></li>
                         <sec:authorize access="hasAnyRole('manager', 'admin')">
-                            <li><a type="button" id="submenu-admin" data-bs-toggle="modal" href="#role-change-admin">주차장 등록</a></li>
+                            <li><a type="button" id="submenu-admin" data-bs-toggle="modal" href="#role-change-admin" onclick="initSettingParkingRegisterAdmin()">주차장 등록</a></li>
 
                             <!-- 관리자 전환 Modal -->
                             <!-- 앞으로 어떤 관리 창을 띄어야 할 경우 해당 버튼 아래에 기록하도록 하자 -->
@@ -110,18 +111,9 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body" id="parking-admin-change-modal-body">
-                                            <div class="input-group mb-0">
-                                                <span class="input-group-text">주차장 고유번호</span>
-                                                <input id="parkingNo-id-0" type="text" name="parkingNo" class="form-control" placeholder="(-) 하이폰까지 표기">
-                                                <span class="input-group-text">주차장 등록</span>
-                                                <input id="referenceDate-id-0" type="text" name="referenceDate" class="form-control" placeholder="ex) 2023-01-01">
-                                                <button type="button" class="btn btn-outline-danger" onclick="deleteAdminParkingRow(this)" onmouseout="blur()">삭제</button>
-                                                <button type="button" class="btn btn-primary" onclick="checkAuthParkingAdmin()" onmouseout="blur()">인증</button>
-                                            </div>
-                                            <div id="auth-check-id-0" style="margin-bottom: 8px;" className="auth-check-result"></div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-primary" onclick="addParkingAdmin()">관리 주차장 추가</button>
+                                            <button type="button" class="btn btn-outline-primary" onclick="addParkingAdminField(null, null)">관리 주차장 추가</button>
                                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
                                         </div>
                                     </div>
