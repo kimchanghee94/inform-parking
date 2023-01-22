@@ -154,6 +154,12 @@
             <version>5.0.6.RELEASE</version>
         </dependency>
 
+        <!-- spring websocket -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
 
     </dependencies>
     <!-- <<< KCH 2022/DEC/16 : 스프링 버전 설정 맟 필요한 라이브러리를 추가해준다. -->

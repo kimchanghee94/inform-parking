@@ -30,7 +30,8 @@ a:active{
 
 textarea:active, textarea:focus, input:active, input:focus,
 .btn:active, .btn:focus,
-.btn_close:active, .btn_close:focus{
+.btn-close:active, .btn-close:focus,
+.user-inform-button:active, .user-inform-button:focus{
     outline: none !important;
     box-shadow: none !important;
 }
@@ -82,7 +83,7 @@ textarea:active, textarea:focus, input:active, input:focus,
     cursor:pointer;
 }
 
-.canvas-top-ul{
+.canvas-ul{
     line-height: 40px;
     font-size: 17px;
 }

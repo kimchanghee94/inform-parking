@@ -25,6 +25,8 @@ function initSettingParkingRegisterAdmin(){
                     addParkingAdminField(item.parkingNo, item.referenceDate);
                 });
             } else if (response.header.statusCode == "01") {
+                /* 아무 데이터가 없기 때문에 한번 다 비워주고 새로 하나의 필드를 추가해준다.*/
+                document.getElementById("parking-admin-change-modal-body").innerHTML = "";
                 addParkingAdminField(null, null);
             }
         }
@@ -331,4 +333,11 @@ function addDBAdminRolePage(parkingNo, referenceDate){
             }
         }
     });
+}
+
+/* ROLE_admin이 된 유저에게는 관리자 전용페이지가 보여야한다.
+* DB 권한 역할 추가와 spring-security 권한 수정 이후 해당 태그 부분을 로드한다.
+* load 이후 body-list-id안에 한번더 body-list-id가 생기는 중첩 현상이 발생하여 부모 div클래스를 하나 만들고 안에 넣도록 한다. */
+function showAdminRolePageInCanvas(){
+    $('#load-for-div-body-id').load(location.href+' #offcanvas-body-list-id');
 }
