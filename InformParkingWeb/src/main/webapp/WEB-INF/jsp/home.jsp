@@ -25,6 +25,7 @@
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9d3a5d31dd0c907fa7e70281e7a04d44&libraries=clusterer,services">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/css/home.css">
@@ -214,5 +215,53 @@
             <div class="toast-body" id="nav-road-inform"></div>
         </div>
     </div>
+<script type="text/javascript">
+    /* WebSocket을 통해 주차장 남은 자리가 동적으로 바뀌도록 한다 */
+    var sock = new SockJS('https://www.inparking.online/echo');
+    sock.onmessage = onMessage;
+    sock.onclose = onClose;
+    sock.onopen = onOpen;
+
+    function sendMessage(){
+        console.log("여기에 parkingUseCnt값을 넘긴다");
+        //sock.send();
+    }
+
+    //서버로부터 메세지를 받는다.
+    function onMessage(msg){
+        var data = msg.data;
+        var sessionId = null; // 데이터를 보낸 사람
+        var message = null;
+
+        console.log("받은 메세지 : " + msg + ", 데이터 파밍" + data);
+        var arr = data.split(":");
+
+        for(var i=0; i<arr.length; i++){
+            console.log('arr[' + i + ']: ' + arr[i]);
+        }
+
+        //현재 세션에 로그인 한 사람
+        var cur_session = '${userid}';
+        console.log("cur_session : " + cur_session);
+
+        sessionId = arr[0];
+        message = arr[1];
+
+        console.log(sessionId + "가 보낸 메세지 : " + message);
+
+    }
+
+    //서버로부터 나감
+    function onClose(evt){
+        let user = '${userid}';
+        console.log(user + "님이 퇴장하셨습니다.");
+    }
+
+    //서버 입장
+    function onOpen(evt) {
+        let user = '${userid}';
+        console.log(user + "님이 입장하셨습니다.");
+    }
+</script>
 </body>
 </html>

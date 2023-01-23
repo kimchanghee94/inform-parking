@@ -14,7 +14,7 @@ public class UserLoginAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
     // DB의 값을 가져다주는 커스터마이징 클래스
-    UserDetailsService userDetailsServcie;
+    UserDetailsService userDetailsService;
 
     // 패스워드 암호화 객체
     @Autowired
@@ -30,7 +30,7 @@ public class UserLoginAuthenticationProvider implements AuthenticationProvider {
         String userPw = (String) authentication.getCredentials();
 
         /* DB에서 가져온 정보 (커스터마이징 가능) */
-        UserDetailsDto userDetails = (UserDetailsDto) userDetailsServcie
+        UserDetailsDto userDetails = (UserDetailsDto) userDetailsService
                 .loadUserByUsername(userId);
 
         if(userDetails != null)

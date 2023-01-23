@@ -62,7 +62,7 @@ function moveCurPos() {
 function execMap(kmFlag, keywordValue){
     navigator.geolocation.getCurrentPosition(
       function (position) {
-          console.log("kmFlag : " + kmFlag + ", kewordValue" + keywordValue);
+          console.log("kmFlag : " + kmFlag + ", kewordValue: " + keywordValue);
             mylatitude = position.coords.latitude;
             mylongitude = position.coords.longitude;
             console.log(mylatitude + ", " + mylongitude)
@@ -254,7 +254,6 @@ function getMapViewMarkers(){
             xhr.setRequestHeader(header, token);
         },
         success : function(response){
-            console.log(response.header.statusCode);
             if(response.header.statusCode == "00"){
                 itemInfoJson = response.body;
             }else if(response.header.statusCode =="01"){

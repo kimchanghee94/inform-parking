@@ -1,9 +1,16 @@
 package com.inpark.controller;
 
 import com.inpark.dto.MemberDto;
+import com.inpark.dto.UserDetailsDto;
 import com.inpark.service.MemberService;
 
+import com.inpark.service.UserDetailsServiceCustom;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,10 +19,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    UserDetailsService userDetailsService;
 
     @Autowired
     private MemberService memberService;
@@ -92,8 +103,22 @@ public class HomeController {
     }
 
     @RequestMapping("/home")
-    public String home()
+    public String home(Model model, Principal principal)
     {
+        String id = null;
+
+        if(principal == null){
+            System.out.println("로그인 안한 상태!!!");
+            id = "Anonymous";
+        }else {
+            System.out.println("로그인 상태!!!" + principal.getName());
+            id = principal.getName();
+            /*UserDetailsDto userDetails = (UserDetailsDto) userDetailsService.loadUserByUsername(id);
+            model.addAttribute("userName", userDetails.getUsername2());
+            System.out.println(userDetails.getUsername2());*/
+        }
+        model.addAttribute("userid", id);
+
         return "home";
     }
 
