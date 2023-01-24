@@ -1,0 +1,2 @@
+24-Jan-2023 01:16:51.931 SEVERE [ajp-nio-127.0.0.1-8009-exec-2] org.apache.coyote.ajp.AjpMessage.processHeader 서명 [5635]와(과) 함께, 유효하지 않은 메시지를 받았습니다.
+24-Jan-2023 01:16:51.957 SEVERE [ajp-nio-127.0.0.1-8009-exec-3] org.apache.coyote.ajp.AjpMessage.processHeader 서명 [5635]와(과) 함께, 유효하지 않은 메시지를 받았습니다.

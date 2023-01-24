@@ -224,7 +224,7 @@
 
     function sendMessage(){
         console.log("여기에 parkingUseCnt값을 넘긴다");
-        //sock.send();
+        sock.send("Test Socket Test!!!");
     }
 
     //서버로부터 메세지를 받는다.

@@ -17,6 +17,8 @@ public class EchoHandler extends TextWebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) throws Exception{
         sessionList.add(session);
 
+        System.out.println("총 사용자 : " + sessionList.toString());
+
         System.out.println(session.getId() + " 사용자 연결 완료");
     }
 

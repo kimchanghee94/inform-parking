@@ -276,6 +276,7 @@ function addParkingAdminRolePageField(parkingNo, parkingName, referenceDate, par
                     if(response.header.statusCode=="00"){
                         newChangeCntResultDiv.style.color="blue";
                         newChangeCntResultDiv.innerHTML="변경 성공";
+                        sendMessage();
                     }else{
                         newChangeCntResultDiv.style.color="red";
                         newChangeCntResultDiv.innerHTML="서버 오류로 변경 실패";
