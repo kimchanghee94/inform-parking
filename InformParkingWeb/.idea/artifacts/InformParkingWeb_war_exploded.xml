@@ -60,6 +60,12 @@
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-acl:5.2.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:5.2.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:5.2.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.reactivestreams:reactive-streams:1.0.3" />
+          <element id="library" level="project" name="Maven: org.springframework.retry:spring-retry:1.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-messaging:5.2.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.integration:spring-integration-stomp:5.2.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.integration:spring-integration-core:5.2.3.RELEASE" />
+          <element id="library" level="project" name="Maven: io.projectreactor:reactor-core:3.3.2.RELEASE" />
         </element>
       </element>
     </root>

@@ -16,7 +16,7 @@
     <meta name="_csrf" content="${_csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
-    <link rel="shortcut icon" href="<c:url value='/static/image/favicons96.ico'/>" type="image/x-icon"/>
+    <link rel="shortcut icon" href="<:url value='/static/image/favicons96.ico'/>" type="image/x-icon"/>
     <link rel="icon" href="<c:url value='/static/image/favicons96.ico'/>" type="image/x-icon"/>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -26,6 +26,7 @@
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9d3a5d31dd0c907fa7e70281e7a04d44&libraries=clusterer,services">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/css/home.css">
@@ -217,7 +218,7 @@
     </div>
 <script type="text/javascript">
     /* WebSocket을 통해 주차장 남은 자리가 동적으로 바뀌도록 한다 */
-    var sock = new SockJS('https://www.inparking.online/echo');
+   /* var sock = new SockJS('https://www.inparking.online/echo');
     sock.onmessage = onMessage;
     sock.onclose = onClose;
     sock.onopen = onOpen;
@@ -261,7 +262,57 @@
     function onOpen(evt) {
         let user = '${userid}';
         console.log(user + "님이 입장하셨습니다.");
+    }*/
+
+    /* stomp로 구현 */
+    var socket = null;
+
+    function connectStomp(){
+        var sock = new SockJS("/ws-stomp");
+        var client = Stomp.over(sock);
+
+        socket = client;
+
+        client.connect({}, function(){
+            console.log("Connected ws-stomp endpoing");
+            client.send('/stompnoti', {}, "msg: Haha~~~");
+
+            client.subscribe('/topic/message', function (event) {
+                console.log("!!!!!!!!!event>>", event);
+            })
+
+        });
+    };
+
+    /*var stompClient;
+    function serverConnect(){
+        var socket = new SockJS('ws-stomp');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            console.log('Connected: ' +  frame);
+            stompClient.subscribe('topic/ws-stomp', function(response){
+                console.log(response);
+                console.log(JSON.parse(response.body));
+            })
+        })
     }
+
+    function clientConnect(){
+        var socket = new SockJS('ws-stomp');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            console.log('Connected: ' +  frame);
+            stompClient.subscribe('topic/a', function(response){
+                console.log(response);
+                console.log(JSON.parse(response.body));
+            })
+        })
+    }
+
+    function send(){
+        console.log("sending");
+        stompClient.send("app/stompnoti", {}, JSON.stringify({name:'testStomp'}));
+    }*/
 </script>
 </body>
 </html>

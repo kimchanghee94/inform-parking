@@ -1,6 +1,7 @@
-$(document).ready(
-    execMap(0, null),
-);
+$(document).ready( function(){
+        execMap(0, null);
+        connectStomp();
+});
 
 //csrf 적용으로 인해 Post로 전송 시 token을 담아 보내야한다.
 const token = $("meta[name='_csrf']").attr("content");
