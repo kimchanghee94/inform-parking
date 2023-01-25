@@ -23,7 +23,7 @@
 
 --사용자가 주차장 등록을 하게되면 DB작업과 spring-security의 룰을 admin으로 동적 변경시키고 확인 버튼 및 x버튼 클릭 시 오프캔버스에 관리자 전용 페이지 목록 생성--
 
-![image](https://user-images.githubusercontent.com/45596085/214701154-ecbe59f9-09f8-42e0-b7ae-efb77fada048.png)
+![image](https://user-images.githubusercontent.com/45596085/214702516-03f09c04-51c7-4b78-9c61-19826a6ae505.png)
 
 
 --관리자 전용페이지에서 현재 사용 중인 주차장 자리를 입력하면 DB작업과 해당 주차장을 보고있는 사용자에게는 실시간으로 남은 자릿수가 변경된다.(Stomp)--
