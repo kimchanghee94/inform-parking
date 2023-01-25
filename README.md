@@ -3,12 +3,14 @@
 
 * Front : jsp, html, css, java-script, bootstrap, apache tile
 * Server : Apache, Tomcat, MySQL, Docker(각 이미지 서브넷으로 만들어 docker에 등록)
-* DataBase : 로컬에 구축 (Mybatis, MySQLWorkBench 사용)
+* Database : 로컬에 구축 (Mybatis, MySQLWorkBench 사용)
 * IDE : intellij
 * Framework : Spring MVC - Maven사용
 * 주요 Library : 
   1. spring-security(auth-provider 사용, 각 post메서드 csrf 적용)
   2. transaction, aop, aspectjweaver(applicationContext에서 aop를 이용한 트랜잭션 처리)
+  3. WebSocket기반 Stomp(with SockJS)
+    i) Apache와 Tomcat은 mod_jk기반 AJP프로토콜 사용, 웹소켓의 경우 AJP프로토콜에서 미지원으로 ProxyPass를 이용하여 Tomcat으로 접속
 * REST-API : 공공데이터포털(전국 주차장), Kakao Map, Kakao Mobilty 길찾기
 * 다중공유기 포트포워딩으로 외부 접속 허용
 * 가비아에서 www.inparking.online 도메인 구매, zero ssl을 통해 https 보안 적용
@@ -17,6 +19,20 @@
 --메인페이지--
 
 ![image](https://user-images.githubusercontent.com/45596085/213401710-7b3c50e3-c3c0-4c30-8711-5206e336a1f6.png)
+
+
+--사용자가 주차장 등록을 하게되면 DB작업과 spring-security의 룰을 admin으로 동적 변경시키고 확인 버튼 및 x버튼 클릭 시 오프캔버스에 관리자 전용 페이지 목록 생성--
+
+![image](https://user-images.githubusercontent.com/45596085/214701154-ecbe59f9-09f8-42e0-b7ae-efb77fada048.png)
+
+
+--관리자 전용페이지에서 현재 사용 중인 주차장 자리를 입력하면 DB작업과 해당 주차장을 보고있는 사용자에게는 실시간으로 남은 자릿수가 변경된다.(Stomp)--
+(관리자)
+![image](https://user-images.githubusercontent.com/45596085/214701845-f6c38438-14f6-4f94-8ecc-10a91785def1.png)
+
+(사용자)
+![image](https://user-images.githubusercontent.com/45596085/214701914-ff5a8734-64f3-44b6-8e7b-5f70b645499c.png)
+
 
 
 
