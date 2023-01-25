@@ -236,7 +236,6 @@ function addParkingAdminRolePageField(parkingNo, parkingName, referenceDate, par
     inputTag.value = parkingUseCnt;
     inputTag.onkeyup = function(){
         $(this).val( $(this).val().replace(/[^0-9]/gi,""));
-        console.log(inputTag.value);
     }
 
     var newButton = document.createElement("button");
@@ -276,7 +275,11 @@ function addParkingAdminRolePageField(parkingNo, parkingName, referenceDate, par
                     if(response.header.statusCode=="00"){
                         newChangeCntResultDiv.style.color="blue";
                         newChangeCntResultDiv.innerHTML="변경 성공";
-                        socket.send('/stompnoti', {}, "msg: Haha~~~");
+                        socket.send('/stompnoti', {}, JSON.stringify({
+                            parkingNo : parkingNo,
+                            referenceDate : referenceDate,
+                            parkingUseCnt : parseInt(inputTag.value)
+                        }));
                     }else{
                         newChangeCntResultDiv.style.color="red";
                         newChangeCntResultDiv.innerHTML="서버 오류로 변경 실패";

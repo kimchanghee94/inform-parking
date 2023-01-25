@@ -56,4 +56,10 @@ public class ParkingController {
     public String insertParkingUseCnt(String parkingNo, String referenceDate, int parkingUseCnt) throws Exception {
         return parkingService.updateParkingUseCnt(parkingNo, referenceDate, parkingUseCnt);
     }
+
+    @RequestMapping(value="/getOneAdminParking", method=RequestMethod.POST)
+    @ResponseBody
+    public String getSelectOneAdminParking(String parkingNo, String referenceDate){
+        return parkingService.selectOneAdminParking(parkingNo, referenceDate);
+    }
 }

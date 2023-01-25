@@ -23,40 +23,41 @@ phone: ${member.phone}
 name: ${member.userName}
 car number: ${member.carNum}
 
-<table class="table" id="parking-admin-page-table">
-    <thead>
-    <tr>
-        <th scope="col">주차장 관리 번호</th>
-        <th scope="col">등록 일자</th>
-        <th scope="col">주차장 이름</th>
-        <th scope="col">사용중인 차 대수</th>
-    </tr>
-    </thead>
-    <tbody class="table-group-divider">
-    <tr>
-        <th scope="row">Mark</th>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    </tr>
-    <tr>
-        <th scope="row">Jacob</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <th scope="row">Thornton</th>
-        <td>Larry the Bird</td>
-        <td>Larry the Bird</td>
-        <td>
-            <input id="" type="text" name="parkingNo" class="form-control"
-                   placeholder="숫자 입력"
-            style="width: 100px">
-        </td>
-    </tr>
-    </tbody>
-</table>
+<input type="text" id="message" />
+<input type="button" id="sendBtn" value="submit"/>
+<div id="messageArea"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    $("#sendBtn").click(function() {
+        console.log("click");
+        sendMessage();
+        $('#message').val('')
+    });
+
+    var sock = new SockJS("/ws-stomp");
+    var client = Stomp.over(sock);
+    // 메시지 전송
+
+    client.connect({}, function(){
+        console.log("Connected ws-stomp endpoing");
+
+        //구독을 함으로써 stompnoti로 메세지를 뿌리면 해당 클라이언트들은 메세지를 받는다.
+        client.subscribe('/topic/message', function (event) {
+            console.log("!!!!!!!!!event>>", event.body);
+            $("#messageArea").append(event.body + "<br/>");
+        });
+    });
+
+    function sendMessage() {
+        console.log("click");
+
+        client.send('/stompnoti', {}, $("#message").val());
+    }
+    // 서버와 연결을 끊었을
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

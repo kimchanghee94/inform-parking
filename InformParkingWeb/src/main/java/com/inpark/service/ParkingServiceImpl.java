@@ -5,6 +5,7 @@ import com.inpark.dto.CompParkingDto;
 import com.inpark.dto.ParkingDto;
 import com.inpark.mapper.MemberMapper;
 import com.inpark.mapper.ParkingMapper;
+import org.apache.ibatis.annotations.Param;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -87,6 +88,9 @@ public class ParkingServiceImpl implements ParkingService {
             temp.put("dayCharge", listParking.get(i).getDayCharge());
             temp.put("monthCharge", listParking.get(i).getMonthCharge());
 
+            temp.put("parkingNo", listParking.get(i).getParkingNo());
+            temp.put("referenceDate", listParking.get(i).getReferenceDate());
+
             items.add(temp);
         }
 
@@ -102,7 +106,7 @@ public class ParkingServiceImpl implements ParkingService {
         }
         root.put("header", header);
 
-        System.out.println(root.toString());
+        //System.out.println(root.toString());
 
         return root.toJSONString();
     }
@@ -484,4 +488,32 @@ public class ParkingServiceImpl implements ParkingService {
 
         parkingMapper.insertParking(parkingList);
     }
+
+    /* 마커로 표시할 때 현재 주차장 사용중인 자리가 얼마나 되는지 뽑아온다 */
+    public String selectOneAdminParking(String parkingNo, String referenceDate){
+        AdminParkingDto result = parkingMapper.selectOneAdminParking(parkingNo, referenceDate);
+        System.out.println(parkingNo + "," + referenceDate);
+        /*json작업 시작*/
+        JSONObject root = new JSONObject();
+        JSONObject header = new JSONObject();
+        JSONObject body = new JSONObject();
+
+        if(result == null){
+            header.put("statusCode", "01");
+            header.put("msg", "Not use or Admin not manage this parking");
+        }else {
+            header.put("statusCode", "00");
+            header.put("msg", "Success Get Parking Use Count");
+
+            body.put("parkingUseCnt", result.getParkingUseCnt());
+        }
+
+        root.put("header", header);
+        root.put("body", body);
+
+        System.out.println(root.toString());
+
+        return root.toJSONString();
+    }
+
 }

@@ -34,19 +34,25 @@ var initMapLevel;
 var clusterer;
 var markers=[];
 
-/*인포윈도우 클릭 후 유지 조건 분기 처리에 필요한 변수 */
+/* 인포윈도우 클릭 후 유지 조건 분기 처리에 필요한 변수 */
 var selectedMarker;
 var clickInfowindows = [];
 
-/*내비 길찾기에 필요한 변수*/
+/* 내비 길찾기에 필요한 변수 */
 var selectedMarkerLat;
 var selectedMarkerLng;
+
+/* stomp 소켓 데이터 처리 */
+var selectedParkingNo = null;
+var selectedReferenceDate = null;
+var selectedParkingCnt = null;
 
 /* 내비경로 폴리라인 요소 */
 var startPoly;
 var endPoly;
 var linePoly;
 var lineOrderNum = [];
+
 
 function keywordSearch() {
     var keywordValue = document.getElementById("search-place-input");
@@ -264,6 +270,8 @@ function getMapViewMarkers(){
         }
     });
 
+
+
     $(itemInfoJson.items).map(function(i, item) {
         var marker =  new kakao.maps.Marker({
             map : map,
@@ -303,6 +311,11 @@ function getMapViewMarkers(){
             /* 내비의 목적지를 담는다. */
             selectedMarkerLat = item.latitude;
             selectedMarkerLng = item.longitude;
+
+            /* stomp 소켓에 처리할 데이터를 담아준다. */
+            selectedParkingNo = item.parkingNo;
+            selectedReferenceDate = item.referenceDate;
+            selectedParkingCnt = item.parkingCnt;
 
             document.getElementById("markerNonClick-page").className = "left-bottom-main markerNonClick HIDDEN";
             document.getElementById("markerClick-page").className = "left-bottom-main markerClick";
@@ -514,8 +527,44 @@ function getMapViewMarkers(){
 
                 document.getElementById("week-time-list").className = "HIDDEN";
                 document.getElementById("sat-time-list").className = "HIDDEN";
-                document.getElementById("holi-time-list").className = "";
+                document.getElem
+                entById("holi-time-list").className = "";
             }
+
+            //현재 주차장이 사용 중인지 확인해본다.
+            //parkingNo와 referenceDate로 검색하고 있는데 문제는 해커가 개발자모드로 도용이 가능해진다.
+            //따라서 추후에 adminparking테이블에 주소를 넣고 이를 가지고 검색을 하도록 해야한다.
+            //WebSocket으로 뿌릴 때도 마찬가지
+            $.ajax({
+                type : "post",
+                url : "/getOneAdminParking",
+                data : {
+                    parkingNo : item.parkingNo,
+                    referenceDate : item.referenceDate
+                },
+                dataType : "json",
+                async : false,
+                statusCode: {
+                    200 : function(data){
+                        console.log("get One Admin Parking success");
+                    },
+                    404 : function(data){
+                        console.log("get One Admin Parking failed");
+                    }
+                },
+                beforeSend : function(xhr){
+                    xhr.setRequestHeader(header, token);
+                },
+                success : function(response){
+                    if(response.header.statusCode == "00"){
+                        document.getElementById("parking-remain-count").innerHTML
+                            = (item.parkingCnt-response.body.parkingUseCnt)+"대";
+                    }else if(response.header.statusCode =="01"){
+                        document.getElementById("parking-remain-count").innerHTML = item.parkingCnt+"대";
+                    }
+                }
+            });
+
         });
         markers.push(marker);
     });

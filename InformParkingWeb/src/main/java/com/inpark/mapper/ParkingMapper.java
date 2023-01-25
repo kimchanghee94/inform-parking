@@ -28,6 +28,8 @@ public interface ParkingMapper {
 
     List<AdminParkingDto> selectAdminParkingList(@Param("id")String id);
 
+    AdminParkingDto selectOneAdminParking(@Param("parkingNo")String parkingNo, @Param("referenceDate")String referenceDate);
+
     void deleteAdminParkingField(@Param("parkingNo")String parkingNo, @Param("referenceDate")String referenceDate);
 
     void updateParkingUseCnt(@Param("parkingNo")String parkingNo, @Param("referenceDate")String referenceDate, @Param("parkingUseCnt")int parkingUseCnt);

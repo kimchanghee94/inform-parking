@@ -30,6 +30,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/css/home.css">
+    <script type="text/javascript" src="/js/home_stomp.js"></script>
     <script type="text/javascript" src="/js/home.js"></script>
     <script type="text/javascript" src="/js/home_admin.js"></script>
     <title>주차장을 알리다</title>
@@ -168,6 +169,7 @@
             </div>
             <div id="parking-operating-time">
                 <h4 id="parking-sub-info"></h4>
+                <h4 id="parking-remain-info">현재 남은 자리(실시간 반영중) : <span id="parking-remain-count"></span></h4>
                 <ul id="time-list">
                     <li id="week-time-list"></li>
                     <li id="sat-time-list"></li>
@@ -216,73 +218,5 @@
             <div class="toast-body" id="nav-road-inform"></div>
         </div>
     </div>
-<script type="text/javascript">
-    /* WebSocket을 통해 주차장 남은 자리가 동적으로 바뀌도록 한다 */
-   /* var sock = new SockJS('https://www.inparking.online/echo');
-    sock.onmessage = onMessage;
-    sock.onclose = onClose;
-    sock.onopen = onOpen;
-
-    function sendMessage(){
-        console.log("여기에 parkingUseCnt값을 넘긴다");
-        sock.send("Test Socket Test!!!");
-    }
-
-    //서버로부터 메세지를 받는다.
-    function onMessage(msg){
-        var data = msg.data;
-        var sessionId = null; // 데이터를 보낸 사람
-        var message = null;
-
-        console.log("받은 메세지 : " + msg + ", 데이터 파밍" + data);
-        var arr = data.split(":");
-
-        for(var i=0; i<arr.length; i++){
-            console.log('arr[' + i + ']: ' + arr[i]);
-        }
-
-        //현재 세션에 로그인 한 사람
-        var cur_session = '${userid}';
-        console.log("cur_session : " + cur_session);
-
-        sessionId = arr[0];
-        message = arr[1];
-
-        console.log(sessionId + "가 보낸 메세지 : " + message);
-
-    }
-
-    //서버로부터 나감
-    function onClose(evt){
-        let user = '${userid}';
-        console.log(user + "님이 퇴장하셨습니다.");
-    }
-
-    //서버 입장
-    function onOpen(evt) {
-        let user = '${userid}';
-        console.log(user + "님이 입장하셨습니다.");
-    }*/
-
-    /* stomp로 구현 */
-    var socket = null;
-
-    function connectStomp(){
-        var sock = new SockJS("/ws-stomp");
-        var client = Stomp.over(sock);
-
-        socket = client;
-
-        client.connect({}, function(){
-            console.log("Connected ws-stomp endpoing");
-            client.send('/stompnoti', {}, "msg: Haha~~~");
-
-            client.subscribe('/topic/message', function (event) {
-                console.log("!!!!!!!!!event>>", event);
-            })
-
-        });
-    };
-</script>
 </body>
 </html>

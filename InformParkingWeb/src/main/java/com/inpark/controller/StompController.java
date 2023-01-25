@@ -1,5 +1,6 @@
 package com.inpark.controller;
 
+import com.inpark.dto.WsMessageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -15,7 +16,7 @@ public class StompController {
 
     @MessageMapping("/stompnoti")
     @SendTo("/topic/message")
-    public String sendMsg(String msg) throws Exception{
+    public WsMessageDto sendMsg(WsMessageDto msg) throws Exception{
         System.out.println("Controller msg : " + msg);
         return msg;
        /* HashMap<String, Object> payload = new HashMap<>();

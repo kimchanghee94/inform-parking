@@ -1,5 +1,6 @@
 package com.inpark.service;
 
+import com.inpark.dto.AdminParkingDto;
 import com.inpark.dto.ParkingDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +28,6 @@ public interface ParkingService {
     String deleteAdminParkingField(String parkingNo, String referenceDate) throws Exception;
 
     String updateParkingUseCnt(String parkingNo, String referenceDate, int parkingUseCnt) throws Exception;
+
+    String selectOneAdminParking(String parkingNo, String referenceDate);
 }

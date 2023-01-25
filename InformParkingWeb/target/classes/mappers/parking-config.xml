@@ -65,4 +65,9 @@
         UPDATE adminparking SET parkingUseCnt = #{parkingUseCnt}
         WHERE parkingNo=#{parkingNo} AND referenceDate=#{referenceDate}
     </update>
+
+    <select id="selectOneAdminParking" resultType="adminParkingDto">
+        SELECT parkingUseCnt FROM adminparking
+        WHERE parkingNo=#{parkingNo} AND referenceDate=#{referenceDate}
+    </select>
 </mapper>

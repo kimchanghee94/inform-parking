@@ -260,7 +260,7 @@ input::placeholder{
     border-bottom: 1px solid lightgray;
     top: 102px;
     width: 100%;
-    height: 215px;
+    height: 240px;
 }
 
 #parking-sub-info{
@@ -270,15 +270,25 @@ input::placeholder{
     line-height: 25px;
 }
 
+#parking-remain-info{
+    height: 25px;
+    font-size: 14px;
+    margin: 15px 0 0 17px;
+}
+
+#parking-remain-count{
+    font-size: 14px;
+}
+
 #time-list{
-    padding:20px 0 0 30px;
+    padding: 5px 0 0 30px;
     font-size: 17px;
     line-height: 40px;
 }
 
 .parking-price-info{
     position: absolute;
-    top: 317px;
+    top: 342px;
     width: 100%;
 }
 
