@@ -10,7 +10,7 @@
   1. spring-security(auth-provider 사용, 각 post메서드 csrf 적용)
   2. transaction, aop, aspectjweaver(applicationContext에서 aop를 이용한 트랜잭션 처리)
   3. WebSocket기반 Stomp(with SockJS)
-     Apache와 Tomcat은 mod_jk기반 AJP프로토콜 사용, 웹소켓의 경우 AJP프로토콜에서 미지원으로 ProxyPass를 이용하여 Tomcat으로 접속
+     * Apache와 Tomcat은 mod_jk기반 AJP프로토콜 사용, 웹소켓의 경우 AJP프로토콜에서 미지원으로 ProxyPass를 이용하여 Tomcat으로 접속
 * REST-API : 공공데이터포털(전국 주차장), Kakao Map, Kakao Mobilty 길찾기
 * 다중공유기 포트포워딩으로 외부 접속 허용
 * 가비아에서 www.inparking.online 도메인 구매, zero ssl을 통해 https 보안 적용
