@@ -130,4 +130,10 @@ public class HomeController {
         model.addAttribute("member", dto);
         return "loginResultView";
     }
+
+    @RequestMapping(value = "/kakaopay", method=RequestMethod.POST)
+    @ResponseBody
+    public String kakaopay(){
+        return memberService.buyParkingWithKakaoPay();
+    }
 }

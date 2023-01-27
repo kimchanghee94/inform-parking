@@ -14,4 +14,6 @@ public interface MemberService {
     MemberDto selectLoginMember(String id);
 
     void insertAuth(String id, String auth);
+
+    String buyParkingWithKakaoPay();
 }

@@ -17,19 +17,16 @@ function connectStomp(){
         //구독을 함으로써 stompnoti로 메세지를 뿌리면 해당 클라이언트들은 메세지를 받는다.
         client.subscribe('/topic/message', function (event) {
             console.log("!!!!!!!!!event>>", event.body);
-            console.log(selectedParkingNo, selectedReferenceDate, parseInt(selectedParkingCnt));
             let jsonBody = JSON.parse(event.body);
-            console.log(jsonBody.parkingNo, jsonBody.referenceDate);
             if(selectedParkingNo !== null
                 && selectedParkingNo ==  jsonBody.parkingNo
                 && selectedReferenceDate == jsonBody.referenceDate){
-                console.log("come here");
                 let remH = document.getElementById("parking-remain-count");
                 remH.innerHTML = (parseInt(selectedParkingCnt)-jsonBody.parkingUseCnt)+"대";
             }
         });
-
     });
+
 };
 
 /////////WebSocket으로 구현했을 때////////////

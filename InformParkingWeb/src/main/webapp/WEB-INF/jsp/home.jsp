@@ -33,6 +33,7 @@
     <script type="text/javascript" src="/js/home_stomp.js"></script>
     <script type="text/javascript" src="/js/home.js"></script>
     <script type="text/javascript" src="/js/home_admin.js"></script>
+    <script type="text/javascript" src="/js/home_pay.js"></script>
     <title>주차장을 알리다</title>
 </head>
 <body class="home_body">
@@ -183,8 +184,8 @@
                 <h4 class="parking-price-list" id="day-price-text"></h4>
                 <h4 class="parking-price-list" id="month-price-text"></h4>
                 <!-- mouse가 버튼 밖으로 이동시 포커스를 없애기 위해 blur처리 -->
-                <button type="button" class="btn btn-primary custom-button" id="day-buy-button" onmouseout="blur()">하루 정기권 구매</button>
-                <button type="button" class="btn btn-primary custom-button" id="month-buy-button" onmouseout="blur()">월 정기권 구매</button>
+                <button type="button" class="btn btn-primary custom-button" id="day-buy-button" onmouseout="blur()" onclick="kakaoPay()">하루 정기권 구매</button>
+                <button type="button" class="btn btn-primary custom-button" id="month-buy-button" onmouseout="blur()" onclick="kakaoPay()">월 정기권 구매</button>
                 <button type="button" class="btn btn-primary custom-button" id="nav-road-button" onclick="naviRoad()" onmouseout="blur()">길찾기</button>
             </div>
             <div class="parking-price-info HIDDEN" id="non-pay-parking">

@@ -8,6 +8,7 @@
 	   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <security:http auto-config="true" use-expressions="true">
+
         <!-- 정적페이지에 대해 모든 권한 허용 -->
         <security:intercept-url pattern="/static/**" access="permitAll" />
         <!-- 관리자 임의 페이지로 권한 테스트 완료-->
@@ -24,21 +25,26 @@
                 authentication-failure-handler-ref="userLoginFailHandler"
                 authentication-success-handler-ref="userLoginSuccessHandler"/>
 
-            <!-- 로그아웃 성공 후 보낼 url이지만 home.jsp a링크에 걸어둔 url로 덮어씌어지는 것으로 판단 -->
-            <!-- 세션 지워줄 것 -->
+        <!-- 로그아웃 성공 후 보낼 url이지만 home.jsp a링크에 걸어둔 url로 덮어씌어지는 것으로 판단 -->
+        <!-- 세션 지워줄 것 -->
         <security:logout
             logout-url="/logout"
             logout-success-url="/"
             invalidate-session="true"
             delete-cookies="true" />
 
+        <!--권한이 없을 때 접근 금지 페이지 설정-->
+        <!--<security:access-denied-hadndler error-page="/login"/>-->
+
+        <!-- session이 만료된 상태에서 로그아웃이나 특정 버튼 누르면 403에러가 발생하여 자동으로 로그인 창으로 이동시키자-->
+<!--        <security:session-management invalid-session-url="/login">-->
+            <!-- 최대 허용 가능 세션수를 1개로 두어 하나의 id로는 한번의 로그인만 가능, 중복 로그인 시 로그인 창으로 -->
+<!--            <security:concurrency-control max-sessions="1" expired-url="/login"/>-->
+<!--        </security:session-management>-->
+
         <!-- csrf 적용 -->
         <security:csrf disabled="false"/>
     </security:http>
-
-
-    <!--권한이 없을 때 접근 금지 페이지 설정-->
-    <!--<security:access-denied-hadndler error-page="/"/>-->
 
     <bean id="userLoginSuccessHandler" class="com.inpark.service.UserLoginSuccessHandler"></bean>
     <bean id="userLoginFailHandler" class="com.inpark.service.UserLoginFailHandler"></bean>
