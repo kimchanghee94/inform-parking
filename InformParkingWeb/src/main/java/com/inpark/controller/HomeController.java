@@ -5,6 +5,9 @@ import com.inpark.dto.UserDetailsDto;
 import com.inpark.service.MemberService;
 
 import com.inpark.service.UserDetailsServiceCustom;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,16 +16,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 
 @Controller
+@SessionAttributes({"tid"}) // 세션에 저장된 겂을 사용할때 쓰는 어노테이션, session에서 없으면 model까지 훑어서 찾아냄.
 public class HomeController {
 
     @Autowired
@@ -133,7 +134,24 @@ public class HomeController {
 
     @RequestMapping(value = "/kakaopay", method=RequestMethod.POST)
     @ResponseBody
-    public String kakaopay(){
-        return memberService.buyParkingWithKakaoPay();
+    public String kakaopay(Model model){
+        String resp = memberService.buyParkingWithKakaoPay();
+
+        try {
+            JSONParser parser = new JSONParser();
+            JSONObject object = (JSONObject) parser.parse(resp);
+            model.addAttribute("tid", (String)object.get("tid"));
+            System.out.println("kakaopay tid : " + (String)object.get("tid"));
+        }catch(ParseException pe){
+            pe.printStackTrace();
+        }
+        return resp;
+    }
+
+    @GetMapping("/approveKakaopay")
+    public String approveKakaoPay(@RequestParam("pg_token") String pgToken, @ModelAttribute("tid") String tid){
+        System.out.println("Controller tid : " + tid + ", token : " + pgToken);
+        memberService.approveKakaoPay(tid, pgToken);
+        return "redirect:/home";
     }
 }

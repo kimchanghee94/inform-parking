@@ -16,4 +16,6 @@ public interface MemberService {
     void insertAuth(String id, String auth);
 
     String buyParkingWithKakaoPay();
+
+    void approveKakaoPay(String tid, String token);
 }
