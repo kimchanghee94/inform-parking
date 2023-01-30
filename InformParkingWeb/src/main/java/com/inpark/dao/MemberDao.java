@@ -14,7 +14,7 @@ public class MemberDao {
     public MemberDto selectMember(final String id){
         MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 
-        MemberDto memberDto = mapper.selectMember(id);
+        MemberDto memberDto = mapper.selectLoginMember(id);
 
         return memberDto;
     }

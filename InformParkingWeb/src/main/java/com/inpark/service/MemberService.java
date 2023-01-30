@@ -3,7 +3,7 @@ package com.inpark.service;
 import com.inpark.dto.MemberDto;
 
 public interface MemberService {
-    MemberDto selectMember(String id);
+    String selectMemberByJson(String id);
 
     void insertMember(MemberDto dto);
 
@@ -14,4 +14,6 @@ public interface MemberService {
     MemberDto selectLoginMember(String id);
 
     void insertAuth(String id, String auth);
+
+    String updateMemberCarNum(String id, String carNum);
 }

@@ -1,0 +1,13 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inpark.mapper.PayMapper">
+    <insert id="insertPurchaseHistory" parameterType="payDto">
+        INSERT INTO purchasehistory(parkingName, purchaseTime, dayMonth, carNum, users_id, parkingPrice)
+        VALUES (#{parkingName}, #{purchaseTime}, #{dayMonth}, #{carNum}, #{users_id}, #{parkingPrice})
+    </insert>
+
+    <select id="selectPurchaseHistory" resultType="payDto">
+        SELECT * FROM purchasehistory WHERE users_id = #{id}
+    </select>
+</mapper>

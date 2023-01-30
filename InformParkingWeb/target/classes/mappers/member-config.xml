@@ -2,7 +2,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.inpark.mapper.MemberMapper">
-    <select id="selectMember" parameterType="String" resultType="memberDto">
+    <select id="selectMemberByJson" parameterType="String" resultType="memberDto">
         SELECT id, userName, passwd, carNum, phone FROM users WHERE id =#{id}
     </select>
 
@@ -35,4 +35,8 @@
         DELETE FROM usersauth
         WHERE users_id=#{id} AND auth='ROLE_ADMIN'
     </delete>
+
+    <update id="updateMemberCarNum">
+        UPDATE users SET carNum = #{carNum} WHERE id=#{id}
+    </update>
 </mapper>

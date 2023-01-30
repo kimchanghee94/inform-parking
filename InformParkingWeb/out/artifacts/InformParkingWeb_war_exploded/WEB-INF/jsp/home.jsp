@@ -60,8 +60,40 @@
                         </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
                             <li><a id="submenu-logout" href="login" onclick="logoutFunc()">로그아웃</a></li>
-                            <li><a id="submenu-reserve" href="#">예매내역</a></li>
+                            <li><a type="button" id="submenu-reserve" data-bs-toggle="modal" href="#purchase-history-modal" onclick="initSettingPurchaseHistory()">예매내역</a></li>
                             <li><a id="submenu-withdrawal" href="#">회원탈퇴</a></li>
+
+                            <!-- 예매 내역 모달 페이지 -->
+                            <!-- 캔버스 창에서 data-bs-keyboard="false"로 막아줌으로 자식 노드도 그에 따라 옵션을 따로 넣어줄 필요가 없다. true로 바꿔줘도 먹히지 않는다. -->
+                            <div class="modal fade" id="purchase-history-modal" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">관리자 전용 페이지</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body" id="purchase-history-modal-body">
+                                            <table class="table table-striped" id="purchase-history-modal-table">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">주차장 이름</th>
+                                                    <th scope="col">예매 날짜</th>
+                                                    <th scope="col">예매 시간</th>
+                                                    <th scope="col">정기권 종류</th>
+                                                    <th scope="col">차량 번호</th>
+                                                    <th scope="col">예매 가격</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="table-group-divider" id="purchase-history-modal-table-body">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </sec:authorize>
                     </ul>
 
@@ -75,7 +107,7 @@
                             <!-- 관리자 전환 Modal -->
                             <!-- 앞으로 어떤 관리 창을 띄어야 할 경우 해당 버튼 아래에 기록하도록 하자 -->
                             <div class="modal fade" id="role-change-admin" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="staticBackdropLabel">주차장 등록</h1>
@@ -98,7 +130,7 @@
                             <!-- 관리자 전용 페이지 -->
                             <!-- 캔버스 창에서 data-bs-keyboard="false"로 막아줌으로 자식 노드도 그에 따라 옵션을 따로 넣어줄 필요가 없다. true로 바꿔줘도 먹히지 않는다. -->
                             <div class="modal fade" id="admin-role-page" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5">관리자 전용 페이지</h1>
@@ -189,8 +221,28 @@
                     <button type="button" class="btn btn-primary custom-button" id="month-buy-button" onmouseout="blur()" onclick="unLoginPay()">월 정기권 구매</button>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
-                    <button type="button" class="btn btn-primary custom-button" id="day-buy-button" onmouseout="blur()" onclick="kakaoPay(0)">하루 정기권 구매</button>
-                    <button type="button" class="btn btn-primary custom-button" id="month-buy-button" onmouseout="blur()" onclick="kakaoPay(1)">월 정기권 구매</button>
+                    <button type="button" class="btn btn-primary custom-button" id="day-buy-button" onmouseout="blur()"
+                            data-bs-toggle="modal" data-bs-target="#check-car-number-modal" onclick="checkCarNum(0)">하루 정기권 구매</button>
+                    <button type="button" class="btn btn-primary custom-button" id="month-buy-button" onmouseout="blur()"
+                            data-bs-toggle="modal" data-bs-target="#check-car-number-modal" onclick="checkCarNum(1)">월 정기권 구매</button>
+
+                    <!-- 차량번호 확인 모달 -->
+                    <div class="modal fade" id="check-car-number-modal" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" style="width:350px">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5">차량 번호 확인</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="check-car-number-modal-body">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">닫기</button>
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="kakaoPay()">확인</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </sec:authorize>
                 <button type="button" class="btn btn-primary custom-button" id="nav-road-button" onclick="naviRoad()" onmouseout="blur()">길찾기</button>
             </div>

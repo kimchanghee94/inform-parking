@@ -227,12 +227,15 @@ function addParkingAdminRolePageField(parkingNo, parkingName, referenceDate, par
     var inputTd = document.createElement("td");
     var newDiv = document.createElement("div");
     newDiv.className="input-group";
+
     var inputTag = document.createElement("input");
     inputTag.type = "text";
     inputTag.name = "parkingCnt";
     inputTag.class = "form-control";
     inputTag.placeholder = "숫자 입력";
-    inputTag.style.width = "100px";
+    inputTag.style.border = "1px solid lightgray";
+    inputTag.style.borderRadius = "3px";
+    inputTag.style.width = "60px";
     inputTag.value = parkingUseCnt;
     inputTag.onkeyup = function(){
         $(this).val( $(this).val().replace(/[^0-9]/gi,""));

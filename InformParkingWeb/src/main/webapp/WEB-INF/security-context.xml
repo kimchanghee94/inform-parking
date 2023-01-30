@@ -34,7 +34,7 @@
             delete-cookies="true" />
 
         <!--권한이 없을 때 접근 금지 페이지 설정-->
-        <!--<security:access-denied-hadndler error-page="/login"/>-->
+        <security:access-denied-handler error-page="/login"/>
 
         <!-- session이 만료된 상태에서 로그아웃이나 특정 버튼 누르면 403에러가 발생하여 자동으로 로그인 창으로 이동시키자-->
 <!--        <security:session-management invalid-session-url="/login">-->

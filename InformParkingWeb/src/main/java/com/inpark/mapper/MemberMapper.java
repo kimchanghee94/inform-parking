@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface MemberMapper {
-    MemberDto selectMember(String id);
+    MemberDto selectMemberByJson(String id);
 
     /*회원가입*/
     void insertMember(MemberDto mto);
@@ -29,4 +29,7 @@ public interface MemberMapper {
     void insertAuth(@Param("id")String id, @Param("auth")String auth);
 
     void deleteAuthUserRoleAdmin(@Param("id")String id);
+
+    void updateMemberCarNum(@Param("id")String id, @Param("carNum")String carNum);
+
 }

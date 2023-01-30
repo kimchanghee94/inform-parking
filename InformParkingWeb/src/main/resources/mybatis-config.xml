@@ -7,5 +7,6 @@
         <typeAlias alias="parkingDto" type="com.inpark.dto.ParkingDto"/>
         <typeAlias alias="compParkingDto" type="com.inpark.dto.CompParkingDto"/>
         <typeAlias alias="adminParkingDto" type="com.inpark.dto.AdminParkingDto"/>
+        <typeAlias alias="payDto" type="com.inpark.dto.PayDto" />
     </typeAliases>
 </configuration>

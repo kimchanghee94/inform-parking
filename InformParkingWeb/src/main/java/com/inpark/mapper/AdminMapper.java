@@ -1,10 +1,12 @@
 package com.inpark.mapper;
 
 import com.inpark.dto.AdminParkingDto;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface AdminMapper {
     int selectAuthParkingAdmin(@Param("parkingNo")String parkingNo, @Param("referenceDate")String referenceDate);
 

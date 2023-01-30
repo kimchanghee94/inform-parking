@@ -81,6 +81,18 @@ public class HomeController {
         return "utility.login";
     }
 
+    @RequestMapping(value = "/getCarNumber", method=RequestMethod.POST)
+    @ResponseBody
+    public String getCarNumber(Principal principal) {
+        return memberService.selectMemberByJson(principal.getName());
+    }
+
+    @RequestMapping(value = "/updateUserCarNum", method=RequestMethod.POST)
+    @ResponseBody
+    public String updateUserCarNum(String carNum, Principal principal) {
+        return memberService.updateMemberCarNum(principal.getName(), carNum);
+    }
+
     @RequestMapping(value = "/memberIdChk", method=RequestMethod.POST)
     @ResponseBody
     public String memberIdChk(String id) {
@@ -117,7 +129,7 @@ public class HomeController {
     /*@PathVariable을 통해 url에 적힌 변수의 값을 가져올 수 있다.
     여러개로 작성할 수 있으며 아래처럼 선언 이외 @PathVariable(id) String id로도 입력가능하다.*/
     public String loginTestResult(@PathVariable String id, Model model){
-        MemberDto dto = memberService.selectMember(id);
+        MemberDto dto = memberService.selectLoginMember(id);
         model.addAttribute("member", dto);
         return "loginResultView";
     }
