@@ -86,8 +86,6 @@ public class PayServiceImpl implements PayService{
             conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
             conn.setDoOutput(true);
 
-            System.out.println("approveKakaoPay : " + tid + ", " + token);
-
             StringBuilder reqParam = new StringBuilder(URLEncoder.encode("cid","UTF-8") + "=TC0ONETIME");
             reqParam.append("&" + URLEncoder.encode("tid", "UTF-8") + "=" + tid);
             reqParam.append("&" + URLEncoder.encode("partner_order_id", "UTF-8") + "=" + URLEncoder.encode(parkingNo, "UTF-8"));

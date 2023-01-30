@@ -36,7 +36,6 @@ function checkCarNum(tmpDayOrMonthFlag){
 
 function getCarNum(){
     var carNum;
-
     $.ajax({
         type : "post",
         url : "/getCarNumber",
@@ -54,7 +53,6 @@ function getCarNum(){
         },
         async : false,
         success : function(response) {
-            console.log(response);
             if(response.header.statusCode == "00") {
                 carNum = response.body.carNum;
             }else{
@@ -196,5 +194,4 @@ function addPurchaseHistoryField(item){
     newTr.appendChild(carNumTd);
     newTr.appendChild(priceTd);
     obj.appendChild(newTr);
-
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 @Controller
@@ -22,7 +23,6 @@ public class PayController {
     @ResponseBody
     public String kakaopay(String parkingNo, String parkingName, int dayMonthFlag, String parkingPrice,
                          String carNum, Model model, Principal principal){
-        System.out.println("Controller Kakao Pay Start : " + parkingNo + ", " + parkingName + ", " + parkingPrice);
         String dayMonthStr = dayMonthFlag == 0 ? new String("일 정기권") : new String("월 정기권");
         String resp = payService.buyParkingWithKakaoPay(parkingNo, parkingName + "_" + dayMonthStr, parkingPrice);
 
@@ -52,7 +52,6 @@ public class PayController {
     public String approveKakaoPay(@RequestParam("pg_token") String pgToken, @ModelAttribute("tid") String tid,
                                   @ModelAttribute("parkingNo") String parkingNo,
                                   @ModelAttribute("payDto") PayDto payDto){
-        System.out.println("Controller tid : " + tid + ", token : " + pgToken);
         payService.approveKakaoPay(tid, pgToken, parkingNo, payDto);
         return "redirect:/";
     }

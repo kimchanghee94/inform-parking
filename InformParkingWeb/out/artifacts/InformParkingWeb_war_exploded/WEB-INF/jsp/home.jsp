@@ -232,17 +232,23 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5">차량 번호 확인</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onmouseout="blur()"></button>
                                 </div>
                                 <div class="modal-body" id="check-car-number-modal-body">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">닫기</button>
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="kakaoPay()">확인</button>
+                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" onmouseout="blur()">닫기</button>
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="kakaoPay()" onmouseout="blur()">확인</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <script type="text/javascript">
+                        $('#check-car-number-modal').on('hidden.bs.modal', function (e) {
+                            console.log("HHHH::");
+                           e.stopImmediatePropagation();
+                        });
+                    </script>
                 </sec:authorize>
                 <button type="button" class="btn btn-primary custom-button" id="nav-road-button" onclick="naviRoad()" onmouseout="blur()">길찾기</button>
             </div>

@@ -106,22 +106,8 @@ public class HomeController {
     }
 
     @RequestMapping("/home")
-    public String home(Model model, Principal principal)
+    public String home()
     {
-        String id = null;
-
-        if(principal == null){
-            System.out.println("로그인 안한 상태!!!");
-            id = "Anonymous";
-        }else {
-            System.out.println("로그인 상태!!!" + principal.getName());
-            id = principal.getName();
-            /*UserDetailsDto userDetails = (UserDetailsDto) userDetailsService.loadUserByUsername(id);
-            model.addAttribute("userName", userDetails.getUsername2());
-            System.out.println(userDetails.getUsername2());*/
-        }
-        model.addAttribute("userid", id);
-
         return "home";
     }
 
