@@ -18,11 +18,11 @@ function connectStomp(){
         client.subscribe('/topic/message', function (event) {
             console.log("!!!!!!!!!event>>", event.body);
             let jsonBody = JSON.parse(event.body);
-            if(selectedParkingNo !== null
-                && selectedParkingNo ==  jsonBody.parkingNo
-                && selectedReferenceDate == jsonBody.referenceDate){
+            if(selectedMarkerJson !== null
+                && selectedMarkerJson.parkingNo ==  jsonBody.parkingNo
+                && selectedMarkerJson.referenceDate == jsonBody.referenceDate){
                 let remH = document.getElementById("parking-remain-count");
-                remH.innerHTML = (parseInt(selectedParkingCnt)-jsonBody.parkingUseCnt)+"대";
+                remH.innerHTML = (parseInt(selectedMarkerJson.parkingCnt)-jsonBody.parkingUseCnt)+"대";
             }
         });
     });

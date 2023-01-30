@@ -12,7 +12,7 @@ import java.net.URLEncoder;
 public class PayServiceImpl implements PayService{
     //카카오페이 API를 이용해 주차장 결제를 이용한다.
     @Override
-    public String buyParkingWithKakaoPay(){
+    public String buyParkingWithKakaoPay(String parkingNo, String parkingName, String parkingPrice){
         try{
             URL kakaoPayURL = new URL("https://kapi.kakao.com/v1/payment/ready");
             HttpURLConnection conn = (HttpURLConnection)kakaoPayURL.openConnection();
@@ -22,12 +22,12 @@ public class PayServiceImpl implements PayService{
             conn.setDoOutput(true);
 
             StringBuilder reqParam = new StringBuilder(URLEncoder.encode("cid","UTF-8") + "=TC0ONETIME");
-            reqParam.append("&" + URLEncoder.encode("partner_order_id", "UTF-8") + "=partner_order_id");
-            reqParam.append("&" + URLEncoder.encode("partner_user_id", "UTF-8") + "=partner_user_id");
-            reqParam.append("&" + URLEncoder.encode("item_name", "UTF-8") + "=parkingName(day or month)");
+            reqParam.append("&" + URLEncoder.encode("partner_order_id", "UTF-8") + "=" + parkingNo);
+            reqParam.append("&" + URLEncoder.encode("partner_user_id", "UTF-8") + "=주차장을 알리다");
+            reqParam.append("&" + URLEncoder.encode("item_name", "UTF-8") + "=" + URLEncoder.encode(parkingName, "UTF-8"));
             reqParam.append("&" + URLEncoder.encode("quantity", "UTF-8") + "=1");
-            reqParam.append("&" + URLEncoder.encode("total_amount", "UTF-8") + "=50000"); //주차장 가격
-            reqParam.append("&" + URLEncoder.encode("tax_free_amount", "UTF-8") + "=25000"); //상품 비과세 금액
+            reqParam.append("&" + URLEncoder.encode("total_amount", "UTF-8") + "=" + parkingPrice); //주차장 가격
+            reqParam.append("&" + URLEncoder.encode("tax_free_amount", "UTF-8") + "=0"); //상품 비과세 금액
             reqParam.append("&" + URLEncoder.encode("approval_url", "UTF-8") + "=https://www.inparking.online/approveKakaopay");
             reqParam.append("&" + URLEncoder.encode("fail_url", "UTF-8") + "=https://www.inparking.online/home");
             reqParam.append("&" + URLEncoder.encode("cancel_url", "UTF-8") + "=https://www.inparking.online/home");
@@ -64,7 +64,7 @@ public class PayServiceImpl implements PayService{
     }
 
     @Override
-    public void approveKakaoPay(String tid, String token){
+    public void approveKakaoPay(String tid, String token, String parkingNo){
         try{
             URL kakaoPayURL = new URL("https://kapi.kakao.com/v1/payment/approve");
             HttpURLConnection conn = (HttpURLConnection)kakaoPayURL.openConnection();
@@ -77,8 +77,8 @@ public class PayServiceImpl implements PayService{
 
             StringBuilder reqParam = new StringBuilder(URLEncoder.encode("cid","UTF-8") + "=TC0ONETIME");
             reqParam.append("&" + URLEncoder.encode("tid", "UTF-8") + "=" + tid);
-            reqParam.append("&" + URLEncoder.encode("partner_order_id", "UTF-8") + "=partner_order_id");
-            reqParam.append("&" + URLEncoder.encode("partner_user_id", "UTF-8") + "=partner_user_id");
+            reqParam.append("&" + URLEncoder.encode("partner_order_id", "UTF-8") + "=" + parkingNo);
+            reqParam.append("&" + URLEncoder.encode("partner_user_id", "UTF-8") + "=주차장을 알리다");
             reqParam.append("&" + URLEncoder.encode("pg_token", "UTF-8") + "=" + token);
 
             OutputStream reqStream = conn.getOutputStream();

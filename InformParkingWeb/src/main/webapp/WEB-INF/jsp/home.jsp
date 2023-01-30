@@ -184,8 +184,14 @@
                 <h4 class="parking-price-list" id="day-price-text"></h4>
                 <h4 class="parking-price-list" id="month-price-text"></h4>
                 <!-- mouse가 버튼 밖으로 이동시 포커스를 없애기 위해 blur처리 -->
-                <button type="button" class="btn btn-primary custom-button" id="day-buy-button" onmouseout="blur()" onclick="kakaoPay()">하루 정기권 구매</button>
-                <button type="button" class="btn btn-primary custom-button" id="month-buy-button" onmouseout="blur()" onclick="kakaoPay()">월 정기권 구매</button>
+                <sec:authorize access="isAnonymous()">
+                    <button type="button" class="btn btn-primary custom-button" id="day-buy-button" onmouseout="blur()" onclick="unLoginPay()">하루 정기권 구매</button>
+                    <button type="button" class="btn btn-primary custom-button" id="month-buy-button" onmouseout="blur()" onclick="unLoginPay()">월 정기권 구매</button>
+                </sec:authorize>
+                <sec:authorize access="isAuthenticated()">
+                    <button type="button" class="btn btn-primary custom-button" id="day-buy-button" onmouseout="blur()" onclick="kakaoPay(0)">하루 정기권 구매</button>
+                    <button type="button" class="btn btn-primary custom-button" id="month-buy-button" onmouseout="blur()" onclick="kakaoPay(1)">월 정기권 구매</button>
+                </sec:authorize>
                 <button type="button" class="btn btn-primary custom-button" id="nav-road-button" onclick="naviRoad()" onmouseout="blur()">길찾기</button>
             </div>
             <div class="parking-price-info HIDDEN" id="non-pay-parking">

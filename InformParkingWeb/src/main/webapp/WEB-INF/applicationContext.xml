@@ -37,7 +37,6 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
-    <!-- MyBatis를 이용하여 dao없이 바로 호출 가능하도록 하는데 3.0 이상 부터 지원해준다 -->
     <bean id="ParkingsTableMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="com.inpark.mapper.ParkingMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />

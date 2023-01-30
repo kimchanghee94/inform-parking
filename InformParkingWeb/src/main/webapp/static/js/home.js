@@ -38,14 +38,8 @@ var markers=[];
 var selectedMarker;
 var clickInfowindows = [];
 
-/* 내비 길찾기에 필요한 변수 */
-var selectedMarkerLat;
-var selectedMarkerLng;
-
-/* stomp 소켓 데이터 처리 */
-var selectedParkingNo = null;
-var selectedReferenceDate = null;
-var selectedParkingCnt = null;
+/* 마커에 선택된 json 정보 담기 */
+var selectedMarkerJson = null;
 
 /* 내비경로 폴리라인 요소 */
 var startPoly;
@@ -308,14 +302,8 @@ function getMapViewMarkers(){
             clickInfowindows.push(infowindow);
             selectedMarker = marker;
 
-            /* 내비의 목적지를 담는다. */
-            selectedMarkerLat = item.latitude;
-            selectedMarkerLng = item.longitude;
-
-            /* stomp 소켓에 처리할 데이터를 담아준다. */
-            selectedParkingNo = item.parkingNo;
-            selectedReferenceDate = item.referenceDate;
-            selectedParkingCnt = item.parkingCnt;
+            /* 현재 선택된 item 정보를 담는다. */
+            selectedMarkerJson = item;
 
             document.getElementById("markerNonClick-page").className = "left-bottom-main markerNonClick HIDDEN";
             document.getElementById("markerClick-page").className = "left-bottom-main markerClick";
@@ -632,7 +620,7 @@ function initPolyLine(){
 function naviRoad(){
     /* 출발지 및 도착지 url에 맞게 조합 */
     var org = mylongitude + "," + mylatitude;
-    var dest = selectedMarkerLng + "," + selectedMarkerLat;
+    var dest = selectedMarkerJson.longitude + "," + selectedMarkerJson.latitude;
 
     var roadsJsonArray;
     var guidesJsonArray;
@@ -737,7 +725,7 @@ function naviRoad(){
 
     var endPath = [
         new kakao.maps.LatLng(naviLat[naviLat.length-1], naviLng[naviLng.length-1]),
-        new kakao.maps.LatLng(selectedMarkerLat, selectedMarkerLng)
+        new kakao.maps.LatLng(selectedMarkerJson.latitude, selectedMarkerJson.longitude)
     ];
 
     startPoly = new kakao.maps.Polyline({

@@ -1,8 +1,12 @@
-function kakaoPay(){
+function kakaoPay(dayMonthFlag){
+
     $.ajax({
         type : "post",
         url : "/kakaopay",
         data : {
+            parkingNo : selectedMarkerJson.parkingNo,
+            parkingName : selectedMarkerJson.parkingName + (dayMonthFlag == 0 ? '(일정기권)' : '(월정기권)'),
+            parkingPrice : (dayMonthFlag == 0 ? selectedMarkerJson.dayCharge : selectedMarkerJson.monthCharge)
         },
         dataType : "json",
         beforeSend : function(xhr){
@@ -25,28 +29,6 @@ function kakaoPay(){
     });
 }
 
-function approveKakaoPay(tid, kpToken){
-    $.ajax({
-        type : "post",
-        url : "/approveKakaopay",
-        data : {
-            tid : tid,
-            token : kpToken
-        },
-        dataType : "json",
-        beforeSend : function(xhr){
-            xhr.setRequestHeader(header, token);
-        },
-        statusCode: {
-            200: function () {
-                console.log("kakao pay Approve API call success");
-            },
-            404: function () {
-                console.log("kakao pay Approve API call failed");
-            }
-        },
-        success : function(response) {
-            console.log(response);
-        }
-    });
+function unLoginPay(){
+    alert("로그인 이후 가능합니다.");
 }

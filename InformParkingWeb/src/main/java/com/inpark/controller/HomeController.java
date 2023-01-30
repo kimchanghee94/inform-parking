@@ -1,18 +1,8 @@
 package com.inpark.controller;
 
 import com.inpark.dto.MemberDto;
-import com.inpark.dto.UserDetailsDto;
 import com.inpark.service.MemberService;
-
-import com.inpark.service.UserDetailsServiceCustom;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

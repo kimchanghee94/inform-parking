@@ -1,7 +1,6 @@
 package com.inpark.controller;
 
 import com.inpark.service.AdminService;
-import com.inpark.service.ParkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
