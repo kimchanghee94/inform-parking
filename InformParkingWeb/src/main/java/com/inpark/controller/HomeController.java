@@ -131,27 +131,4 @@ public class HomeController {
         model.addAttribute("member", dto);
         return "loginResultView";
     }
-
-    @RequestMapping(value = "/kakaopay", method=RequestMethod.POST)
-    @ResponseBody
-    public String kakaopay(Model model){
-        String resp = memberService.buyParkingWithKakaoPay();
-
-        try {
-            JSONParser parser = new JSONParser();
-            JSONObject object = (JSONObject) parser.parse(resp);
-            model.addAttribute("tid", (String)object.get("tid"));
-            System.out.println("kakaopay tid : " + (String)object.get("tid"));
-        }catch(ParseException pe){
-            pe.printStackTrace();
-        }
-        return resp;
-    }
-
-    @GetMapping("/approveKakaopay")
-    public String approveKakaoPay(@RequestParam("pg_token") String pgToken, @ModelAttribute("tid") String tid){
-        System.out.println("Controller tid : " + tid + ", token : " + pgToken);
-        memberService.approveKakaoPay(tid, pgToken);
-        return "redirect:/home";
-    }
 }

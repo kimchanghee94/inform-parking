@@ -1,0 +1,44 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inpark.mapper.AdminMapper">
+    <select id="selectAuthParkingAdmin" resultType="int">
+        SELECT COUNT(*) AS cnt FROM parking
+        WHERE parkingNo=#{parkingNo} AND referenceDate=#{referenceDate}
+    </select>
+
+    <select id="selectGetParkingName" resultType="String">
+        SELECT parkingName FROM parking
+        WHERE parkingNo=#{parkingNo} AND referenceDate=#{referenceDate}
+    </select>
+
+    <select id="selectCheckAuthParkingAdmin" resultType="int">
+        SELECT COUNT(*) AS cnt FROM adminparking
+        WHERE parkingNo=#{parkingNo}
+    </select>
+
+    <delete id="deleteAdminParkingField">
+        DELETE FROM adminparking
+        WHERE parkingNo=#{parkingNo} AND referenceDate=#{referenceDate}
+    </delete>
+
+    <insert id="insertAdminParking" parameterType="adminParkingDto">
+        INSERT INTO adminparking(users_id, parkingNo, parkingUseCnt, parkingName, referenceDate)
+        VALUES(#{users_id}, #{parkingNo}, #{parkingUseCnt}, #{parkingName}, #{referenceDate})
+    </insert>
+
+    <select id="selectAdminParkingList" resultType="adminParkingDto">
+        SELECT parkingNo, parkingUseCnt, parkingName, referenceDate, users_id FROM adminparking
+        WHERE users_id=#{id}
+    </select>
+
+    <update id="updateParkingUseCnt">
+        UPDATE adminparking SET parkingUseCnt = #{parkingUseCnt}
+        WHERE parkingNo=#{parkingNo} AND referenceDate=#{referenceDate}
+    </update>
+
+    <select id="selectOneAdminParking" resultType="adminParkingDto">
+        SELECT parkingUseCnt FROM adminparking
+        WHERE parkingNo=#{parkingNo} AND referenceDate=#{referenceDate}
+    </select>
+</mapper>

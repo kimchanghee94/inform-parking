@@ -43,6 +43,11 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
+    <bean id="AdminTableMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.inpark.mapper.AdminMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg ref="sqlSessionFactory"></constructor-arg>
     </bean>
@@ -66,9 +71,9 @@
     <!-- aop pointcut을 통해 적용할 범위를 선택해준다. 그리고 advisor를 통해 적용할 advice를 택한다. -->
     <aop:config>
         <aop:pointcut id="requiredTx"
-                      expression="execution(* com.inpark.service..ParkingServiceImpl.insert*(..))
-                      || execution(* com.inpark.service..ParkingServiceImpl.delete*(..))
-                      || execution(* com.inpark.service..ParkingServiceImpl.update*(..))"/>
+                      expression="execution(* com.inpark.service..*Impl.insert*(..))
+                      || execution(* com.inpark.service..*Impl.delete*(..))
+                      || execution(* com.inpark.service..*Impl.update*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx"/>
     </aop:config>
 </beans>

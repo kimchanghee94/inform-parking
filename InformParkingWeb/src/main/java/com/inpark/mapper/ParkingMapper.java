@@ -17,20 +17,4 @@ public interface ParkingMapper {
     void deleteAllParking();
 
     int selectCountParkingRow();
-
-    int selectAuthParkingAdmin(@Param("parkingNo")String parkingNo, @Param("referenceDate")String referenceDate);
-
-    int selectCheckAuthParkingAdmin(@Param("parkingNo")String parkingNo);
-
-    String selectGetParkingName(@Param("parkingNo")String parkingNo, @Param("referenceDate")String referenceDate);
-
-    void insertAdminParking(AdminParkingDto apDto);
-
-    List<AdminParkingDto> selectAdminParkingList(@Param("id")String id);
-
-    AdminParkingDto selectOneAdminParking(@Param("parkingNo")String parkingNo, @Param("referenceDate")String referenceDate);
-
-    void deleteAdminParkingField(@Param("parkingNo")String parkingNo, @Param("referenceDate")String referenceDate);
-
-    void updateParkingUseCnt(@Param("parkingNo")String parkingNo, @Param("referenceDate")String referenceDate, @Param("parkingUseCnt")int parkingUseCnt);
 }
