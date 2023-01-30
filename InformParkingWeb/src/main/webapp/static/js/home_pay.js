@@ -187,7 +187,7 @@ function addPurchaseHistoryField(item){
     carNumTd.innerHTML = item.carNum;
 
     var priceTd = document.createElement("td");
-    priceTd.innerHTML = item.parkingPrice + "원";
+    priceTd.innerHTML = parseInt(item.parkingPrice).toLocaleString() + "원";
 
     newTr.appendChild(newTh);
     newTr.appendChild(dateTd);

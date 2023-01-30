@@ -54,7 +54,7 @@ public class PayController {
                                   @ModelAttribute("payDto") PayDto payDto){
         System.out.println("Controller tid : " + tid + ", token : " + pgToken);
         payService.approveKakaoPay(tid, pgToken, parkingNo, payDto);
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/getInitSettingPurchaseHistory", method= RequestMethod.POST)
