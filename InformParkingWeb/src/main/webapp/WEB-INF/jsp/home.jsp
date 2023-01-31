@@ -265,7 +265,7 @@
     </div>
     <div class="map-view" id="kakao_map">
         <div id="spinner-content" class="">
-            <div class="spinner-border" role="status">
+            <div class="spinner-grow text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>

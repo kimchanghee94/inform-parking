@@ -240,12 +240,12 @@
                                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" onmouseout="blur()">닫기</button>
                                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="kakaoPay()" onmouseout="blur()">확인</button>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                     <script type="text/javascript">
                         $('#check-car-number-modal').on('hidden.bs.modal', function (e) {
-                            console.log("HHHH::");
                            e.stopImmediatePropagation();
                         });
                     </script>
@@ -265,7 +265,7 @@
     </div>
     <div class="map-view" id="kakao_map">
         <div id="spinner-content" class="">
-            <div class="spinner-border" role="status">
+            <div class="spinner-grow text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
