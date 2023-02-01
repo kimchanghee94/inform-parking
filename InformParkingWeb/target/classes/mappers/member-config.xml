@@ -39,4 +39,16 @@
     <update id="updateMemberCarNum">
         UPDATE users SET carNum = #{carNum} WHERE id=#{id}
     </update>
+
+    <select id="selectSubCarNumberList" parameterType="String" resultType="memberDto">
+        SELECT carNum FROM subcar WHERE users_id=#{id}
+    </select>
+
+    <insert id="insertSubCarNum" parameterType="String">
+        INSERT INTO subcar(users_id, carNum) VALUES(#{id}, #{carNum})
+    </insert>
+
+    <delete id="deleteCarNum" parameterType="String">
+        DELETE FROM subcar WHERE users_id=#{id} AND carNum=#{carNum}
+    </delete>
 </mapper>

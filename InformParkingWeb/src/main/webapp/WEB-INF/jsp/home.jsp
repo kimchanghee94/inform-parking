@@ -34,6 +34,7 @@
     <script type="text/javascript" src="/js/home.js"></script>
     <script type="text/javascript" src="/js/home_admin.js"></script>
     <script type="text/javascript" src="/js/home_pay.js"></script>
+    <script type="text/javascript" src="/js/home_register_car.js"></script>
     <title>주차장을 알리다</title>
 </head>
 <body class="home_body">
@@ -61,6 +62,26 @@
                         <sec:authorize access="isAuthenticated()">
                             <li><a id="submenu-logout" href="login" onclick="logoutFunc()">로그아웃</a></li>
                             <li><a type="button" id="submenu-reserve" data-bs-toggle="modal" href="#purchase-history-modal" onclick="initSettingPurchaseHistory()">예매내역</a></li>
+                            <li><a id="submenu-register-car" type="button" data-bs-toggle="modal" href="#register-car" onclick="initSettingRegisterCar()">차량등록</a></li>
+
+                            <!-- 주차 차량 등록하기 -->
+                            <div class="modal fade" id="register-car" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg" style="width:700px">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">차량등록</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body" id="register-car-modal-body">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-primary" onclick="addRegisterCarField(null)">차량 추가</button>
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <li><a id="submenu-withdrawal" href="#">회원탈퇴</a></li>
 
                             <!-- 예매 내역 모달 페이지 -->
@@ -222,13 +243,13 @@
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <button type="button" class="btn btn-primary custom-button" id="day-buy-button" onmouseout="blur()"
-                            data-bs-toggle="modal" data-bs-target="#check-car-number-modal" onclick="checkCarNum(0)">하루 정기권 구매</button>
+                            data-bs-toggle="modal" data-bs-target="#check-car-number-modal" onclick="initSettingSelectCar(0)">하루 정기권 구매</button>
                     <button type="button" class="btn btn-primary custom-button" id="month-buy-button" onmouseout="blur()"
-                            data-bs-toggle="modal" data-bs-target="#check-car-number-modal" onclick="checkCarNum(1)">월 정기권 구매</button>
+                            data-bs-toggle="modal" data-bs-target="#check-car-number-modal" onclick="initSettingSelectCar(1)">월 정기권 구매</button>
 
                     <!-- 차량번호 확인 모달 -->
                     <div class="modal fade" id="check-car-number-modal" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable" style="width:350px">
+                        <div class="modal-dialog modal-dialog-scrollable" style="width:500px">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5">차량 번호 확인</h1>

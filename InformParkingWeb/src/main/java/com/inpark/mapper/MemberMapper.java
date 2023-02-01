@@ -32,4 +32,9 @@ public interface MemberMapper {
 
     void updateMemberCarNum(@Param("id")String id, @Param("carNum")String carNum);
 
+    List<MemberDto> selectSubCarNumberList(@Param("id")String id);
+
+    void insertSubCarNum(@Param("id")String id, @Param("carNum")String carNum);
+
+    void deleteCarNum(@Param("id")String id, @Param("carNum")String carNum);
 }

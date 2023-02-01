@@ -16,4 +16,10 @@ public interface MemberService {
     void insertAuth(String id, String auth);
 
     String updateMemberCarNum(String id, String carNum);
+
+    String selectSubCarNumberList(String id);
+
+    String insertCarNum(String id, String carNum);
+
+    String deleteCarNum(String id, String carNum);
 }

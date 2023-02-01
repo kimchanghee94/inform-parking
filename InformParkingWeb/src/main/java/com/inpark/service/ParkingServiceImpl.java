@@ -96,10 +96,10 @@ public class ParkingServiceImpl implements ParkingService {
 
         if(listParking.size() == 0){
             header.put("statusCode", "01");
-            System.out.println("값을 받은게 존재하지 않는다.");
+            System.out.println("지도의 마커 값을 받은게 존재하지 않는다.");
         }else{
             header.put("statusCode", "00");
-            System.out.println("정상적으로 값을 받아옴");
+            System.out.println("정상적으로 마커 정보 값을 받아옴");
         }
         root.put("header", header);
 

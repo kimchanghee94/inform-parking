@@ -63,7 +63,7 @@ function moveCurPos() {
 function execMap(kmFlag, keywordValue){
     navigator.geolocation.getCurrentPosition(
       function (position) {
-          console.log("kmFlag : " + kmFlag + ", kewordValue: " + keywordValue);
+          console.log("kmFlag : " + kmFlag + ", keywordValue: " + keywordValue);
             mylatitude = position.coords.latitude;
             mylongitude = position.coords.longitude;
             console.log(mylatitude + ", " + mylongitude);

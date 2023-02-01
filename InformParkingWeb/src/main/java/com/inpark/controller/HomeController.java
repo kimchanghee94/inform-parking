@@ -87,6 +87,24 @@ public class HomeController {
         return memberService.selectMemberByJson(principal.getName());
     }
 
+    @RequestMapping(value = "/getSubCarNumberList", method=RequestMethod.POST)
+    @ResponseBody
+    public String getSubCarNumberList(Principal principal) {
+        return memberService.selectSubCarNumberList(principal.getName());
+    }
+
+    @RequestMapping(value = "/addCarNum", method=RequestMethod.POST)
+    @ResponseBody
+    public String addCarNum(String carNum, Principal principal) {
+        return memberService.insertCarNum(principal.getName(), carNum);
+    }
+
+    @RequestMapping(value = "/deleteCarNum", method=RequestMethod.POST)
+    @ResponseBody
+    public String deleteCarNum(String carNum, Principal principal) {
+        return memberService.deleteCarNum(principal.getName(), carNum);
+    }
+
     @RequestMapping(value = "/updateUserCarNum", method=RequestMethod.POST)
     @ResponseBody
     public String updateUserCarNum(String carNum, Principal principal) {
