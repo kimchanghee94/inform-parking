@@ -34,15 +34,23 @@
 --관리자 전용페이지에서 현재 사용 중인 주차장 자리를 입력하면 DB작업과 해당 주차장을 보고있는 사용자에게는 실시간으로 남은 자릿수가 변경된다.(Stomp)--
 
 (관리자)
-![image](https://user-images.githubusercontent.com/45596085/214701845-f6c38438-14f6-4f94-8ecc-10a91785def1.png)
+![image](https://user-images.githubusercontent.com/45596085/215927245-0d23cb85-a5fb-4600-af17-c38e458e9125.png)
+
 
 (사용자)
 ![image](https://user-images.githubusercontent.com/45596085/214701914-ff5a8734-64f3-44b6-8e7b-5f70b645499c.png)
 
 
+--예매내역--
+![image](https://user-images.githubusercontent.com/45596085/215927942-c440e133-4638-4964-9c31-9cdacd7018e8.png)
 
---이용내역--
-![image](https://user-images.githubusercontent.com/45596085/215577819-a8ce56cb-6e20-4605-8d81-aa9b3e00588d.png)
+--차량등록--
+![image](https://user-images.githubusercontent.com/45596085/215927327-cd57b047-f920-4ddb-913d-eaa33bd12fd0.png)
+
+
+--차량 선택 후 구매버튼 동작--
+![image](https://user-images.githubusercontent.com/45596085/215927384-c391dec9-02af-4498-aa64-912a01cf6083.png)
+
 
 
 
