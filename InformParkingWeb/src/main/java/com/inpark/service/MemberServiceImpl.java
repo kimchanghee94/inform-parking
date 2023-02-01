@@ -215,7 +215,6 @@ public class MemberServiceImpl implements MemberService {
         return root.toJSONString();
     }
 
-
     @Override
     public void insertMember(MemberDto dto){
         System.out.println("암호화 전 : " + dto.getPasswd());

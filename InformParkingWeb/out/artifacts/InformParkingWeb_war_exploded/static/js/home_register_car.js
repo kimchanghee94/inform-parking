@@ -107,6 +107,9 @@ function addRegisterCarField(carNum){
                     /* 한번 등록에 성공한 필드는 더 이상 입력 불가능한 필드로 바꿔준다. */
                     newButton1.disabled = true;
                     newInput.disabled = true;
+
+                    /* 등록 성공 시 자동으로 하나의 주차 필드를 생성해주자 */
+                    addRegisterCarField(null);
                 }else if(response.header.statusCode == "01"){
                     newAuthDiv.style.color="red";
                     newAuthDiv.innerHTML="이미 등록된 차량입니다.";

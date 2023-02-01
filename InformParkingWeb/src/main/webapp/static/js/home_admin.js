@@ -116,6 +116,9 @@ function addParkingAdminField(parkingNo, referenceDate){
                     newInput2.disabled = true;
 
                     addDBAdminRolePage(newInput1.value.toString().trim(), newInput2.value.toString().trim());
+
+                    /* 인증 성공 시 자동으로 관리자 입력 필드를 생성해주자 */
+                    addParkingAdminField(null, null);
                 }else if(response.header.statusCode == "01"){
                     newAuthDiv.style.color="red";
                     newAuthDiv.innerHTML="인증에 실패하였습니다.";
