@@ -28,8 +28,7 @@
 
 --사용자가 주차장 등록을 하게되면 DB작업과 spring-security의 룰을 admin으로 동적 변경시키고 확인 버튼 및 x버튼 클릭 시 오프캔버스에 관리자 전용 페이지 목록 생성--
 
-![image](https://user-images.githubusercontent.com/45596085/214702516-03f09c04-51c7-4b78-9c61-19826a6ae505.png)
-
+![image](https://user-images.githubusercontent.com/45596085/215928453-c444fdf3-f1ed-489a-9f90-e6fc1fe3a66c.png)
 
 --관리자 전용페이지에서 현재 사용 중인 주차장 자리를 입력하면 DB작업과 해당 주차장을 보고있는 사용자에게는 실시간으로 남은 자릿수가 변경된다.(Stomp)--
 
@@ -44,13 +43,13 @@
 --예매내역--
 ![image](https://user-images.githubusercontent.com/45596085/215927942-c440e133-4638-4964-9c31-9cdacd7018e8.png)
 
+
 --차량등록--
-![image](https://user-images.githubusercontent.com/45596085/215927327-cd57b047-f920-4ddb-913d-eaa33bd12fd0.png)
+![image](https://user-images.githubusercontent.com/45596085/215928497-af05974f-fe33-420d-b209-fb8a13ad7d6f.png)
 
 
 --차량 선택 후 구매버튼 동작--
-![image](https://user-images.githubusercontent.com/45596085/215927384-c391dec9-02af-4498-aa64-912a01cf6083.png)
-
+![image](https://user-images.githubusercontent.com/45596085/215928591-17b2ac7b-2863-4d26-9527-664e0e7c22a3.png)
 
 
 
