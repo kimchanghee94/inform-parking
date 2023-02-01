@@ -198,6 +198,25 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public String updateSwitchRepUserCarNum(String id, String repCarNum, String selectedCarNum){
+        memberMapper.updateMemberCarNum(id, selectedCarNum);
+        memberMapper.updateSubCarNum(id, selectedCarNum, repCarNum);
+
+        /*json작업 시작*/
+        JSONObject root = new JSONObject();
+        JSONObject header = new JSONObject();
+
+        header.put("msg", "Success update User and Sub Car Number");
+        header.put("statusCode", "00");
+        root.put("header", header);
+
+        System.out.println(root.toString());
+
+        return root.toJSONString();
+    }
+
+
+    @Override
     public void insertMember(MemberDto dto){
         System.out.println("암호화 전 : " + dto.getPasswd());
         dto.setPasswd(bCryptPasswordEncoder.encode(dto.getPasswd()));

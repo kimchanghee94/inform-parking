@@ -22,4 +22,6 @@ public interface MemberService {
     String insertCarNum(String id, String carNum);
 
     String deleteCarNum(String id, String carNum);
+
+    String updateSwitchRepUserCarNum(String id, String repCarNum, String selectedCarNum);
 }

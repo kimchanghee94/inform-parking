@@ -105,10 +105,10 @@ public class HomeController {
         return memberService.deleteCarNum(principal.getName(), carNum);
     }
 
-    @RequestMapping(value = "/updateUserCarNum", method=RequestMethod.POST)
+    @RequestMapping(value = "/switchRepUserCarNum", method=RequestMethod.POST)
     @ResponseBody
-    public String updateUserCarNum(String carNum, Principal principal) {
-        return memberService.updateMemberCarNum(principal.getName(), carNum);
+    public String switchRepUserCarNum(String repCarNum, String selectedCarNum, Principal principal) {
+        return memberService.updateSwitchRepUserCarNum(principal.getName(), repCarNum, selectedCarNum);
     }
 
     @RequestMapping(value = "/memberIdChk", method=RequestMethod.POST)

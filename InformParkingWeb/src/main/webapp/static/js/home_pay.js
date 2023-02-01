@@ -1,12 +1,14 @@
 var dayOrMonthFlag = 0;
+var selectedCarNum = null;
+var repCarNum = null;
 
 function initSettingSelectCar(tmpDayOrMonthFlag){
-    var repCarNum = getCarNum();
+    repCarNum = getCarNum();
     dayOrMonthFlag = tmpDayOrMonthFlag;
     var obj = document.getElementById("check-car-number-modal-body");
     obj.innerHTML = "";
 
-    if(repCarNum !== null || repCarNum.length !== 0){
+    if(repCarNum !== null && repCarNum.length !== 0){
         addCarNum(repCarNum);
 
         $.ajax({
@@ -42,25 +44,34 @@ function initSettingSelectCar(tmpDayOrMonthFlag){
 function addCarNum(carNum){
     var obj = document.getElementById("check-car-number-modal-body");
 
+    var newDiv = document.createElement("div");
+    newDiv.className = "input-group mb-2";
+
     var radioDiv = document.createElement("div");
-    radioDiv.className = "form-check mb-2";
+    radioDiv.className = "input-group-text";
 
     var radioInput = document.createElement("input");
     radioInput.className = "form-check-input";
     radioInput.type = "radio";
-    radioInput.name = "flexRadio" + carNum;
-    radioInput.id = "flexRadio" + carNum;
+    radioInput.id = carNum;
 
-    var radioLabel = document.createElement("label");
-    radioLabel.className = "form-check-label";
-    radioLabel.htmlFor = "flexRadio" + carNum;
-    radioLabel.innerText = "Hello";
+    if(repCarNum == carNum){
+        radioInput.checked = true;
+    }
 
-    var newDiv = document.createElement("div");
-    newDiv.className = "input-group";
+    radioInput.addEventListener("click", function() {
+        selectedCarNum = radioInput.id;
+        var radioButtons = obj.querySelectorAll(".form-check-input");
+        radioButtons.forEach(function(radioButton) {
+            if (radioButton.id !== radioInput.id) {
+                radioButton.checked = false;
+            }
+        });
+    });
+
     var newSpan = document.createElement("span");
     newSpan.className = "input-group-text";
-    newSpan.innerHTML = "차량 번호";
+    newSpan.innerHTML = "차량번호";
 
     var newInput = document.createElement("input");
     newInput.className = "form-control";
@@ -70,14 +81,12 @@ function addCarNum(carNum){
     newInput.disabled = true;
 
     //태그 조합
+    radioDiv.appendChild(radioInput);
+    newDiv.appendChild(radioDiv);
     newDiv.appendChild(newSpan);
     newDiv.appendChild(newInput);
 
-    //radioLabel.appendChild(newDiv);
-    radioDiv.appendChild(radioInput);
-    radioDiv.appendChild(radioLabel);
-
-    obj.appendChild(radioDiv);
+    obj.appendChild(newDiv);
 }
 
 function getCarNum(){
@@ -110,13 +119,20 @@ function getCarNum(){
 }
 
 function kakaoPay(){
-    console.log(firstCarNum, lastCarNum);
-    if(firstCarNum != lastCarNum){
+    if(selectedCarNum === null){
+        alert("선택된 차량이 없습니다.");
+        return;
+    }
+
+    //대표차량을 바꿔주자
+    if(repCarNum != selectedCarNum){
+        console.log("repCarNum", repCarNum, "selectedCarNum", selectedCarNum);
         $.ajax({
             type : "post",
-            url : "/updateUserCarNum",
+            url : "/switchRepUserCarNum",
             data : {
-                carNum : lastCarNum
+                repCarNum : repCarNum,
+                selectedCarNum : selectedCarNum
             },
             dataType : "json",
             beforeSend : function(xhr){
@@ -136,14 +152,14 @@ function kakaoPay(){
         })
     }
 
-    $.ajax({
+   $.ajax({
         type : "post",
         url : "/kakaopay",
         data : {
             parkingNo : selectedMarkerJson.parkingNo,
             parkingName : selectedMarkerJson.parkingName,
             dayMonthFlag : dayOrMonthFlag,
-            carNum : lastCarNum,
+            carNum : selectedCarNum,
             parkingPrice : (dayOrMonthFlag == 0 ? selectedMarkerJson.dayCharge : selectedMarkerJson.monthCharge)
         },
         dataType : "json",

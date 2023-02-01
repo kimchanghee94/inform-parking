@@ -51,4 +51,8 @@
     <delete id="deleteCarNum" parameterType="String">
         DELETE FROM subcar WHERE users_id=#{id} AND carNum=#{carNum}
     </delete>
+
+    <update id="updateSubCarNum" parameterType="String">
+        UPDATE subcar SET carNum=#{repCarNum} WHERE users_id=#{id} AND carNum=#{selectedCarNum}
+    </update>
 </mapper>

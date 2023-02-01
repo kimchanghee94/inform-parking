@@ -252,7 +252,7 @@
                         <div class="modal-dialog modal-dialog-scrollable" style="width:500px">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5">차량 번호 확인</h1>
+                                    <h1 class="modal-title fs-5">차량 번호 선택</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onmouseout="blur()"></button>
                                 </div>
                                 <div class="modal-body" id="check-car-number-modal-body">

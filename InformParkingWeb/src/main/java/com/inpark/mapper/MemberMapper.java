@@ -37,4 +37,6 @@ public interface MemberMapper {
     void insertSubCarNum(@Param("id")String id, @Param("carNum")String carNum);
 
     void deleteCarNum(@Param("id")String id, @Param("carNum")String carNum);
+
+    void updateSubCarNum(@Param("id")String id, @Param("selectedCarNum")String selectedCarNum, @Param("repCarNum")String repCarNum);
 }

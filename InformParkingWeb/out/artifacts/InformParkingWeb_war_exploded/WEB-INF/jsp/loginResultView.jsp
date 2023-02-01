@@ -23,28 +23,34 @@ phone: ${member.phone}
 name: ${member.userName}
 car number: ${member.carNum}
 
-<button type="button" class="btn btn-primary custom-button" id="day-buy-button" onmouseout="blur()"
-        data-bs-toggle="modal" data-bs-target="#check-car-number-modal" onclick="checkCarNum(0)">하루 정기권 구매</button>
-<button type="button" class="btn btn-primary custom-button" id="month-buy-button" onmouseout="blur()"
-        data-bs-toggle="modal" data-bs-target="#check-car-number-modal" onclick="checkCarNum(1)">월 정기권 구매</button>
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+    <label class="form-check-label" for="flexRadioDefault1">
+        Default radio
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+    <label class="form-check-label" for="flexRadioDefault2">
+        Default checked radio
+    </label>
+</div>
 
-<!-- 차량번호 확인 모달 -->
-<div class="modal fade" id="check-car-number-modal" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" style="width:350px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">차량 번호 확인</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onmouseout="blur()"></button>
-            </div>
-            <div class="modal-body" id="check-car-number-modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" onmouseout="blur()">닫기</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="kakaoPay()" onmouseout="blur()">확인</button>
-            </div>
+<div>
+    <div class="input-group">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0" type="radio" id="test1" value="" aria-label="Radio button for following text input">
         </div>
+        <input type="text" class="form-control" aria-label="Text input with radio button">
+    </div>
+    <div class="input-group">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0" type="radio" id="test2" value="" aria-label="Radio button for following text input">
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with radio button">
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
