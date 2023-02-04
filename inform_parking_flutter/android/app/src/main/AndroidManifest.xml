@@ -1,9 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.inparking.inform_parking_flutter">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="inform_parking_flutter"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true">
+        <!-- KCH 2023/FEB/04 http 및 https 보안 허용을 위해 위 userCleartextTraffic 코드 추가(안그러면 흰생 바탕이 발생) -->
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -36,7 +36,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
-  #KCH dependencies에 webview-flutter 모듈 사용하도록 명시
+  #KCH 2023/FEB/04 dependencies에 webview-flutter 모듈 사용하도록 명시
+  webview_flutter: ^0.3.22+1
 
 dev_dependencies:
   flutter_test:

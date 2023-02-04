@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <!-- >>> KCH 2023/FEB/04 IOS Web view 설정 -->
+    <!-- 흰색 화면만 나오는 현상 방지 -->
+    <key>io.flutter.embedded_views_preview</key>
+    <string>YES</string>
+
+    <!-- http 및 https 보안 문제로 허용시킴으로써 흰 화면 나오는 현상 방지 -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+      <key>NSAllowsArbitraryLoadsInWebContent</key>
+      <true/>
+    </dict>
+    <!-- <<< KCH 2023/FEB/04 IOS Web view 설정 -->
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
