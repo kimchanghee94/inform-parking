@@ -1,17 +1,22 @@
 # inform-parking(Mac OS)
 주차장 위치와 남은 공간, 가격 등을 제공하는 웹프로젝트
 
-* Front : jsp, html, css, java-script, bootstrap, apache tile
-* Server : Apache, Tomcat, MySQL, Docker(각 이미지 서브넷으로 만들어 docker에 등록)
-* Database : 로컬에 구축 (Mybatis, MySQLWorkBench 사용)
+* Front : jsp, html, css, java-script
+* Server : Apache, Tomcat, MySQL
+* Database : 로컬에 구축 (MySQLWorkBench 사용)
 * IDE : intellij
-* Framework : Spring MVC - Maven사용
+* TextEditor : Visual Studio Code
+* Framework : Spring MVC - Maven
 * 주요 Library : 
   1. spring-security(auth-provider 사용, 각 post메서드 csrf 적용)
   2. transaction, aop, aspectjweaver(applicationContext에서 aop를 이용한 트랜잭션 처리)
   3. WebSocket기반 Stomp(with SockJS)
      * Apache와 Tomcat은 mod_jk기반 AJP프로토콜 사용
      * 웹소켓의 경우 AJP프로토콜에서 미지원으로 ProxyPass를 이용하여 Tomcat으로 접속
+  4. Mybatis
+  5. BootStrap
+  6. ApacheTiles
+
 * REST-API : 
   1. 공공데이터포털(전국 주차장)
   2. Kakao Map
@@ -19,7 +24,8 @@
   4. Kakao Pay
 
 * Open Source :
-  1. Cross Platform(Hybrid) : Flutter => (Ios, Android)WebView
+  1. Flutter Cross Platform(Hybrid) => (Ios, Android)WebView
+  2. Docker(Apache, Tomcat, MySQL 각 이미지 특정 서브넷 그룹으로 포함시켜 사용)
 
 * 다중공유기 포트포워딩으로 외부 접속 허용
 * 가비아에서 www.inparking.online 도메인 구매, zero ssl을 통해 https 보안 적용
