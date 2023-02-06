@@ -10,8 +10,8 @@
     <!-- http 및 https 보안 문제로 허용시킴으로써 흰 화면 나오는 현상 방지 -->
     <key>NSAppTransportSecurity</key>
     <dict>
-      <key></key> <true/>
-      <key>InWebContent</key> <true/>
+      <key>NSAllowsArbitraryLoads</key> <true/>
+      <key>NSAllowsArbitraryLoadsInWebContent</key> <true/>
     </dict>
 
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>

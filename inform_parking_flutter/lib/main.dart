@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return const Scaffold(
       body: SafeArea(
         child: WebView(
-          initialUrl: 'https://www.inparking.online/',
+          initialUrl: 'https://www.inparking.online',
           javascriptMode: JavascriptMode.unrestricted,
         ),
       ),

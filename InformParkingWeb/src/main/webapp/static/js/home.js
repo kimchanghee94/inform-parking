@@ -69,7 +69,7 @@ function execMap(kmFlag, keywordValue){
             console.log(mylatitude + ", " + mylongitude);
 
             if(kmFlag ==0){
-                map = new kakao.maps.Map(document.getElementById('kakao_map'), { // 지도를 표시할 div
+                    map = new kakao.maps.Map(document.getElementById('kakao_map'), { // 지도를 표시할 div
                     center : new kakao.maps.LatLng(mylatitude, mylongitude), // 지도의 중심좌표
                     level : 5 // 지도의 확대 레벨
                 });
