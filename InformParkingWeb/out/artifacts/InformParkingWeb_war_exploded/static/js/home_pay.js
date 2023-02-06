@@ -9,7 +9,7 @@ function initSettingSelectCar(tmpDayOrMonthFlag){
     obj.innerHTML = "";
 
     if(repCarNum !== null && repCarNum.length !== 0){
-        addCarNum(repCarNum);
+        listPaySelectCarNum(repCarNum);
 
         $.ajax({
             type : "post",
@@ -31,7 +31,7 @@ function initSettingSelectCar(tmpDayOrMonthFlag){
                 if(response.header.statusCode == "00") {
                     carNum = response.body.carNum;
                     $(response.body.items).map(function (i, item) {
-                        addCarNum(item.carNum);
+                        listPaySelectCarNum(item.carNum);
                     });
                 }else{
                     console.log(response.header.msg);
@@ -41,7 +41,7 @@ function initSettingSelectCar(tmpDayOrMonthFlag){
     }
 }
 
-function addCarNum(carNum){
+function listPaySelectCarNum(carNum){
     var obj = document.getElementById("check-car-number-modal-body");
 
     var newDiv = document.createElement("div");
@@ -56,6 +56,7 @@ function addCarNum(carNum){
     radioInput.id = carNum;
 
     if(repCarNum == carNum){
+        selectedCarNum = carNum;
         radioInput.checked = true;
     }
 
