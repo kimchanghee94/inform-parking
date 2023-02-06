@@ -109,7 +109,9 @@ function execMap(kmFlag, keywordValue){
                         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
                         // KCH 경로타는 가운데 비동기 실시간 내 위치에 주차장
                         map.setBounds(bounds);
-                        getMapViewMarkers();
+                        if(map.getLevel() < 8){
+                            getMapViewMarkers();
+                        }
                     }else if(status === kakao.maps.services.Status.ZERO_RESULT){
                         document.getElementById("markerClick-page").className = "left-bottom-main markerClick HIDDEN";
                         document.getElementById("markerNonClick-page").className = "left-bottom-main markerClick";
@@ -166,7 +168,7 @@ function mapInitSetting(){
         }
     });
 
-    //지도 클 이벤릭트
+    //지도 클릭 이벤트
     kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
         if(clickInfowindows.length !== 0) {
             clickInfowindows[0].close();

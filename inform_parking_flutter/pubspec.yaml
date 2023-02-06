@@ -38,6 +38,7 @@ dependencies:
 
   #KCH 2023/FEB/04 dependencies에 webview-flutter 모듈 사용하도록 명시
   webview_flutter: ^0.3.22+1
+  geolocator: ^6.0.0
 
 dev_dependencies:
   flutter_test:
