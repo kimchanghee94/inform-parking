@@ -66,7 +66,7 @@
 
                             <!-- 주차 차량 등록하기 -->
                             <div class="modal fade" id="register-car" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable modal-lg" style="width:700px">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5">차량등록</h1>
@@ -249,7 +249,7 @@
 
                     <!-- 차량번호 확인 모달 -->
                     <div class="modal fade" id="check-car-number-modal" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable" style="width:500px">
+                        <div class="modal-dialog modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5">차량 번호 선택</h1>
