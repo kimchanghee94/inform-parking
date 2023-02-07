@@ -109,7 +109,7 @@ function execMap(kmFlag, keywordValue){
                         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
                         // KCH 경로타는 가운데 비동기 실시간 내 위치에 주차장
                         map.setBounds(bounds);
-                        if(map.getLevel() < 8){
+                        if(map.getLevel() < 6){
                             getMapViewMarkers();
                         }
                     }else if(status === kakao.maps.services.Status.ZERO_RESULT){
@@ -133,7 +133,7 @@ function execMap(kmFlag, keywordValue){
                 map.panTo(new kakao.maps.LatLng(mylatitude, mylongitude));
                 getMapViewMarkers();
             }
-      }
+        }
     );
 }
 
@@ -153,9 +153,16 @@ function mapInitSetting(){
         }
 
         if(clickInfowindows.length !== 0) {
-            if (map.getLevel() > 6) {
+            var neLat = map.getBounds().getNorthEast().getLat();
+            var neLng = map.getBounds().getNorthEast().getLng();
+            var swLat = map.getBounds().getSouthWest().getLat();
+            var swLng = map.getBounds().getSouthWest().getLng();
+
+            if (map.getLevel() > 5) {
                 clickInfowindows[0].close();
-            }else {
+            }else if(swLng <= selectedMarkerJson.longitude && selectedMarkerJson.longitude <= neLng
+            && swLat <= selectedMarkerJson.latitude && selectedMarkerJson.latitude <= neLat){
+                console.log("In map marker here?");
                 clickInfowindows[0].open(map, selectedMarker);
             }
         }
