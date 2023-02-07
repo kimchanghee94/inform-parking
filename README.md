@@ -62,22 +62,22 @@
 --차량 선택 후 구매버튼 동작--
 ![image](https://user-images.githubusercontent.com/45596085/215928591-17b2ac7b-2863-4d26-9527-664e0e7c22a3.png)
 
-
-
-
-
+   
+  
+  
+  
 --로그인 페이지--
 
 ![image](https://user-images.githubusercontent.com/45596085/211064015-fa93cc91-5f54-4e54-83e5-cd0c3385e20b.png)
 
-
-
+  
+  
 --회원가입 페이지--
 
 ![image](https://user-images.githubusercontent.com/45596085/211064181-79edc61d-2adf-428d-892c-a21cff840257.png)
 
-
-
+  
+  
 --반응형 메인페이지--
 
 
@@ -99,11 +99,10 @@
 
 ![image](https://user-images.githubusercontent.com/45596085/212411814-c4708ef6-aa82-4375-8253-971349c2517e.png)
 
-
-
-
-
-
+  
+  
+  
+  
 
 * 위 반응형 페이지 UI는 초창기 개발 구형 버전이라 나중에 업데이트 할 예정
 
