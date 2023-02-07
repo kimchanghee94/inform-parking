@@ -24,7 +24,7 @@
   4. Kakao Pay
 
 * Open Source :
-  1. Flutter Cross Platform(Hybrid) => (Ios, Android)WebView
+  1. Flutter Cross Platform => (Ios, Android)WebView
   2. Docker(Apache, Tomcat, MySQL 각 이미지 특정 서브넷 그룹으로 포함시켜 사용)
 
 * 다중공유기 포트포워딩으로 외부 접속 허용
