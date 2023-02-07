@@ -98,3 +98,16 @@
 
 
 ![image](https://user-images.githubusercontent.com/45596085/212411814-c4708ef6-aa82-4375-8253-971349c2517e.png)
+
+
+
+
+* 위 반응형 페이지 UI는 초창기 개발 구형 버전이라 나중에 업데이트 할 예정
+
+Cross 플랫폼 중 flutter오픈소스를 통해 아이폰, 안드로이드 web view어플 개발
+
+ex) 안드로이드 폰 출력 간단 영상
+
+![시현영상_AdobeExpress](https://user-images.githubusercontent.com/45596085/217217697-eca2d1ac-f41d-410e-9870-fb0486a690ba.gif)
+
+
